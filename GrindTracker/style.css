@@ -81,7 +81,7 @@ input:checked + .slider:before {
 .main-nav {
   text-align: center;
   font-size: large;
-  border-bottom: 1px solid rgb(196, 196, 196);
+  border-bottom: 1px solid #caf3ff;
 }
 .main-nav li {
   padding: 0 5%;
@@ -206,10 +206,12 @@ input:checked + .slider:before {
   color: #e2e4e9;
 }
 .dark-text-w {
-  color: white;
+  color: white !important;
 }
 
 .dark-text-b {
   color: #db0a40;
   text-shadow: 0 0 0.025em #db0a40;
 }
+
+/*border-bottom: 1px solid rgb(196, 196, 196);

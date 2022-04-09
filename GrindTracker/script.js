@@ -35,8 +35,13 @@ checkbox.addEventListener("change", () => {
     console.log(e);
   }
 
-  document.querySelector("nav a").classList.toggle("dark-text-w");
+  document.querySelector(".nav a").classList.toggle("dark-text-w");
   // .nav a > .dark-t-w
+
+  const darke = document.querySelectorAll(".nav-elements");
+  for (let i = 0; i < darke.length; i++) {
+    darke[i].classList.toggle("dark-text-w");
+  }
 
   try {
     const darkt = document.querySelectorAll(".dark-t");
