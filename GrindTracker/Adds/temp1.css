@@ -1,0 +1,204 @@
+@font-face {
+  font-family: Raleway;
+  src: url(Fonts/Raleway-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: Kanit;
+  src: url(Fonts/Kanit-Regular.ttf);
+}
+@font-face {
+  font-family: Teko;
+  src: url(Fonts/Teko-Medium.ttf);
+}
+* {
+  font-family: Raleway;
+  color: rgb(0 0 0);
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+.nav ul {
+  margin: 0;
+}
+.nav li {
+  display: inline;
+}
+a {
+  text-decoration: none;
+  padding: 0.5em;
+}
+.nav a {
+  display: inline-block;
+  color: rgb(255 238 238);
+}
+.nav a:hover {
+  background-color: rgba(236, 236, 236, 0.33);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: 55px;
+  height: 30px;
+  margin: 0 5px;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #23baeb;
+  transition: 0.4s;
+  border-radius: 17px;
+}
+.switch input {
+  display: none;
+}
+.slider:before {
+  position: absolute;
+  font-size: 17px;
+  content: "🌙";
+  top: 2.5px;
+  height: 25px;
+  width: 25px;
+  right: 2.5px;
+  left: 2.5px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 25px;
+}
+input:checked + .slider {
+  background-color: #08769b;
+}
+input:checked + .slider:before {
+  transform: translateX(25px);
+  content: "💡";
+}
+
+.main-nav {
+  text-align: center;
+  font-size: large;
+  border-bottom: 1px solid rgb(196, 196, 196);
+}
+.main-nav li {
+  padding: 0 5%;
+}
+.main-header {
+  background: linear-gradient(120deg, #c4c4c4, #23baeb);
+  background-color: rgba(0, 0, 0, 0.2);
+  background-blend-mode: multiply;
+  background-size: cover;
+}
+
+.TitleGT {
+  text-align: center;
+  color: #fefff6;
+  margin: 0px;
+  font-size: 6em;
+  font-family: Teko;
+}
+.content-section {
+  margin: 1em;
+}
+.container {
+  margin: 0 auto;
+  padding: 0 1.5em;
+}
+.about {
+  max-width: 900px;
+}
+.div-about {
+  padding: 1px;
+}
+.section-header {
+  font-family: Kanit;
+  color: black;
+  font-size: 2em;
+}
+.section-paragraph {
+  font-size: 1.5em;
+}
+
+.TitleGT2 {
+  font-size: 3em;
+  color: rgb(221, 240, 255);
+}
+.main-footer {
+  background-color: rgb(54, 54, 54);
+  padding: 0.25em 0;
+}
+.main-footer-container {
+  display: flex;
+  align-items: center;
+}
+.main-footer-container a {
+  text-align: end;
+  font-size: 30px;
+}
+
+* {
+  font-size: 1.15em;
+}
+
+.login {
+  width: none;
+  padding: 40px;
+  top: 50%;
+  left: 50%;
+  background: linear-gradient(120deg, #23baeb, #c4c4c4);
+  text-align: center;
+}
+
+.login input[type="text"],
+.login input[type="password"] {
+  border: 0;
+  background-color: none;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  border: 2px solid #3594b9;
+  padding: 14px 10px;
+  width: 280px;
+  outline: none;
+  border-radius: 24px;
+}
+.login input[type="text"]:focus,
+.login input[type="password"]:focus {
+  width: 400px;
+  border-color: #23baeb;
+}
+.login button[role="submit"] {
+  border: 0;
+  background-color: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3594b9;
+  padding: 14px 10px;
+  width: 190px;
+  outline: none;
+  border-radius: 24px;
+}
+.login button[role="submit"]:hover {
+  width: 210px;
+  border-color: #bedae6;
+  background-color: #68b5d3;
+  color: rgb(221, 240, 255);
+}
+
+.dark-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: multiply;
+  background-size: cover;
+}
+.dark-about {
+  background-color: #242424;
+}
+.dark-text {
+  color: white;
+}

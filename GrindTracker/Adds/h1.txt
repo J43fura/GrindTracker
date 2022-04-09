@@ -1,0 +1,7 @@
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: multiply;
+  background-size: cover;
+
+
+#db0a40;
+#68b5d3;

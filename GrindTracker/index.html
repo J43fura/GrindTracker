@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="script.js" defer></script>
+    <title>GrindTracker 🔺</title>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="GrindTracker is a tool that let you keep track of your progress and
+    visualise them to better grind your way up reaching your desired
+    goals."
+    />
+  </head>
+  <body>
+    <header id="RAS" class="main-header dark-h">
+      <nav class="nav main-nav">
+        <ul>
+          <li><a href="#RAS">Home</a></li>
+          <li><a href="#Login">Login</a></li>
+          <li><a href="#About">About</a></li>
+          <li>
+            <label class="switch">
+              <input type="checkbox" id="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </li>
+        </ul>
+      </nav>
+      <!--<hr /> -->
+      <h1 class="TitleGT TitleGT1 TitleGT1-d">GrindTracker</h1>
+    </header>
+
+    <section class="content-section container login" id="Login">
+      <!--<hr /> -->
+      <h2 class="section-header dark-t-w">LOGIN</h2>
+      <form class="section-paragraph" id="myForm">
+        <input type="text" name="username" placeholder="Username" required />
+        <br />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <br />
+        <button role="submit" id="btnLogin">Log In</button>
+        <button role="submit" id="btnRegister">Register</button>
+      </form>
+    </section>
+
+    <div class="div-about">
+      <section class="content-section container about" id="About">
+        <!--<hr /> -->
+
+        <h2 class="section-header dark-t">About:</h2>
+
+        <p class="section-paragraph dark-t">
+          GrindTracker is a tool that let you keep track of your progress and
+          visualise them to better grind your way up reaching your desired
+          goals.
+        </p>
+
+        <img class="ImageGrind" src="Images/Grind.png" />
+        <p class="section-paragraph dark-t">
+          GRIND > is a term that refers to persevering when doing something
+          difficult or performing repetitive tasks to attain a certain goal.
+          <br /><br />TRACKER > follow the trail or movements of your GRIND,
+          typically in order to find them or note their course.
+        </p>
+      </section>
+    </div>
+
+    <footer class="main-footer">
+      <div class="container main-footer-container">
+        <!--<hr />-->
+        <h3 class="TitleGT TitleGT2">GrindTracker</h3>
+        <a href="#RAS">🔺</a>
+      </div>
+    </footer>
+  </body>
+</html>
