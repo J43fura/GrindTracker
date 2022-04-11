@@ -2,8 +2,9 @@
 <html>
   <head>
     <script src="script.js" defer></script>
-    <title>GrindTracker 🔺</title>
+    <title weight="normal">GrindTracker 🔺</title>
     <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -34,7 +35,12 @@
     <section class="content-section container login" id="Login">
       <!--<hr /> -->
       <h2 class="section-header dark-t-w">LOGIN</h2>
-      <form class="section-paragraph" id="myForm">
+      <form
+        class="section-paragraph"
+        id="myForm"
+        method="post"
+        action="register.php"
+      >
         <input type="text" name="username" placeholder="Username" required />
         <br />
         <input
@@ -61,7 +67,7 @@
           goals.
         </p>
 
-        <img class="ImageGrind" src="Images/Grind.png" />
+        <img class="ImageGrind" src="Images/Grind.webp" />
         <p class="section-paragraph dark-t">
           GRIND > is a term that refers to persevering when doing something
           difficult or performing repetitive tasks to attain a certain goal.

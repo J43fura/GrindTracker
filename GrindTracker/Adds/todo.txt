@@ -1,0 +1,14 @@
+todolist
+
+
+
+
+Calendar
+
+*wazn/toul/ BMI
+*workouts: maxiumum pushup/pull up..
+
++Graphes
+
+dashboard - todo list - graphjs
+++ BD
