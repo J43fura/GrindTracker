@@ -224,7 +224,7 @@ input:checked + .slider:before {
   padding: 20px;
   margin: 0px;
   border-radius: 25px;
-  box-shadow: 0 0 1000px 1000px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 1000px 1000px rgba(0, 0, 0, 0.7);
 }
 .popup .section-header {
   margin: 10px;
@@ -238,4 +238,9 @@ input:checked + .slider:before {
   padding: 0px !important;
   width: 37px !important;
   text-align: center;
+}
+#gender {
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
 }
