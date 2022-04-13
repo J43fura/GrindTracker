@@ -50,8 +50,38 @@
           required
         />
         <br />
-        <button role="submit" id="btnLogin">Log In</button>
-        <button role="submit" id="btnRegister">Register</button>
+        <button class="button" role="submit" id="btnLogin">Log In</button>
+        <button type="button" class="button" onclick="togglePopup()">
+          Register
+        </button>
+      </form>
+    </section>
+
+    <section class="content-section container login popup" id="popup-1">
+      <button class="button btnx" onclick="togglePopup()">&times;</button>
+      <h2 class="section-header dark-t-w">Sign Up</h2>
+      <form
+        class="section-paragraph"
+        id="myForm"
+        method="post"
+        action="register.php"
+      >
+        <input type="text" name="username" placeholder="Username" required />
+        <br />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <br />
+        <input type="radio" id="gender" name="gender" value="m" checked />
+        <label class="dark-t">Male</label>
+        <br />
+        <input type="radio" id="gender" name="gender" value="f" />
+        <label class="dark-t">Female</label>
+        <br />
+        <button class="button" role="submit" id="btnRegister">Register</button>
       </form>
     </section>
 
@@ -67,7 +97,7 @@
           goals.
         </p>
 
-        <img class="ImageGrind" src="Images/Grind.webp" />
+        <img class="ImageGrind" src="Images/Grind.png" />
         <p class="section-paragraph dark-t">
           GRIND > is a term that refers to persevering when doing something
           difficult or performing repetitive tasks to attain a certain goal.

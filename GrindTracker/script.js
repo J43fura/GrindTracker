@@ -5,38 +5,53 @@ try {
 }
 checkbox.addEventListener("change", () => {
   try {
-    document.querySelector(".TitleGT1-d").classList.toggle("dark-text-b");
+    const darke = document.querySelectorAll(".TitleGT1-d");
+    for (let i = 0; i < darke.length; i++) {
+      darke[i].classList.toggle("dark-text-b");
+    }
   } catch (e) {
     console.log(e);
   }
   try {
-    document.querySelector(".login").classList.toggle("dark-container");
+    const darke = document.querySelectorAll(".login");
+    for (let i = 0; i < darke.length; i++) {
+      darke[i].classList.toggle("dark-container");
+    }
   } catch (e) {
     console.log(e);
   }
   try {
-    document.querySelector(".main-footer").classList.toggle("dark-footer");
+    const darke = document.querySelectorAll(".main-footer");
+    for (let i = 0; i < darke.length; i++) {
+      darke[i].classList.toggle("dark-footer");
+    }
   } catch (e) {
     console.log(e);
   }
   try {
-    document.querySelector(".div-about").classList.toggle("dark-about");
+    const darke = document.querySelectorAll(".div-about");
+    for (let i = 0; i < darke.length; i++) {
+      darke[i].classList.toggle("dark-about");
+    }
   } catch (e) {
     console.log(e);
   }
   try {
-    document.querySelector(".dark-t-w").classList.toggle("dark-text-w");
+    const darke = document.querySelectorAll(".dark-t-w");
+    for (let i = 0; i < darke.length; i++) {
+      darke[i].classList.toggle("dark-text-w");
+    }
   } catch (e) {
     console.log(e);
   }
   try {
-    document.querySelector(".dark-h").classList.toggle("dark-header");
+    const darke = document.querySelectorAll(".dark-h");
+    for (let i = 0; i < darke.length; i++) {
+      darke[i].classList.toggle("dark-header");
+    }
   } catch (e) {
     console.log(e);
   }
-
-  document.querySelector(".nav a").classList.toggle("dark-text-w");
-  // .nav a > .dark-t-w
 
   const darke = document.querySelectorAll(".nav-elements");
   for (let i = 0; i < darke.length; i++) {
@@ -51,9 +66,33 @@ checkbox.addEventListener("change", () => {
   } catch (e) {
     console.log(e);
   }
-  document.querySelector(".nav a").classList.toggle("dark-text-w");
+
+  /*try {
+    const darkt = document.querySelectorAll(".gender");
+    for (let i = 0; i < darkt.length; i++) {
+      darkt[i].classList.toggle("dark-text-w");
+    }
+  } catch (e) {
+    console.log(e);
+  }*/
 });
 
-btnRegister.addEventListener("click", () => {});
+function togglePopup() {
+  document.getElementById("popup-1").classList.toggle("active");
+}
+
+/*
+btnRegister.addEventListener("click", () => {
+  var request = new XMLHttpRequest();
+  request.open('POST', 'register.php', true);
+  request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  request.send(data);
+});
 
 btnLogin.addEventListener("click", () => {});
+
+
+
+  document.querySelector(".nav a").classList.toggle("dark-text-w");
+  // .nav a > .dark-t-w
+  */

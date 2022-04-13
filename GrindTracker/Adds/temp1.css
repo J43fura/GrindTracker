@@ -12,7 +12,7 @@
 }
 * {
   font-family: Raleway;
-  color: rgb(22, 22, 22);
+  color: rgb(0 0 0);
 }
 html,
 body {
@@ -31,11 +31,12 @@ a {
 }
 .nav a {
   display: inline-block;
-  color: #181a20;
+  color: rgb(255 238 238);
 }
 .nav a:hover {
   background-color: rgba(236, 236, 236, 0.33);
 }
+
 .switch {
   position: relative;
   display: inline-block;
@@ -51,7 +52,7 @@ a {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: #333744;
+  background-color: #23baeb;
   transition: 0.4s;
   border-radius: 17px;
 }
@@ -78,24 +79,28 @@ input:checked + .slider:before {
   transform: translateX(25px);
   content: "💡";
 }
+
 .main-nav {
   text-align: center;
   font-size: large;
-  border-bottom: 1px solid #caf3ff;
+  border-bottom: 1px solid rgb(196, 196, 196);
 }
 .main-nav li {
   padding: 0 5%;
 }
 .main-header {
-  background: linear-gradient(120deg, #9acfe0, #cbe6ef);
+  background: linear-gradient(120deg, #c4c4c4, #23baeb);
+  background-color: rgba(0, 0, 0, 0.2);
+  background-blend-mode: multiply;
+  background-size: cover;
 }
+
 .TitleGT {
   text-align: center;
-  color: #e8faff;
+  color: #fefff6;
   margin: 0px;
   font-size: 6em;
   font-family: Teko;
-  text-shadow: 0 0 0.05em #333744;
 }
 .content-section {
   margin: 1em;
@@ -105,11 +110,10 @@ input:checked + .slider:before {
   padding: 0 1.5em;
 }
 .about {
-  max-width: 950px;
+  max-width: 900px;
 }
 .div-about {
   padding: 1px;
-  background-color: #cbe6ef;
 }
 .section-header {
   font-family: Kanit;
@@ -119,15 +123,13 @@ input:checked + .slider:before {
 .section-paragraph {
   font-size: 1.5em;
 }
-.ImageGrind {
-  width: 100%;
-}
+
 .TitleGT2 {
   font-size: 3em;
   color: rgb(221, 240, 255);
 }
 .main-footer {
-  background-color: #182c39;
+  background-color: rgb(54, 54, 54);
   padding: 0.25em 0;
 }
 .main-footer-container {
@@ -138,20 +140,20 @@ input:checked + .slider:before {
   text-align: end;
   font-size: 30px;
 }
+
 * {
   font-size: 1.15em;
-  transition: 0.3s;
 }
 
 .login {
   width: none;
-  padding: 50px;
-  padding-bottom: 130px;
+  padding: 40px;
   top: 50%;
   left: 50%;
-  background: linear-gradient(120deg, #23baeb, #a2bbc2);
+  background: linear-gradient(120deg, #23baeb, #c4c4c4);
   text-align: center;
 }
+
 .login input[type="text"],
 .login input[type="password"] {
   border: 0;
@@ -161,7 +163,7 @@ input:checked + .slider:before {
   text-align: center;
   border: 2px solid #3594b9;
   padding: 14px 10px;
-  width: 370px;
+  width: 280px;
   outline: none;
   border-radius: 24px;
 }
@@ -170,10 +172,10 @@ input:checked + .slider:before {
   width: 400px;
   border-color: #23baeb;
 }
-.login .button {
+.login button[role="submit"] {
   border: 0;
   background-color: none;
-  -display: block;
+  display: block;
   margin: 20px auto;
   text-align: center;
   border: 2px solid #3594b9;
@@ -182,60 +184,21 @@ input:checked + .slider:before {
   outline: none;
   border-radius: 24px;
 }
-.login .button:hover {
+.login button[role="submit"]:hover {
   width: 210px;
   border-color: #bedae6;
-  background: linear-gradient(140deg, #db0a40, #db590a);
   background-color: #68b5d3;
   color: rgb(221, 240, 255);
 }
 
-.dark-header {
-  background: linear-gradient(120deg, #181a20, #181a20);
-}
 .dark-container {
-  background: linear-gradient(120deg, #181a20, #13151b);
-}
-.dark-footer {
-  background: #13151b;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: multiply;
+  background-size: cover;
 }
 .dark-about {
-  padding-top: 0.5px;
-  background-color: #181a20;
+  background-color: #242424;
 }
 .dark-text {
-  color: #e2e4e9;
-}
-.dark-text-w {
-  color: white !important;
-}
-.dark-text-b {
-  color: #db0a40;
-  text-shadow: 0 0 0.025em #db0a40;
-}
-
-.popup {
-  display: none;
-}
-.popup.active {
-  display: block;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  margin: 0px;
-  border-radius: 25px;
-  box-shadow: 0 0 1000px 1000px rgba(0, 0, 0, 0.9);
-}
-.popup .section-header {
-  margin: 10px;
-  margin-bottom: 30px;
-}
-.btnx {
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin: 0px !important;
-  padding: 0px !important;
-  width: 37px !important;
-  text-align: center;
+  color: white;
 }
