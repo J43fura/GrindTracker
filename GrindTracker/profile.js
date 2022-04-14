@@ -13,3 +13,38 @@ function DisplaySettings() {
   }
 }
 document.getElementById("Verify").addEventListener("click", () => {});
+
+function ADDvar() {
+  /*
+  <li>
+    <input type="number" placeholder="height" id="height" name="height" />
+    <button class="button BtnS" onclick="DELETEvar()">
+      ❌
+    </button>
+  </li>;
+*/
+  const li = document.createElement("li");
+  const input = document.createElement("input");
+  const button = document.createElement("button");
+  const textnode = document.createTextNode("❌");
+
+  input.setAttribute("type", "text");
+
+  button.setAttribute("class", "button BtnS");
+  button.setAttribute("onclick", "DELETEvar()");
+  button.appendChild(textnode);
+
+  li.appendChild(input);
+  li.appendChild(button);
+
+  document.getElementById("listing").appendChild(li);
+}
+
+function DELETEvar() {
+  //document.getElementById("#test").parentElement.innerHTML = "test";
+  //document.getElementById("#test").parentElement.createTextNode("test");
+  document.getElementById("#test").parentElement.remove();
+  //this.parentElement.remove();
+}
+
+function GRAPHvar() {}

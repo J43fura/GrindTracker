@@ -39,12 +39,12 @@
       <ul class="listing">
         <li>
           <input type="number" placeholder="weight" id="weight" name="weight" />
-          <button class="button BtnS" onclick="toggleGraph()">📈</button>
+          <button class="button BtnS" onclick="GRAPHvar()">📈</button>
         </li>
 
         <li>
           <input type="number" placeholder="height" id="height" name="height" />
-          <button class="button BtnS" onclick="toggleGraph()">📈</button>
+          <button class="button BtnS" onclick="GRAPHvar()">📈</button>
         </li>
 
         <li>
@@ -54,25 +54,25 @@
             id="benchMAX"
             name="benchMAX"
           />
-          <button class="button BtnS" onclick="toggleGraph()">📈</button>
+          <button class="button BtnS" onclick="GRAPHvar()">📈</button>
         </li>
       </ul>
       <button id="Settings" class="button BtnS" onclick="DisplaySettings()">
         ⚙️
       </button>
-      <button id="Verify" class="button BtnS">✔️</button>
+      <button id="Verify" class="button BtnS" onclick="VERIFYvar()">✔️</button>
     </div>
 
     <div class="vars Settings">
-      <ul class="listing">
+      <ul id="listing" class="listing">
         <li>
           <input type="number" placeholder="weight" id="weight" name="weight" />
-          <button class="button BtnS" onclick="toggleGraph()">❌</button>
+          <button class="button BtnS" onclick="DELETEvar()">❌</button>
         </li>
 
         <li>
           <input type="number" placeholder="height" id="height" name="height" />
-          <button class="button BtnS" onclick="toggleGraph()">❌</button>
+          <button class="button BtnS" onclick="DELETEvar()">❌</button>
         </li>
 
         <li>
@@ -82,17 +82,19 @@
             id="benchMAX"
             name="benchMAX"
           />
-          <button class="button BtnS" onclick="toggleGraph()">❌</button>
+          <button id="#test" class="button BtnS" onclick="DELETEvar()">
+            ❌
+          </button>
         </li>
 
-        <li>
-          <button class="button BtnS" id="ADD1button">➕</button>
+        <li id="ADD1button">
+          <button class="button BtnS" onclick="ADDvar()">➕</button>
         </li>
       </ul>
       <button id="Settings" class="button BtnS" onclick="DisplaySettings()">
         ⚙️
       </button>
-      <button id="Verify" class="button BtnS">✔️</button>
+      <button id="Verify" class="button BtnS" onclick="VERIFYvar()">✔️</button>
     </div>
 
     <div>
