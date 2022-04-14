@@ -269,6 +269,11 @@ input:focus {
   bottom: 0;
   right: 0;
 }
+#Settings {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
 
 .vars {
   height: auto;
@@ -278,6 +283,10 @@ input:focus {
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.Settings {
+  display: none;
 }
 
 .listing li {
