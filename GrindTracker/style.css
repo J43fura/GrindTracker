@@ -308,3 +308,15 @@ input:focus {
 .listing input:focus {
   width: 120px;
 }
+
+#msg1 {
+  color: #ffffff;
+  font-size: 40px;
+  padding: 20px 0;
+}
+
+#msg2 {
+  color: #ffffff;
+  font-size: 20px;
+  padding-bottom: 20px;
+}

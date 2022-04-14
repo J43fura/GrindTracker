@@ -49,9 +49,8 @@
           placeholder="Password"
           required
         />
-        <br />
+        <div id="msg1"></div>
         <button class="button" role="submit" id="btnLogin">Log In</button>
-        <br />
         <button type="button" class="button signup" onclick="togglePopup()">
           Sign Up
         </button>
@@ -68,13 +67,14 @@
         action="register.php"
       >
         <input type="text" name="username" placeholder="Username" required />
-        <br />
+        <div id="msg2"></div>
         <input
           type="password"
           name="password"
           placeholder="Password"
           required
         />
+
         <br />
         <input type="radio" id="gender" name="gender" value="m" checked />
         <label class="dark-t">Male</label>

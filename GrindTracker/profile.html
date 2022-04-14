@@ -3,6 +3,7 @@
 <html>
   <head>
     <script src="script.js" defer></script>
+    <script src="profile.js" defer></script>
     <title weight="normal">GrindTracker 🔺| Profile</title>
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
@@ -18,8 +19,8 @@
     <header id="RAS" class="main-header dark-h">
       <nav class="nav main-nav">
         <ul>
-          <li><a href="#RAS">Home</a></li>
-          <li><a href="logout.php">Logout</a></li>
+          <li><a class="nav-elements" href="#RAS">Home</a></li>
+          <li><a class="nav-elements" href="logout.php">Logout</a></li>
           <li>
             <label class="switch">
               <input type="checkbox" id="checkbox" />
@@ -63,8 +64,9 @@
     </div>
 
     <div>
-      <input type="date" id="birthday" name="birthday" />
+      <input type="date" value="today" id="calendar" name="calendar" required />
       <!--http://jsfiddle.net/trixta/cc7Rt/-->
+      <i id="timenow"></i>
     </div>
 
     <div>

@@ -66,33 +66,8 @@ checkbox.addEventListener("change", () => {
   } catch (e) {
     console.log(e);
   }
-
-  /*try {
-    const darkt = document.querySelectorAll(".gender");
-    for (let i = 0; i < darkt.length; i++) {
-      darkt[i].classList.toggle("dark-text-w");
-    }
-  } catch (e) {
-    console.log(e);
-  }*/
 });
 
 function togglePopup() {
   document.getElementById("popup-1").classList.toggle("active");
 }
-
-/*
-btnRegister.addEventListener("click", () => {
-  var request = new XMLHttpRequest();
-  request.open('POST', 'register.php', true);
-  request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-  request.send(data);
-});
-
-btnLogin.addEventListener("click", () => {});
-
-
-
-  document.querySelector(".nav a").classList.toggle("dark-text-w");
-  // .nav a > .dark-t-w
-  */
