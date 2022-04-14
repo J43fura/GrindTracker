@@ -4,6 +4,7 @@
   <head>
     <script src="script.js" defer></script>
     <title weight="normal">GrindTracker 🔺| Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -67,9 +68,31 @@
       <!--http://jsfiddle.net/trixta/cc7Rt/-->
     </div>
 
-    <div>
-      TODO LIST
-      <!--https://youtu.be/Ttf3CEsEwMQ-->
+    <div class="todo-div"><!--https://youtu.be/Ttf3CEsEwMQ-->
+
+      <header class="todo-head">
+        <h1>TODO LIST</h1>
+      </header>
+
+      <form class="todo-form">
+        <input type="text" class="todo-input">
+        <button class="todo-button" type="submit">
+          <i class="fas fa-plus-square"></i>
+        </button>
+
+        <div class="select">
+          <select name="todos" class="filter-todo">
+            <option value="all ">All</option>
+            <option value="completed">Completed</option>
+            <option value="uncompleted">Uncompleted</option>
+          </select>
+        </div>
+      </form>
+
+      <div class="todo-container">
+        <ul class="todo-list"></ul>
+      </div>
+      
     </div>
 
     <footer class="main-footer">

@@ -140,7 +140,7 @@ input:checked + .slider:before {
 }
 * {
   font-size: 1.15em;
-  transition: 0.3s;
+  
 }
 
 .login {
@@ -307,4 +307,110 @@ input:focus {
 
 .listing input:focus {
   width: 120px;
+}
+
+
+/*-------------------------todo list  --------------------------------*/
+.todo-div{
+  background: linear-gradient(180deg,#08769b,#182c39);
+  margin: 0;
+}
+.todo-head,.todo-form {
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.todo-form button{
+  border-radius: 17px;
+}
+.todo-form input {
+  margin: 0;
+}
+
+.todo-form input ,.todo-form button {
+
+  padding: 0.5rem;
+  font-size: 2rem;
+}
+.todo-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.todo-list{
+  min-width: 30%;
+  list-style: none;
+}
+.todo{
+  margin: 0.5rem;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+.todo li{
+  flex: 1;
+}
+.trash-btn,.complete-btn {
+  border: none;
+  
+  background: #ff6f47;
+  /* cant change color because of *{color}*/
+  color: red!important;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.complete-btn{
+  background: green;
+}
+.todo-item{
+  padding: 0rem 0.5rem;
+}
+.fa-check,.fa-trash {
+  pointer-events: none;
+}
+
+
+.completed{
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+select{
+  -webkit-appearance:none ;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border: none;
+}
+.select{
+  margin: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+select{
+  color: #08769b;
+  width: 10rem;
+  cursor: pointer;
+  padding: 1rem;
+  font-size:1rem;
+}
+.select::after{
+  content: "\25BC";
+  position: absolute;
+  background: #182c39;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  pointer-events: none;
+  font-size: 1rem;
+}
+.filter-todo{
+  font-size: 0.9rem;
+}
+.select:hover::after {
+  background:white ;
+  color: #182c39;
 }
