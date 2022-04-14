@@ -3,6 +3,7 @@
 <html>
   <head>
     <script src="script.js" defer></script>
+    <script src="profile.js" defer></script>
     <title weight="normal">GrindTracker 🔺| Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css" />
@@ -19,8 +20,8 @@
     <header id="RAS" class="main-header dark-h">
       <nav class="nav main-nav">
         <ul>
-          <li><a href="#RAS">Home</a></li>
-          <li><a href="logout.php">Logout</a></li>
+          <li><a class="nav-elements" href="#RAS">Home</a></li>
+          <li><a class="nav-elements" href="logout.php">Logout</a></li>
           <li>
             <label class="switch">
               <input type="checkbox" id="checkbox" />
@@ -55,17 +56,49 @@
           />
           <button class="button BtnS" onclick="toggleGraph()">📈</button>
         </li>
+      </ul>
+      <button id="Settings" class="button BtnS" onclick="DisplaySettings()">
+        ⚙️
+      </button>
+      <button id="Verify" class="button BtnS">✔️</button>
+    </div>
+
+    <div class="vars Settings">
+      <ul class="listing">
+        <li>
+          <input type="number" placeholder="weight" id="weight" name="weight" />
+          <button class="button BtnS" onclick="toggleGraph()">❌</button>
+        </li>
+
+        <li>
+          <input type="number" placeholder="height" id="height" name="height" />
+          <button class="button BtnS" onclick="toggleGraph()">❌</button>
+        </li>
+
+        <li>
+          <input
+            type="number"
+            placeholder="benchMAX"
+            id="benchMAX"
+            name="benchMAX"
+          />
+          <button class="button BtnS" onclick="toggleGraph()">❌</button>
+        </li>
 
         <li>
           <button class="button BtnS" id="ADD1button">➕</button>
         </li>
       </ul>
+      <button id="Settings" class="button BtnS" onclick="DisplaySettings()">
+        ⚙️
+      </button>
       <button id="Verify" class="button BtnS">✔️</button>
     </div>
 
     <div>
-      <input type="date" id="birthday" name="birthday" />
+      <input type="date" value="today" id="calendar" name="calendar" required />
       <!--http://jsfiddle.net/trixta/cc7Rt/-->
+      <i id="timenow"></i>
     </div>
 
     <div class="todo-div"><!--https://youtu.be/Ttf3CEsEwMQ-->

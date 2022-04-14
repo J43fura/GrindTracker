@@ -1,4 +1,5 @@
 <?php
+
 require_once('connection.php');
 $username = filter_input(INPUT_POST, 'username');
 $password = filter_input(INPUT_POST, 'password');
@@ -8,12 +9,16 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 	$result = mysqli_query($conn,$sql);
 	$num = mysqli_num_rows($result);
 	if($num==1){
-		echo "Username already taken.";
+		include 'index.html';
+		echo "<script>document.getElementById('msg2').innerHTML = '⛔ The username is already used.';
+		document.getElementById('popup-1').classList.toggle('active');
+		 </script>";
 	}
 	else{
 		$sql = "INSERT INTO register(username, password, gender) values ('$username','$password','$gender')";
 	if ($conn->query($sql)){
-		echo "New record is inserted sucessfully";
+		include 'index.html';
+		echo "<script>document.getElementById('msg1').innerHTML = 'Your account has been created.'; </script>";
 	}
 	else{
 		echo "Error: ". $sql ."". $conn->error;

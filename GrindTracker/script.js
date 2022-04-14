@@ -66,15 +66,6 @@ checkbox.addEventListener("change", () => {
   } catch (e) {
     console.log(e);
   }
-
-  /*try {
-    const darkt = document.querySelectorAll(".gender");
-    for (let i = 0; i < darkt.length; i++) {
-      darkt[i].classList.toggle("dark-text-w");
-    }
-  } catch (e) {
-    console.log(e);
-  }*/
 });
 
 function togglePopup() {

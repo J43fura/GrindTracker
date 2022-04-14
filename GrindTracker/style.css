@@ -269,6 +269,11 @@ input:focus {
   bottom: 0;
   right: 0;
 }
+#Settings {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
 
 .vars {
   height: auto;
@@ -278,6 +283,10 @@ input:focus {
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.Settings {
+  display: none;
 }
 
 .listing li {
@@ -413,4 +422,15 @@ select{
 .select:hover::after {
   background:white ;
   color: #182c39;
+}
+#msg1 {
+  color: #ffffff;
+  font-size: 40px;
+  padding: 20px 0;
+}
+
+#msg2 {
+  color: #ffffff;
+  font-size: 20px;
+  padding-bottom: 20px;
 }

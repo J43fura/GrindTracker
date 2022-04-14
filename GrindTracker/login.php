@@ -11,14 +11,15 @@ if (!empty($username) && !empty($password) ){
 		header("location:profile.html");
 	}
 	else{
-		echo "The username or password is incorrect.";
+		include 'index.html';
+		echo "<script>document.getElementById('msg1').innerHTML = '⛔ The username or password is incorrect.'; </script>";
 		//b fazt el link %--= %  %
 		$conn->close();
 	}					
 }
 else{
 	header("location:index.html");
+	//header("location:index.html/<script>document.getElementById('error').innerHTML = 'The username or password is incorrect.'; </script>");
 }
-
 
 ?>
