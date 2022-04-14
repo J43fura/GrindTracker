@@ -31,15 +31,18 @@
       <h1 class="TitleGT TitleGT1 TitleGT1-d">GrindTracker</h1>
     </header>
 
-
-    <div>
-      <ul>
+    <div class="vars">
+      <ul class="listing">
         <li>
           <input type="number" placeholder="weight" id="weight" name="weight" />
+          <button class="button BtnS" onclick="toggleGraph()">📈</button>
         </li>
+
         <li>
           <input type="number" placeholder="height" id="height" name="height" />
+          <button class="button BtnS" onclick="toggleGraph()">📈</button>
         </li>
+
         <li>
           <input
             type="number"
@@ -47,13 +50,26 @@
             id="benchMAX"
             name="benchMAX"
           />
-		  <li><button id="ADD1button">➕</button></li>
+          <button class="button BtnS" onclick="toggleGraph()">📈</button>
+        </li>
+
+        <li>
+          <button class="button BtnS" id="ADD1button">➕</button>
         </li>
       </ul>
+      <button id="Verify" class="button BtnS">✔️</button>
     </div>
-    <li>
+
+    <div>
       <input type="date" id="birthday" name="birthday" />
-    </li>
+      <!--http://jsfiddle.net/trixta/cc7Rt/-->
+    </div>
+
+    <div>
+      TODO LIST
+      <!--https://youtu.be/Ttf3CEsEwMQ-->
+    </div>
+
     <footer class="main-footer">
       <div class="container main-footer-container">
         <!--<hr />-->

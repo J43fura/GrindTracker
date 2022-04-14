@@ -152,8 +152,8 @@ input:checked + .slider:before {
   background: linear-gradient(120deg, #23baeb, #a2bbc2);
   text-align: center;
 }
-.login input[type="text"],
-.login input[type="password"] {
+
+input {
   border: 0;
   background-color: none;
   display: block;
@@ -165,15 +165,14 @@ input:checked + .slider:before {
   outline: none;
   border-radius: 24px;
 }
-.login input[type="text"]:focus,
-.login input[type="password"]:focus {
+input:focus {
   width: 400px;
   border-color: #23baeb;
 }
-.login .button {
+.button {
   border: 0;
   background-color: none;
-  -display: block;
+  display: block;
   margin: 20px auto;
   text-align: center;
   border: 2px solid #3594b9;
@@ -181,13 +180,25 @@ input:checked + .slider:before {
   width: 190px;
   outline: none;
   border-radius: 24px;
+  cursor: pointer;
 }
-.login .button:hover {
+.button:hover {
   width: 210px;
   border-color: #bedae6;
   background: linear-gradient(140deg, #db0a40, #db590a);
   background-color: #68b5d3;
   color: rgb(221, 240, 255);
+}
+
+.signup {
+  background: linear-gradient(140deg, #94733d, #daaf62);
+  border-color: #ffe7bb !important;
+  box-shadow: 0 0 10px #ffe7bb;
+  color: rgb(255, 255, 255) !important;
+}
+.signup:hover {
+  background: linear-gradient(150deg, #aa8f61, #ecb24a) !important;
+  color: rgb(255, 255, 255) !important;
 }
 
 .dark-header {
@@ -239,8 +250,61 @@ input:checked + .slider:before {
   width: 37px !important;
   text-align: center;
 }
+
 #gender {
   height: 25px;
   width: 25px;
   cursor: pointer;
+}
+
+/***********************************************************************/
+.BtnS {
+  margin: 0px;
+  padding: 0px;
+  width: 80px !important;
+  height: 80px !important;
+}
+#Verify {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.vars {
+  height: auto;
+  position: relative;
+  text-align: center;
+  background-color: #08769b;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.listing li {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center !important;
+  width: none;
+  padding: 10px !important;
+  border-radius: 25px;
+  top: 50%;
+  left: 50%;
+  background-color: #69c9e9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.listing {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.listing input {
+  width: 100px;
+  height: 52px;
+  font-size: 25px;
+}
+
+.listing input:focus {
+  width: 120px;
 }
