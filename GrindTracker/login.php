@@ -12,6 +12,7 @@ if (!empty($username) && !empty($password) ){
 	}
 	else{
 		echo "The username or password is incorrect.";
+		//b fazt el link %--= %  %
 		$conn->close();
 	}					
 }

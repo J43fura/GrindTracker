@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once('connection.php');
 $username = filter_input(INPUT_POST, 'username');
 $password = filter_input(INPUT_POST, 'password');
