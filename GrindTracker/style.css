@@ -338,7 +338,7 @@ input:focus {
 
 /*-------------------------todo list  --------------------------------*/
 .todo-div {
-  background: linear-gradient(180deg, #08769b, #182c39);
+  background: linear-gradient(180deg, #9acfe0, #cbe6ef);
   margin: 0;
 }
 .todo-head,
@@ -376,6 +376,7 @@ input:focus {
   justify-content: space-between;
   align-items: center;
   transition: all 0.5s ease;
+  box-shadow: 0 0 10px rgb(0 52 60 / 70%);
 }
 .todo li {
   flex: 1;
@@ -443,4 +444,15 @@ select {
   color: #182c39;
 }
 
+.todo-form .listing {
+  align-items: center;
+  box-shadow: 0 0 20px rgb(0 0 0 / 40%);
+  background-color: #a9d5e4;
+  padding: 10px;
+  border-radius: 25px;
+}
+
+.todo-form .listing input {
+  width: 300px;
+}
 /*-------------------------todo list: KMEL.  --------------------------------*/
