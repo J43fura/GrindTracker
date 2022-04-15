@@ -5,7 +5,13 @@
     <script src="script.js" defer></script>
     <script src="profile.js" defer></script>
     <title weight="normal">GrindTracker 🔺| Profile</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -60,19 +66,19 @@
       <button id="Settings" class="button BtnS" onclick="DisplaySettings()">
         ⚙️
       </button>
-      <button id="Verify" class="button BtnS" onclick="VERIFYvar()">✔️</button>
+      <button id="Verify" class="button BtnS" onclick="Verify()">✔️</button>
     </div>
 
     <div class="vars Settings">
       <ul id="listing" class="listing">
         <li>
           <input type="number" placeholder="weight" id="weight" name="weight" />
-          <button class="button BtnS" onclick="DELETEvar()">❌</button>
+          <button class="button BtnS" onclick="DELETEvar(this)">❌</button>
         </li>
 
         <li>
           <input type="number" placeholder="height" id="height" name="height" />
-          <button class="button BtnS" onclick="DELETEvar()">❌</button>
+          <button class="button BtnS" onclick="DELETEvar(this);">❌</button>
         </li>
 
         <li>
@@ -82,7 +88,7 @@
             id="benchMAX"
             name="benchMAX"
           />
-          <button id="#test" class="button BtnS" onclick="DELETEvar()">
+          <button id="#test" class="button BtnS" onclick="DELETEvar(this)">
             ❌
           </button>
         </li>
@@ -94,7 +100,7 @@
       <button id="Settings" class="button BtnS" onclick="DisplaySettings()">
         ⚙️
       </button>
-      <button id="Verify" class="button BtnS" onclick="VERIFYvar()">✔️</button>
+      <button id="Verify" class="button BtnS" onclick="Verify()">✔️</button>
     </div>
 
     <div>
@@ -103,14 +109,15 @@
       <i id="timenow"></i>
     </div>
 
-    <div class="todo-div"><!--https://youtu.be/Ttf3CEsEwMQ-->
+    <div class="todo-div">
+      <!--https://youtu.be/Ttf3CEsEwMQ-->
 
       <header class="todo-head">
         <h1>TODO LIST</h1>
       </header>
 
       <form class="todo-form">
-        <input type="text" class="todo-input">
+        <input type="text" class="todo-input" />
         <button class="todo-button" type="submit">
           <i class="fas fa-plus-square"></i>
         </button>
@@ -127,7 +134,6 @@
       <div class="todo-container">
         <ul class="todo-list"></ul>
       </div>
-      
     </div>
 
     <footer class="main-footer">

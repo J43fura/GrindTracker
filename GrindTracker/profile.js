@@ -5,24 +5,28 @@ const NowDate = document.getElementById("calendar").valueAsDate;
 
 function DisplaySettings() {
   if (document.querySelector(".Settings").style.display != "block") {
+    //vars
     document.querySelector(".vars").style.display = "none";
     document.querySelector(".Settings").style.display = "block";
+    //input: number > string
   } else if (document.querySelector(".Settings").style.display == "block") {
+    //settings
     document.querySelector(".vars").style.display = "block";
     document.querySelector(".Settings").style.display = "none";
+    //input: string > number //+sql?
   }
 }
-document.getElementById("Verify").addEventListener("click", () => {});
+function Verify() {
+  if (document.querySelector(".Settings").style.display != "block") {
+    console.log("V vars");
+    //vars
+  } else if (document.querySelector(".Settings").style.display == "block") {
+    console.log("V settings");
+    //settings
+  }
+}
 
 function ADDvar() {
-  /*
-  <li>
-    <input type="number" placeholder="height" id="height" name="height" />
-    <button class="button BtnS" onclick="DELETEvar()">
-      ❌
-    </button>
-  </li>;
-*/
   const li = document.createElement("li");
   const input = document.createElement("input");
   const button = document.createElement("button");
@@ -31,7 +35,7 @@ function ADDvar() {
   input.setAttribute("type", "text");
 
   button.setAttribute("class", "button BtnS");
-  button.setAttribute("onclick", "DELETEvar()");
+  button.setAttribute("onclick", "DELETEvar(this)");
   button.appendChild(textnode);
 
   li.appendChild(input);
@@ -40,11 +44,8 @@ function ADDvar() {
   document.getElementById("listing").appendChild(li);
 }
 
-function DELETEvar() {
-  //document.getElementById("#test").parentElement.innerHTML = "test";
-  //document.getElementById("#test").parentElement.createTextNode("test");
-  document.getElementById("#test").parentElement.remove();
-  //this.parentElement.remove();
+function DELETEvar(t) {
+  t.parentElement.remove();
 }
 
 function GRAPHvar() {}
