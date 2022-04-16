@@ -7,17 +7,16 @@ if (!empty($username) && !empty($password) ){
 	$sql = "SELECT password FROM register WHERE username='$username'";
 	$result = mysqli_query($conn,$sql);
 	$num = mysqli_num_rows($result);
-
 	if($num==1){
 		$value = mysqli_fetch_assoc($result);
 		$value = $value["password"];
 		if(password_verify($password,$value)){
 			$_SESSION["username"] = $username;
-			header("location:profile.php");}
-	}
-
-	include 'index.php';
-	echo "<script>document.getElementById('msg1').innerHTML = '⛔ The username or password is incorrect.'; </script>";
+			header("location:profile.php");
+			exit();
+		}
+}
+header("location:index.php?msg=incorrect");
 	//b fazt el link %--= %  %
 	$conn->close();		
 }

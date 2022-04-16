@@ -57,7 +57,16 @@ if (isset($_SESSION["username"])){
           placeholder="Password"
           required
         />
-        <div id="msg1"></div>
+        <!--<div id="msg1"></div>-->
+        <?php
+            if (isset($_GET["msg"])){
+              if ($_GET["msg"] == "incorrect"){
+              echo "<div id='msg1'>⛔ The username or password is incorrect.</div>";
+            }
+            else if($_GET["msg"] == "accountcreated"){
+              echo "<div id='msg1'>Your account has been created.</div>";
+            }}
+              ?>
         <button class="button" role="submit" id="btnLogin">Log In</button>
         <button type="button" class="button signup" onclick="togglePopup()">
           Sign Up
@@ -75,7 +84,14 @@ if (isset($_SESSION["username"])){
         action="register.php"
       >
         <input type="text" name="username" placeholder="Username" required />
-        <div id="msg2"></div>
+        <!--<div id="msg2"></div>-->
+        <?php
+            if (isset($_GET["msg"])){
+              if ($_GET["msg"] == "usedusername"){
+              echo "<div id='msg2'>⛔ The username is already used.</div>
+              <script>document.getElementById('popup-1').classList.toggle('active');</script>";
+            }}
+              ?>
         <input
           type="password"
           name="password"

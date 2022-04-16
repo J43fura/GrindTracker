@@ -8,17 +8,13 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 	$result = mysqli_query($conn,$sql);
 	$num = mysqli_num_rows($result);
 	if($num==1){
-		include 'index.php';
-		echo "<script>document.getElementById('msg2').innerHTML = '⛔ The username is already used.';
-		document.getElementById('popup-1').classList.toggle('active');
-		 </script>";
+		header("location:index.php?msg=usedusername");
 	}
 	else{
 		$password = password_hash($password,PASSWORD_DEFAULT);
 		$sql = "INSERT INTO register(username, password, gender) values ('$username','$password','$gender')";
 	if ($conn->query($sql)){
-		include 'index.php';
-		echo "<script>document.getElementById('msg1').innerHTML = 'Your account has been created.'; </script>";
+		header("location:index.php?msg=accountcreated");
 	}
 	else{
 		echo "Error: ". $sql ."". $conn->error;
