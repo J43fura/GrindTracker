@@ -1,5 +1,12 @@
-<!DOCTYPE html>
 <!--Session-->
+<?php 
+  session_start();
+if (!isset($_SESSION["username"])){
+
+  header("location:index.php");
+}
+?>
+<!DOCTYPE html>
 <html>
   <head>
     <script src="script.js" defer></script>
@@ -113,7 +120,7 @@
       <!--https://youtu.be/Ttf3CEsEwMQ-->
 
       <header class="todo-head">
-        <h1>TODO LIST</h1>
+        <h2 class="section-header dark-t">TODO:</h2>
       </header>
 
       <form class="todo-form">
