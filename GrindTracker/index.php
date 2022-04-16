@@ -57,14 +57,17 @@ if (isset($_SESSION["username"])){
           placeholder="Password"
           required
         />
-        <!--<div id="msg1"></div>-->
+        <div id="msg1"></div>
         <?php
             if (isset($_GET["msg"])){
               if ($_GET["msg"] == "incorrect"){
-              echo "<div id='msg1'>⛔ The username or password is incorrect.</div>";
+              //echo "<div id='msg1'>⛔ The username or password is incorrect.</div>
+              echo "<script>document.getElementById('msg1').innerHTML = '⛔ The username or password is incorrect.'; </script>";
             }
             else if($_GET["msg"] == "accountcreated"){
-              echo "<div id='msg1'>Your account has been created.</div>";
+
+              //echo "<div id='msg1'>Your account has been created.</div>
+              echo "<script>document.getElementById('msg1').innerHTML = 'Your account has been created.'; </script>";
             }}
               ?>
         <button class="button" role="submit" id="btnLogin">Log In</button>
@@ -84,12 +87,14 @@ if (isset($_SESSION["username"])){
         action="register.php"
       >
         <input type="text" name="username" placeholder="Username" required />
-        <!--<div id="msg2"></div>-->
+        <div id="msg2"></div>
         <?php
             if (isset($_GET["msg"])){
               if ($_GET["msg"] == "usedusername"){
-              echo "<div id='msg2'>⛔ The username is already used.</div>
-              <script>document.getElementById('popup-1').classList.toggle('active');</script>";
+              //echo "<div id='msg2'>⛔ The username is already used.</div>
+              echo "<script>document.getElementById('msg2').innerHTML = '⛔ The username is already used.';
+              document.getElementById('popup-1').classList.toggle('active');
+               </script>";
             }}
               ?>
         <input
