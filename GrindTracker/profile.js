@@ -24,8 +24,10 @@ function DisplaySettings() {
     //input: string > number //+sql?
   }
 }
+
 function Verify() {
   if (document.querySelector(".Settings").style.display != "block") {
+    //vars
     /*
     console.log("V vars");
     fetch('wrap.php', {
@@ -38,7 +40,6 @@ function Verify() {
     .then(response => response.text())
     .then(data => document.querySelector("p.broken").innerHTML = data);
     */
-    //vars
   } else if (document.querySelector(".Settings").style.display == "block") {
     console.log("V settings");
     //settings

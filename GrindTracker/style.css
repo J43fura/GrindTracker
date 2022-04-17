@@ -61,7 +61,7 @@ a {
 .slider:before {
   position: absolute;
   font-size: 17px;
-  content: "ðŸŒ™";
+  content: "💡";
   top: 2.5px;
   height: 25px;
   width: 25px;
@@ -76,7 +76,7 @@ input:checked + .slider {
 }
 input:checked + .slider:before {
   transform: translateX(25px);
-  content: "ðŸ’¡";
+  content: "🌙";
 }
 .main-nav {
   text-align: center;
