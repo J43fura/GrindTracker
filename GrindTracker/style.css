@@ -61,7 +61,7 @@ a {
 .slider:before {
   position: absolute;
   font-size: 17px;
-  content: "🌙";
+  content: "ðŸŒ™";
   top: 2.5px;
   height: 25px;
   width: 25px;
@@ -76,7 +76,7 @@ input:checked + .slider {
 }
 input:checked + .slider:before {
   transform: translateX(25px);
-  content: "💡";
+  content: "ðŸ’¡";
 }
 .main-nav {
   text-align: center;
@@ -280,10 +280,10 @@ input:focus {
   height: auto;
   position: relative;
   text-align: center;
-  background-color: #08769b;
+  background: linear-gradient(180deg, #cbe6ef, #9acfe0);
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .Settings {
@@ -340,6 +340,10 @@ input:focus {
 .todo-div {
   background: linear-gradient(180deg, #9acfe0, #cbe6ef);
   margin: 0;
+  padding: 10px;
+  border-radius: 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 25px !important;
 }
 .todo-head,
 .todo-form {
@@ -474,4 +478,15 @@ select {
   right: 20px;
 
   filter: drop-shadow(0 0 10px rgb(255 90 0 / 70%));
+}
+
+#calendar {
+  font-size: 40px;
+  size: 900px !important;
+}
+.calendar {
+  background: #9acfe0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 25px;
+  padding: 50px;
 }

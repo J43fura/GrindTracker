@@ -9,6 +9,14 @@ function DisplaySettings() {
     document.querySelector(".vars").style.display = "none";
     document.querySelector(".Settings").style.display = "block";
     //input: number > string
+    try {
+      const elemvar = document.querySelectorAll(".Settings input[type=number]");
+      for (let i = 0; i < elemvar.length; i++) {
+        elemvar[i].type = "text";
+      }
+    } catch (e) {
+      console.log(e);
+    }
   } else if (document.querySelector(".Settings").style.display == "block") {
     //settings
     document.querySelector(".vars").style.display = "block";
@@ -34,6 +42,20 @@ function Verify() {
   } else if (document.querySelector(".Settings").style.display == "block") {
     console.log("V settings");
     //settings
+    try {
+      const elemvar = document.querySelectorAll(".Settings input[type=text]");
+      for (let i = 0; i < elemvar.length; i++) {
+        //console.log(elemvar);
+        console.log(elemvar[i].value); //PHP SQL
+        //fetch("varssettings.php", { method: "POST", body: data })
+        //.then(res => res.text())
+        //.then((txt) => {
+        //  console.log(txt);
+        //})
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
 
@@ -42,7 +64,7 @@ function ADDvar() {
   const input = document.createElement("input");
   const button = document.createElement("button");
   const textnode = document.createTextNode("❌");
-
+  input.setAttribute("required", "");
   input.setAttribute("type", "text");
 
   button.setAttribute("class", "button BtnS");

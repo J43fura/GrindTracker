@@ -14,6 +14,15 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 		$password = password_hash($password,PASSWORD_DEFAULT);
 		$sql = "INSERT INTO register(username, password, gender) values ('$username','$password','$gender')";
 	if ($conn->query($sql)){
+
+		$sql = "SELECT id FROM register WHERE username = '$username'";
+		$result = mysqli_query($conn,$sql);
+		$value = mysqli_fetch_assoc($result);
+		$id = $value["id"];
+		$sql = "CREATE TABLE pr$id (PrDate DATE, TODO varchar(124))";
+		$conn->query($sql);
+		
+
 		header("location:index.php?msg=accountcreated");
 	}
 	else{

@@ -110,7 +110,7 @@ if (!isset($_SESSION["username"])){
       <button id="Verify" class="button BtnS" onclick="Verify()">✔️</button>
     </div>
 
-    <div>
+    <div class="calendar">
       <input type="date" value="today" id="calendar" name="calendar" required />
       <!--http://jsfiddle.net/trixta/cc7Rt/-->
       <i id="timenow"></i>
