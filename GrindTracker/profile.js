@@ -36,6 +36,65 @@ function Verify() {
       const elemvar = document.querySelectorAll(".Settings input[type=text]");
       for (let i = 0; i < elemvar.length; i++) {
         //rename lel 9dim + verification esm mafamech menou (placeholder>)
+        elemph = elemvar[i].placeholder;
+        elemvl = elemvar[i].value;
+        if (elemvl != "") {
+          if (elemph != "") {
+            //RENAME
+            console.log("RENAME");
+            console.log(elemvl);
+            console.log(elemph);
+
+            $.ajax({
+              url: "varssettings.php",
+              type: "POST",
+              data: { elemvl: elemvl, elemph: elemph },
+              success: function (data) {
+                if (data == 0) {
+                  alert("Something wrong went. Please try again.");
+                }
+              },
+            });
+          } else {
+            //ADD
+            console.log("ADD");
+            console.log(elemvl);
+
+            $.ajax({
+              url: "varssettings.php",
+              type: "POST",
+              data: { elemvl: elemvl },
+              success: function (data) {
+                if (data == 0) {
+                  alert("Something wrong went. Please try again.");
+                }
+              },
+            });
+          }
+        } else if (elemvl == "") {
+          if (elemph != "") {
+            if (elemvar[i].parentElement.id == "ToDelete") {
+              if (confirm("Are you sure you want to delete " + elemph + " ?")) {
+                //DELETE
+                console.log("DELETE");
+                console.log(elemph);
+
+                $.ajax({
+                  url: "varssettings.php",
+                  type: "POST",
+                  data: { elemph: elemph },
+                  success: function (data) {
+                    if (data == 0) {
+                      alert("Something wrong went. Please try again.");
+                    }
+                  },
+                });
+                document.getElementById(elemph).parentElement.remove();
+              }
+            }
+          }
+        }
+
         //ALTER TABLE pr$id ADD $axe int(7) : colon jdida lel jdod (else>value)
         //varssettings
       }
@@ -92,7 +151,9 @@ function ADDvar() {
 }
 
 function DELETEvar(t) {
-  t.parentElement.remove();
+  //t.parentElement.remove();
+  t.parentElement.style.display = "none";
+  t.parentElement.setAttribute("id", "ToDelete");
 }
 
 function GRAPHvar() {}

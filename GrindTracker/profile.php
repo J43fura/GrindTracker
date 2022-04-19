@@ -62,20 +62,21 @@ if (!isset($_SESSION["username"])){
       $value = mysqli_fetch_assoc($result);
       $id = $value["id"];
 
-      //$sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO'";
-      $sql="SELECT column_name from information_schema.columns where table_name = 'pr$id' and table_schema='grindtracker' and column_name != 'PrDate' and column_name != 'TODO'";
+      //$sql="SELECT column_name from information_schema.columns where table_name = 'pr$id' and table_schema='grindtracker' and column_name != 'PrDate' and column_name != 'TODO'";
+      $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO'";
       $result = mysqli_query($conn,$sql);
       if (mysqli_num_rows($result)>0){
         while ($row=mysqli_fetch_assoc($result)){
           ?>
           <li>
-                <input type="number" placeholder="<?php echo $row['column_name'] ?>" id="<?php echo $row['column_name'] ?>" name="<?php echo $row['column_name'] ?>" />
+                <input type="number" placeholder="<?php echo $row['Field'] ?>" id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" />
                 <button class="button BtnS" onclick="GRAPHvar()">📈</button>
               </li>
       <?php
         }
       }
-      ?>
+    ?>
+
       </ul>
       <button id="Settings" class="button BtnS" onclick="DisplaySettings()">
         ⚙️
