@@ -22,6 +22,7 @@ if (isset($_SESSION["username"])){
     />
   </head>
   <body>
+  <!--<div class="loader" id="loader"></div>-->
     <header id="RAS" class="main-header dark-h">
       <nav class="nav main-nav">
         <ul>

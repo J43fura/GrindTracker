@@ -20,7 +20,7 @@ if (!empty($axe)){
 
 	}
 	catch(e){
-		$sql = "INSERT INTO pr$id ($axe, number(7))";
+		$sql = "ALTER TABLE pr$id ADD $axe int(7)";
 		$conn->query($sql);
 		header("location:profile.php?msg=axeadded");
 		exit();

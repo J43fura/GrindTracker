@@ -11,6 +11,7 @@ if (!isset($_SESSION["username"])){
   <head>
     <script src="script.js" defer></script>
     <script src="profile.js" defer></script>
+    <script src="Adds/jquery-3.6.0.js"></script>
     <title weight="normal">GrindTracker 🔺| Profile</title>
     <link
       rel="stylesheet"
@@ -30,6 +31,7 @@ if (!isset($_SESSION["username"])){
     />
   </head>
   <body>
+    <!--<div class="loader" id="loader"></div>-->
     <header id="RAS" class="main-header dark-h">
       <nav class="nav main-nav">
         <ul>
@@ -50,25 +52,30 @@ if (!isset($_SESSION["username"])){
     <!--load php maghyr refresh lel page; ajax?-->
     <div class="vars">
       <ul class="listing">
-        <li>
-          <input type="number" placeholder="weight" id="weight" name="weight" />
-          <button class="button BtnS" onclick="GRAPHvar()">📈</button>
-        </li>
+      <?php
+      //charge vars:
+      require_once('connection.php');
+      $username = $_SESSION["username"];
 
-        <li>
-          <input type="number" placeholder="height" id="height" name="height" />
-          <button class="button BtnS" onclick="GRAPHvar()">📈</button>
-        </li>
+      $sql = "SELECT id FROM register WHERE username = '$username'";
+      $result = mysqli_query($conn,$sql);
+      $value = mysqli_fetch_assoc($result);
+      $id = $value["id"];
 
-        <li>
-          <input
-            type="number"
-            placeholder="benchMAX"
-            id="benchMAX"
-            name="benchMAX"
-          />
-          <button class="button BtnS" onclick="GRAPHvar()">📈</button>
-        </li>
+      //$sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO'";
+      $sql="SELECT column_name from information_schema.columns where table_name = 'pr$id' and table_schema='grindtracker' and column_name != 'PrDate' and column_name != 'TODO'";
+      $result = mysqli_query($conn,$sql);
+      if (mysqli_num_rows($result)>0){
+        while ($row=mysqli_fetch_assoc($result)){
+          ?>
+          <li>
+                <input type="number" placeholder="<?php echo $row['column_name'] ?>" id="<?php echo $row['column_name'] ?>" name="<?php echo $row['column_name'] ?>" />
+                <button class="button BtnS" onclick="GRAPHvar()">📈</button>
+              </li>
+      <?php
+        }
+      }
+      ?>
       </ul>
       <button id="Settings" class="button BtnS" onclick="DisplaySettings()">
         ⚙️
@@ -78,27 +85,31 @@ if (!isset($_SESSION["username"])){
 
     <div class="vars Settings">
       <ul id="listing" class="listing">
-        <li>
-          <input type="number" placeholder="weight" id="weight" name="weight" />
-          <button class="button BtnS" onclick="DELETEvar(this)">❌</button>
-        </li>
+      <?php
+      //charge varssettings:
+        //select vars t7awwwelhom vars settings tnajjem
+      require_once('connection.php');
+      $username = $_SESSION["username"];
 
-        <li>
-          <input type="number" placeholder="height" id="height" name="height" />
-          <button class="button BtnS" onclick="DELETEvar(this);">❌</button>
-        </li>
+      $sql = "SELECT id FROM register WHERE username = '$username'";
+      $result = mysqli_query($conn,$sql);
+      $value = mysqli_fetch_assoc($result);
+      $id = $value["id"];
 
-        <li>
-          <input
-            type="number"
-            placeholder="benchMAX"
-            id="benchMAX"
-            name="benchMAX"
-          />
-          <button id="#test" class="button BtnS" onclick="DELETEvar(this)">
-            ❌
-          </button>
-        </li>
+      //$sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO'";
+      $sql="SELECT column_name from information_schema.columns where table_name = 'pr$id' and table_schema='grindtracker' and column_name != 'PrDate' and column_name != 'TODO'";
+      $result = mysqli_query($conn,$sql);
+      if (mysqli_num_rows($result)>0){
+        while ($row=mysqli_fetch_assoc($result)){
+          ?>
+          <li>
+                <input type="text" placeholder="<?php echo $row['column_name'] ?>" id="<?php echo $row['column_name'] ?>" name="<?php echo $row['column_name'] ?>" />
+                <button class="button BtnS" onclick="DELETEvar(this)">❌</button>
+              </li>
+      <?php
+        }
+      }
+      ?>
 
         <li id="ADD1button">
           <button class="button BtnS" onclick="ADDvar()">➕</button>

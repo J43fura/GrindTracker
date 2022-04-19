@@ -1,3 +1,6 @@
+document.writeln(
+  "<script type='text/javascript' src='Adds/jquery-3.6.0.js'></script>"
+);
 document.getElementById("calendar").valueAsDate = new Date();
 const NowDate = document.getElementById("calendar").valueAsDate;
 
@@ -9,14 +12,14 @@ function DisplaySettings() {
     document.querySelector(".vars").style.display = "none";
     document.querySelector(".Settings").style.display = "block";
     //input: number > string
-    try {
+    /*try {
       const elemvar = document.querySelectorAll(".Settings input[type=number]");
       for (let i = 0; i < elemvar.length; i++) {
         elemvar[i].type = "text";
       }
     } catch (e) {
       console.log(e);
-    }
+    }*/
   } else if (document.querySelector(".Settings").style.display == "block") {
     //settings
     document.querySelector(".vars").style.display = "block";
@@ -26,33 +29,43 @@ function DisplaySettings() {
 }
 
 function Verify() {
-  if (document.querySelector(".Settings").style.display != "block") {
-    //vars
-    /*
-    console.log("V vars");
-    fetch('wrap.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-      },
-      body: "text=" + document.querySelector("p.unbroken").innerText
-    })
-    .then(response => response.text())
-    .then(data => document.querySelector("p.broken").innerHTML = data);
-    */
-  } else if (document.querySelector(".Settings").style.display == "block") {
-    console.log("V settings");
+  if (document.querySelector(".Settings").style.display == "block") {
     //settings
+    console.log("V settings");
     try {
       const elemvar = document.querySelectorAll(".Settings input[type=text]");
       for (let i = 0; i < elemvar.length; i++) {
-        //console.log(elemvar);
-        console.log(elemvar[i].value); //PHP SQL
-        //fetch("varssettings.php", { method: "POST", body: data })
-        //.then(res => res.text())
-        //.then((txt) => {
-        //  console.log(txt);
-        //})
+        //rename lel 9dim + verification esm mafamech menou (placeholder>)
+        //ALTER TABLE pr$id ADD $axe int(7) : colon jdida lel jdod (else>value)
+        //varssettings
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  } else {
+    //vars
+    console.log("Vars");
+    try {
+      const elemvar = document.querySelectorAll(".vars input[type=number]");
+      const timecalendar = document.getElementById("calendar").value;
+      console.log(timecalendar);
+      for (let i = 0; i < elemvar.length; i++) {
+        elemph = elemvar[i].placeholder;
+        elemvl = elemvar[i].value;
+        //PHP SQL
+        console.log(elemph);
+        console.log(elemvl);
+
+        $.ajax({
+          url: "vars.php",
+          type: "POST",
+          data: { elemvl: elemvl, elemph: elemph, timecalendar: timecalendar },
+          success: function (data) {
+            if (data == 0) {
+              alert("Something wrong went. Please try again.");
+            }
+          },
+        });
       }
     } catch (e) {
       console.log(e);

@@ -1,3 +1,7 @@
+/*window.addEventListener("load", function () {
+  document.getElementById("loader").classList.toggle("loaderstop");
+});
+*/
 try {
   const checkbox = document.getElementById("checkbox");
 } catch (e) {
