@@ -13,6 +13,7 @@ $id = $value["id"];
 $axejdid = $_POST['elemvl'];
 $axe = $_POST['elemph'];
 
+
 if(!empty($axe)){
 	if(!empty($axejdid)){
 	/*RENAME*/
@@ -20,17 +21,21 @@ if(!empty($axe)){
 	$result = mysqli_query($conn, $sql);
 }
 else if(empty($axejdid)){
+	/*DELETE*/
 	$sql = "ALTER TABLE pr$id DROP $axe";
 	$result = mysqli_query($conn, $sql);
-
 }
 }
 else if(empty($axe)){
 	/*ADD*/
+
 	$sql = "ALTER TABLE pr$id ADD $axejdid int(7)";
 	$result = mysqli_query($conn, $sql);
 
 }
+echo("window.location.reload(true)");
+header("location:profile.php?msg=done");
+exit();
 
 if ($result) {
     echo 1;
@@ -38,7 +43,6 @@ if ($result) {
     echo 0;
 }
 
-//header("location:profile.php?msg=done");
-exit();
+
 
 ?>

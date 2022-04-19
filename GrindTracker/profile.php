@@ -52,6 +52,7 @@ if (!isset($_SESSION["username"])){
     <!--load php maghyr refresh lel page; ajax?-->
     <div class="vars">
       <ul class="listing">
+
       <?php
       //charge vars:
       require_once('connection.php');

@@ -8,23 +8,15 @@ const NowDate = document.getElementById("calendar").valueAsDate;
 
 function DisplaySettings() {
   if (document.querySelector(".Settings").style.display != "block") {
-    //vars
+    //vars > settings
     document.querySelector(".vars").style.display = "none";
     document.querySelector(".Settings").style.display = "block";
-    //input: number > string
-    /*try {
-      const elemvar = document.querySelectorAll(".Settings input[type=number]");
-      for (let i = 0; i < elemvar.length; i++) {
-        elemvar[i].type = "text";
-      }
-    } catch (e) {
-      console.log(e);
-    }*/
   } else if (document.querySelector(".Settings").style.display == "block") {
-    //settings
+    //settings > vars
     document.querySelector(".vars").style.display = "block";
     document.querySelector(".Settings").style.display = "none";
-    //input: string > number //+sql?
+    //
+    window.location.reload(true);
   }
 }
 
@@ -41,35 +33,47 @@ function Verify() {
         if (elemvl != "") {
           if (elemph != "") {
             //RENAME
-            console.log("RENAME");
-            console.log(elemvl);
-            console.log(elemph);
+            if (
+              confirm(
+                "Are you sure you want to rename " +
+                  elemph +
+                  " to " +
+                  elemvl +
+                  " ?"
+              )
+            ) {
+              console.log("RENAME");
+              console.log(elemvl);
+              console.log(elemph);
 
-            $.ajax({
-              url: "varssettings.php",
-              type: "POST",
-              data: { elemvl: elemvl, elemph: elemph },
-              success: function (data) {
-                if (data == 0) {
-                  alert("Something wrong went. Please try again.");
-                }
-              },
-            });
+              $.ajax({
+                url: "varssettings.php",
+                type: "POST",
+                data: { elemvl: elemvl, elemph: elemph },
+                success: function (data) {
+                  if (data == 0) {
+                    alert("Something wrong went. Please try again.");
+                  }
+                },
+              });
+            }
           } else {
             //ADD
-            console.log("ADD");
-            console.log(elemvl);
+            if (confirm("Are you sure you want to add " + elemvl + " ?")) {
+              console.log("ADD");
+              console.log(elemvl);
 
-            $.ajax({
-              url: "varssettings.php",
-              type: "POST",
-              data: { elemvl: elemvl },
-              success: function (data) {
-                if (data == 0) {
-                  alert("Something wrong went. Please try again.");
-                }
-              },
-            });
+              $.ajax({
+                url: "varssettings.php",
+                type: "POST",
+                data: { elemvl: elemvl },
+                success: function (data) {
+                  if (data == 0) {
+                    alert("Something wrong went. Please try again.");
+                  }
+                },
+              });
+            }
           }
         } else if (elemvl == "") {
           if (elemph != "") {
