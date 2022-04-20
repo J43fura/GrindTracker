@@ -33,7 +33,6 @@ else if(empty($axe)){
 	$result = mysqli_query($conn, $sql);
 
 }
-echo("window.location.reload(true)");
 header("location:profile.php?msg=done");
 exit();
 

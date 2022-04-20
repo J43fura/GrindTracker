@@ -1,10 +1,11 @@
 <?php 
- // tincludeha marra f lheader lkol lezm dhhrli //Notice: session_start(): Ignoring session_start() because a session is already active in
+ // tincludeha marra f lheader lkol lezm dhhrli //Notice: session_start(): Ignoring session_start() because a session is already active in ????
 if (isset($_SESSION["username"])){
   session_start();
   header("location:profile.php");
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>

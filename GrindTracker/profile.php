@@ -12,6 +12,7 @@ if (!isset($_SESSION["username"])){
     <script src="script.js" defer></script>
     <script src="profile.js" defer></script>
     <script src="Adds/jquery-3.6.0.js"></script>
+    <script src="Adds/chart.js"></script>
     <title weight="normal">GrindTracker 🔺| Profile</title>
     <link
       rel="stylesheet"
@@ -49,6 +50,7 @@ if (!isset($_SESSION["username"])){
       <h1 class="TitleGT TitleGT1 TitleGT1-d">GrindTracker</h1>
     </header>
 
+
     <!--load php maghyr refresh lel page; ajax?-->
     <div class="vars">
       <ul class="listing">
@@ -71,7 +73,7 @@ if (!isset($_SESSION["username"])){
           ?>
           <li>
                 <input type="number" placeholder="<?php echo $row['Field'] ?>" id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" />
-                <button class="button BtnS" onclick="GRAPHvar()">📈</button>
+                <button class="button BtnS" onclick="GRAPHvar(this)">📈</button>
               </li>
       <?php
         }
@@ -128,6 +130,13 @@ if (!isset($_SESSION["username"])){
       <!--http://jsfiddle.net/trixta/cc7Rt/-->
       <i id="timenow"></i>
     </div>
+
+    <div id="divGraph"></div>
+
+
+
+
+
 
     <div class="todo-div">
       <!--https://youtu.be/Ttf3CEsEwMQ-->

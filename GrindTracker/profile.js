@@ -1,6 +1,10 @@
 document.writeln(
   "<script type='text/javascript' src='Adds/jquery-3.6.0.js'></script>"
 );
+document.writeln(
+  "<script type='text/javascript' src='Adds/chart.js'></script>"
+);
+
 document.getElementById("calendar").valueAsDate = new Date();
 const NowDate = document.getElementById("calendar").valueAsDate;
 
@@ -119,16 +123,32 @@ function Verify() {
         console.log(elemph);
         console.log(elemvl);
 
-        $.ajax({
-          url: "vars.php",
-          type: "POST",
-          data: { elemvl: elemvl, elemph: elemph, timecalendar: timecalendar },
-          success: function (data) {
-            if (data == 0) {
-              alert("Something wrong went. Please try again.");
-            }
-          },
-        });
+        if (
+          confirm(
+            "Are you sure you want to save: " +
+              elemvl +
+              " > " +
+              timecalendar +
+              " >> " +
+              elemph +
+              " ?"
+          )
+        ) {
+          $.ajax({
+            url: "vars.php",
+            type: "POST",
+            data: {
+              elemvl: elemvl,
+              elemph: elemph,
+              timecalendar: timecalendar,
+            },
+            success: function (data) {
+              if (data == 0) {
+                alert("Something wrong went. Please try again.");
+              }
+            },
+          });
+        }
       }
     } catch (e) {
       console.log(e);
@@ -160,7 +180,38 @@ function DELETEvar(t) {
   t.parentElement.setAttribute("id", "ToDelete");
 }
 
-function GRAPHvar() {}
+function GRAPHvar(t) {
+  try {
+    console.log("GRAPHvar");
+    elemph = t.parentElement.children[0].placeholder;
+    console.log(elemph);
+    $.ajax({
+      url: "graph.php",
+      type: "POST",
+      data: { elemph: elemph },
+      success: function (line_graph) {},
+    });
+  } catch (e) {
+    console.log(e);
+  }
+  //PHP SQL
+  /*
+    $.ajax({
+      url: "graph.php",
+      type: "POST",
+      data: { elemph: elemph },
+      success: function (line_graph) {
+        $("divGraph").html(line_graph);
+        $("#graph").chart = new Chart(
+          $("#graph"),
+          $("#graph").data("settings")
+        );
+      },
+    });
+  } catch (e) {
+    console.log(e);
+  }*/
+}
 
 /*----------------------------to do list-----------------*/
 
