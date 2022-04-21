@@ -231,10 +231,11 @@ input:focus {
 
 /******************************* DARK ****************************************/
 .dark-header {
-  background: #181a20;
+  background: #181a20 !important;
 }
 .dark-container {
-  background: linear-gradient(120deg, #181a20, #13151b);
+  background: linear-gradient(120deg, #181a20, #13151b) !important;
+  border-radius: 0px !important;
 }
 .dark-footer {
   background: #13151b;
@@ -242,6 +243,7 @@ input:focus {
 .dark-about {
   padding-top: 0.5px;
   background-color: #181a20;
+  border-radius: 0px !important;
 }
 .dark-text {
   color: #e2e4e9;
@@ -253,6 +255,11 @@ input:focus {
   color: #db0a40;
   text-shadow: 0 0 0.025em #db0a40;
 }
+
+.dark-var {
+  background: #2b2f3a !important;
+}
+
 /******************************* DARK:KMEL. ****************************************/
 .popup {
   display: none;
@@ -371,7 +378,7 @@ input:focus {
   padding: 10px;
   border-radius: 25px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
-  border-radius: 25px !important;
+  border-radius: 25px;
 }
 .todo-head,
 .todo-form {
@@ -504,7 +511,6 @@ select {
   position: fixed !important;
   bottom: 20px;
   right: 20px;
-
   filter: drop-shadow(0 0 10px rgb(255 90 0 / 70%));
 }
 

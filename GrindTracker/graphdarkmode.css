@@ -1,0 +1,19 @@
+.chartBody {
+  background: #cbe6ef !important;
+}
+.chartMenu {
+  background: #9acfe0 !important;
+}
+
+.chartMenu p {
+  color: #cbe6ef !important;
+  text-shadow: 0 0 0.05em #000000;
+}
+
+.chartBox {
+  border: solid 3px #db0a40 !important;
+  background: #f8fdff;
+}
+.main-footer {
+  background-color: #182c39 !important;
+}

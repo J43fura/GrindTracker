@@ -1,7 +1,6 @@
 <?php 
   session_start();
 if (!isset($_SESSION["id"])){
-
   header("location:index.php");
 }
 ?>
@@ -40,7 +39,7 @@ if (!isset($_SESSION["id"])){
           <li><a class="nav-elements" href="logout.php">Logout</a></li>
           <li>
             <label class="switch">
-              <input type="checkbox" id="checkbox" />
+              <input type="checkbox" id="darkmode" />
               <span class="slider"></span>
             </label>
           </li>
@@ -95,7 +94,7 @@ if (!isset($_SESSION["id"])){
           ?>
           <li>
                 <input type="text" placeholder="<?php echo $row['Field'] ?>" title="<?php echo $row['Field'] ?>"  id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" />
-                <button class="button BtnS" onclick="DELETEvar(this) title="Delete <?php echo $row['Field'] ?>">❌</button>
+                <button class="button BtnS" onclick="DELETEvar(this)" title="Delete <?php echo $row['Field'] ?>">❌</button>
               </li>
       <?php
         }
@@ -151,5 +150,6 @@ if (!isset($_SESSION["id"])){
         <a href="#RAS" id="RASF">🔺</a>
       </div>
     </footer>
+    <script src="darkmode.js" defer></script>
   </body>
 </html>

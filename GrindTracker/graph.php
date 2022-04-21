@@ -36,7 +36,7 @@ $axe = $_POST['elemph'];
 
       .chartMenu p {
         padding: 10px;
-        font-size: 3vh;
+        font-size: 4vh;
         text-align: center;
         font-weight: bold;
         color:#db0a40;
@@ -56,12 +56,26 @@ $axe = $_POST['elemph'];
         border: solid 3px #db0a40;
         background:#f8fdff;
       }
-      .dark-footer {
+      .main-footer {
         position: relative;
         padding:0px;
         background: #181a20;
       }
+      #RASF{
+        cursor: pointer;
+      }
     </style>
+
+
+<script>
+  let darkMode = localStorage.getItem("darkMode");
+  console.log(darkMode);
+  if (darkMode !== "enabled") {
+    console.log(darkMode);
+      document.write("<link rel='stylesheet' href='graphdarkmode.css'/>");
+    }
+</script>
+
   </head>
   <body class="chartBody">
     <div class="chartMenu">
@@ -143,7 +157,7 @@ try{
     );
     </script>
 
-    <footer class="main-footer dark-footer">
+    <footer class="main-footer">
       <div class="container main-footer-container">
         <h3 class="TitleGT TitleGT2">GrindTracker</h3>
         <a id="RASF">🔺</a>
@@ -151,6 +165,11 @@ try{
     </footer>
   </body>
 </html>
+<script>
+  var RASF = document.getElementById('RASF');
+  RASF.addEventListener("click", () => {
+    window.close();
+});</script>
 <?php
 unset($axe);
  ?>

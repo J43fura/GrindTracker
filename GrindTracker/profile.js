@@ -1,10 +1,3 @@
-document.writeln(
-  "<script type='text/javascript' src='Adds/jquery-3.6.0.js'></script>"
-);
-document.writeln(
-  "<script type='text/javascript' src='Adds/chart.js'></script>"
-);
-
 document.getElementById("calendar").valueAsDate = new Date();
 const NowDate = document.getElementById("calendar").valueAsDate;
 

@@ -10,6 +10,7 @@ if (isset($_SESSION["id"])){
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="Adds/jquery-3.6.0.js"></script>
     <script src="script.js" defer></script>
     <title weight="normal">GrindTracker 🔺</title>
     <link rel="stylesheet" href="style.css" />
@@ -32,7 +33,7 @@ if (isset($_SESSION["id"])){
           <li><a class="nav-elements" href="#About">About</a></li>
           <li>
             <label class="switch">
-              <input type="checkbox" id="checkbox" />
+              <input type="checkbox" id="darkmode" />
               <span class="slider"></span>
             </label>
           </li>
@@ -145,5 +146,6 @@ if (isset($_SESSION["id"])){
         <a href="#RAS">🔺</a>
       </div>
     </footer>
+    <script src="darkmode.js" defer></script>
   </body>
 </html>
