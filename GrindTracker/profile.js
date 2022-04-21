@@ -123,31 +123,33 @@ function Verify() {
         console.log(elemph);
         console.log(elemvl);
 
-        if (
-          confirm(
-            "Are you sure you want to save: " +
-              elemvl +
-              " > " +
-              timecalendar +
-              " >> " +
-              elemph +
-              " ?"
-          )
-        ) {
-          $.ajax({
-            url: "vars.php",
-            type: "POST",
-            data: {
-              elemvl: elemvl,
-              elemph: elemph,
-              timecalendar: timecalendar,
-            },
-            success: function (data) {
-              if (data == 0) {
-                alert("Something wrong went. Please try again.");
-              }
-            },
-          });
+        if (elemvl != "") {
+          if (
+            confirm(
+              "Are you sure you want to save: " +
+                elemvl +
+                " > " +
+                timecalendar +
+                " >> " +
+                elemph +
+                " ?"
+            )
+          ) {
+            $.ajax({
+              url: "vars.php",
+              type: "POST",
+              data: {
+                elemvl: elemvl,
+                elemph: elemph,
+                timecalendar: timecalendar,
+              },
+              success: function (data) {
+                if (data == 0) {
+                  alert("Something wrong went. Please try again.");
+                }
+              },
+            });
+          }
         }
       }
     } catch (e) {
@@ -189,7 +191,10 @@ function GRAPHvar(t) {
       url: "graph.php",
       type: "POST",
       data: { elemph: elemph },
-      success: function (line_graph) {},
+      success: function (graph) {
+        var win = window.open();
+        win.document.write(graph);
+      },
     });
   } catch (e) {
     console.log(e);

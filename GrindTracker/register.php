@@ -9,7 +9,8 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 	$num = mysqli_num_rows($result);
 	if($num==1){
 		header("location:index.php?msg=usedusername");
-	}
+		exit(); /*SUS*/ 
+		}
 	else{
 		$password = password_hash($password,PASSWORD_DEFAULT);
 		$sql = "INSERT INTO register(username, password, gender) values ('$username','$password','$gender')";

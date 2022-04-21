@@ -1,14 +1,7 @@
 <?php
 session_start();
 require_once('connection.php');
-$username = $_SESSION["username"];
-
-$sql = "SELECT id FROM register WHERE username = '$username'";
-$result = mysqli_query($conn,$sql);
-$value = mysqli_fetch_assoc($result);
-
-$id = $value["id"];
-
+$id = $_SESSION["id"];
 
 $axejdid = $_POST['elemvl'];
 $axe = $_POST['elemph'];
@@ -28,7 +21,6 @@ else if(empty($axejdid)){
 }
 else if(empty($axe)){
 	/*ADD*/
-
 	$sql = "ALTER TABLE pr$id ADD $axejdid int(7)";
 	$result = mysqli_query($conn, $sql);
 
@@ -41,7 +33,5 @@ if ($result) {
 } else {
     echo 0;
 }
-
-
 
 ?>

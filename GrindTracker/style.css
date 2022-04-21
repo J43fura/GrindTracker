@@ -129,6 +129,7 @@ input:checked + .slider:before {
 .main-footer {
   background-color: #182c39;
   padding: 0.25em 0;
+  font-size: 2.5vh;
 }
 .main-footer-container {
   display: flex;
@@ -136,7 +137,7 @@ input:checked + .slider:before {
 }
 .main-footer-container a {
   text-align: end;
-  font-size: 30px;
+  font-size: 3vh;
 }
 * {
   font-size: 1.15em;
@@ -230,7 +231,7 @@ input:focus {
 
 /******************************* DARK ****************************************/
 .dark-header {
-  background: linear-gradient(120deg, #181a20, #181a20);
+  background: #181a20;
 }
 .dark-container {
   background: linear-gradient(120deg, #181a20, #13151b);

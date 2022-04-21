@@ -18,8 +18,12 @@ if (!empty($username) && !empty($password) ){
         $value = $value["password"];
 
         if(password_verify($password,$value)){
-
-            $_SESSION["username"] = $username;
+            $sql = "SELECT id FROM register WHERE username = '$username'";
+            $result = mysqli_query($conn,$sql);
+            $value = mysqli_fetch_assoc($result);
+            $id = $value["id"];
+            
+            $_SESSION["id"] = $id;
             header("location:profile.php");
 
             exit();

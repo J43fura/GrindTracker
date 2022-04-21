@@ -1,7 +1,6 @@
-<!--Session-->
 <?php 
   session_start();
-if (!isset($_SESSION["username"])){
+if (!isset($_SESSION["id"])){
 
   header("location:index.php");
 }
@@ -13,6 +12,7 @@ if (!isset($_SESSION["username"])){
     <script src="profile.js" defer></script>
     <script src="Adds/jquery-3.6.0.js"></script>
     <script src="Adds/chart.js"></script>
+    <script src="Adds/chartjs-adapter-date-fns.bundle.min.js"></script>
     <title weight="normal">GrindTracker 🔺| Profile</title>
     <link
       rel="stylesheet"
@@ -46,7 +46,6 @@ if (!isset($_SESSION["username"])){
           </li>
         </ul>
       </nav>
-      <!--<hr /> -->
       <h1 class="TitleGT TitleGT1 TitleGT1-d">GrindTracker</h1>
     </header>
 
@@ -58,22 +57,16 @@ if (!isset($_SESSION["username"])){
       <?php
       //charge vars:
       require_once('connection.php');
-      $username = $_SESSION["username"];
+      $id = $_SESSION["id"];
 
-      $sql = "SELECT id FROM register WHERE username = '$username'";
-      $result = mysqli_query($conn,$sql);
-      $value = mysqli_fetch_assoc($result);
-      $id = $value["id"];
-
-      //$sql="SELECT column_name from information_schema.columns where table_name = 'pr$id' and table_schema='grindtracker' and column_name != 'PrDate' and column_name != 'TODO'";
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO'";
       $result = mysqli_query($conn,$sql);
       if (mysqli_num_rows($result)>0){
         while ($row=mysqli_fetch_assoc($result)){
           ?>
           <li>
-                <input type="number" placeholder="<?php echo $row['Field'] ?>" id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" />
-                <button class="button BtnS" onclick="GRAPHvar(this)">📈</button>
+                <input type="number" placeholder="<?php echo $row['Field'] ?>" title="<?php echo $row['Field'] ?>" id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" />
+                <button class="button BtnS" onclick="GRAPHvar(this)" title="Graph of <?php echo $row['Field'] ?>">📈</button>
               </li>
       <?php
         }
@@ -91,24 +84,18 @@ if (!isset($_SESSION["username"])){
       <ul id="listing" class="listing">
       <?php
       //charge varssettings:
-        //select vars t7awwwelhom vars settings tnajjem
       require_once('connection.php');
-      $username = $_SESSION["username"];
+      $id = $_SESSION["id"];
 
-      $sql = "SELECT id FROM register WHERE username = '$username'";
-      $result = mysqli_query($conn,$sql);
-      $value = mysqli_fetch_assoc($result);
-      $id = $value["id"];
 
-      //$sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO'";
-      $sql="SELECT column_name from information_schema.columns where table_name = 'pr$id' and table_schema='grindtracker' and column_name != 'PrDate' and column_name != 'TODO'";
+      $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO'";
       $result = mysqli_query($conn,$sql);
       if (mysqli_num_rows($result)>0){
         while ($row=mysqli_fetch_assoc($result)){
           ?>
           <li>
-                <input type="text" placeholder="<?php echo $row['column_name'] ?>" id="<?php echo $row['column_name'] ?>" name="<?php echo $row['column_name'] ?>" />
-                <button class="button BtnS" onclick="DELETEvar(this)">❌</button>
+                <input type="text" placeholder="<?php echo $row['Field'] ?>" title="<?php echo $row['Field'] ?>"  id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" />
+                <button class="button BtnS" onclick="DELETEvar(this) title="Delete <?php echo $row['Field'] ?>">❌</button>
               </li>
       <?php
         }
@@ -130,14 +117,6 @@ if (!isset($_SESSION["username"])){
       <!--http://jsfiddle.net/trixta/cc7Rt/-->
       <i id="timenow"></i>
     </div>
-
-    <div id="divGraph"></div>
-
-
-
-
-
-
     <div class="todo-div">
       <!--https://youtu.be/Ttf3CEsEwMQ-->
 
