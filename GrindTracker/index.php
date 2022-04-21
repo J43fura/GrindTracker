@@ -1,5 +1,6 @@
 <?php 
- // tincludeha marra f lheader lkol lezm dhhrli //Notice: session_start(): Ignoring session_start() because a session is already active in ????
+// double password; password compositions, email API, email reminder fel todo, BMI, toul fel register?;
+// tincludeha marra f lheader lkol lezm dhhrli //Notice: session_start(): Ignoring session_start() because a session is already active in ????
  session_start();
 if (isset($_SESSION["id"])){
   header("location:profile.php");
