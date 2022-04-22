@@ -1,9 +1,11 @@
 <?php 
 
-include 'connection.php';
+session_start();
+require_once('connection.php');
+$id = $_SESSION["id"];
 
 
-$sql = "SELECT * from todo ";
+$sql = "SELECT TODO from pr$id ";
 $result = mysqli_query($conn,$sql);
 
 if(mysqli_num_rows($result)> 0){
@@ -11,7 +13,7 @@ if(mysqli_num_rows($result)> 0){
         ?>
         <div class="todo">
             <li class="todo-item"> 
-                <?php echo $row['title'];?>
+                <?php echo $row['TODO'];?>
             </li>
         </div>
         <?php

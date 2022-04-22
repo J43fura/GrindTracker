@@ -151,7 +151,6 @@ checkbox.addEventListener("change", () => {
 */
 function togglePopup() {
   document.getElementById("popup-1").classList.toggle("active");
-  document.body.style.overflow(hidden); height100%?
 }
 /*
 btnRegister.addEventListener("click", () => {

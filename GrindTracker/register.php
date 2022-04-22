@@ -20,7 +20,7 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 		$result = mysqli_query($conn,$sql);
 		$value = mysqli_fetch_assoc($result);
 		$id = $value["id"];
-		$sql = "CREATE TABLE pr$id (PrDate DATE, TODO varchar(124))";
+		$sql = "CREATE TABLE pr$id (PrDate DATE,TODOADDED DATE DEFAULT CURRENT_TIMESTAMP, TODO varchar(124))";
 		$conn->query($sql);
 		
 
