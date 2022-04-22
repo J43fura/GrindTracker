@@ -132,10 +132,13 @@ try{
     };
 
     // config 
+    
     const config = {
+      
       type: 'line',
       data,
       options: {
+        fill:true,
         scales: {
 			x:{
 				type: 'time',
@@ -144,7 +147,7 @@ try{
 				}
 			},
           y: {
-            beginAtZero: true
+            //beginAtZero: true,
           }
         }
       }

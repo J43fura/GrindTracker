@@ -125,8 +125,8 @@ if (!isset($_SESSION["id"])){
 
       <form class="todo-form">
         <div class="listing">
-          <input type="text" id="taskvalue" class="todo-input" />
-          <button id="addbtn" class="todo-button button BtnS" type="submit">➕</button>
+          <input type="text" class="todo-input" />
+          <button class="todo-button button BtnS" type="submit">➕</button>
         </div>
 
         <div class="select">
@@ -139,9 +139,7 @@ if (!isset($_SESSION["id"])){
       </form>
 
       <div class="todo-container">
-        <ul id="tasks" class="todo-list">
-          <div class="todo"></div>
-        </ul>
+        <ul class="todo-list"></ul>
       </div>
     </div>
 
@@ -152,39 +150,6 @@ if (!isset($_SESSION["id"])){
         <a href="#RAS" id="RASF">🔺</a>
       </div>
     </footer>
-    <script>
-     $(document).ready(function(){
-  //show tasks
-  function loadTasks(){
-    $.ajax({
-    url: "show-todo.php",
-    type :"POST",
-    success: function(data){
-      $("#tasks").html(data);
-    }
-  });
-  }
-  loadTasks();
-  
-  $("#addbtn").on("click",function(e){
-    e.preventDefault();
-    const todoInput = document.querySelector(".todo-input");
-    var task = $("#taskvalue").val();
-     $.ajax({
-      url: "add-todo.php",
-      type :"POST",
-      data :{task: task},
-      success: function(data){
-        if (data == 1) {
-          loadTasks();
-          todoInput.value = "";
-          
-        }
-      }
-    });
-  })
-});
-    </script>
     <script src="darkmode.js" defer></script>
   </body>
 </html>

@@ -1,5 +1,7 @@
 <?php 
-// double password; password compositions, email API, email reminder fel todo, BMI, toul fel register?;
+// double password; password compositions, email API, email reminder fel todo, BMI, toul fel register?; welcome 'username' message; 
+//summary button tab3th el graphs lkol lel email ++tlinki vars mb3dhom yjiboulk graph we7ed b checkbox
+
 // tincludeha marra f lheader lkol lezm dhhrli //Notice: session_start(): Ignoring session_start() because a session is already active in ????
  session_start();
 if (isset($_SESSION["id"])){
@@ -101,13 +103,27 @@ if (isset($_SESSION["id"])){
                </script>";
             }}
               ?>
+        
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+        />
+        <br />
+
         <input
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="Enter Password"
           required
         />
-
+        <input
+          type="password"
+          name="password"
+          placeholder="Confirm password"
+          required
+        />
         <br />
         <input type="radio" id="gender" name="gender" value="m" checked />
         <label class="dark-t">Male</label>
