@@ -125,7 +125,7 @@ if (!isset($_SESSION["id"])){
 
       <form class="todo-form">
         <div class="listing">
-        <input type="text" id="taskvalue" class="todo-input" />
+        <input type="text" id="taskvalue" class="todo-input" required/>
           <button id="addbtn" class="todo-button button BtnS" type="submit">➕</button>
         </div>
 
@@ -166,12 +166,13 @@ if (!isset($_SESSION["id"])){
   });
   }
   loadTasks();
-  
+  //tchouf l value mta3 el todos -uncompleted wl fazet tzidhom fel post, te5ohom mel show todo, if statement == value edheka 3la 7sebou kifech tselecti + fama fazet trasilk t3mlhom
   $("#addbtn").on("click",function(e){
     e.preventDefault();
     const todoInput = document.querySelector(".todo-input");
     const timecalendar = document.getElementById("calendar").value;
     var task = $("#taskvalue").val();
+    if (task !== ""){
     console.log(task);
      $.ajax({
       url: "add-todo.php",
@@ -185,7 +186,7 @@ if (!isset($_SESSION["id"])){
         }
       }
     });
-  })
+  }})
 });
     </script>
     <script src="darkmode.js" defer></script>

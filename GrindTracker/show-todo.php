@@ -5,7 +5,7 @@ require_once('connection.php');
 $id = $_SESSION["id"];
 
 
-$sql = "SELECT TODO from pr$id ";
+$sql = "SELECT TODO from pr$id WHERE TODO IS NOT NULL ORDER BY PrDate";
 $result = mysqli_query($conn,$sql);
 
 if(mysqli_num_rows($result)> 0){
