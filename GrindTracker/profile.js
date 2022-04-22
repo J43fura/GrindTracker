@@ -152,7 +152,11 @@ function Verify() {
 }
 
 function ADDvar() {
+  let darkMode = localStorage.getItem("darkMode");
   const li = document.createElement("li");
+  if (darkMode === "enabled") {
+    li.classList.toggle("dark-var");
+  }
   const input = document.createElement("input");
   const button = document.createElement("button");
   const textnode = document.createTextNode("❌");
@@ -210,7 +214,3 @@ function GRAPHvar(t) {
     console.log(e);
   }*/
 }
-
-/*----------------------------to do list-----------------*/
-
-

@@ -286,7 +286,9 @@ input:focus {
   width: 37px !important;
   text-align: center;
 }
-
+.popup form {
+  font-size: 1em;
+}
 #gender {
   height: 25px;
   width: 25px;

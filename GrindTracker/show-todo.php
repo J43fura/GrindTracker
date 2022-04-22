@@ -13,7 +13,7 @@ if(mysqli_num_rows($result)> 0){
         ?>
         <div class="todo">
             <li class="todo-item"> 
-                <?php echo $row['TODO'];?>
+            <?php echo $row['TODO'];?>
             </li>
         </div>
         <?php

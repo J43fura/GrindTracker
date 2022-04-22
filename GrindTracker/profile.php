@@ -125,7 +125,7 @@ if (!isset($_SESSION["id"])){
 
       <form class="todo-form">
         <div class="listing">
-          <input type="text" id="taskvalue" class="todo-input" />
+        <input type="text" id="taskvalue" class="todo-input" />
           <button id="addbtn" class="todo-button button BtnS" type="submit">➕</button>
         </div>
 
@@ -139,9 +139,10 @@ if (!isset($_SESSION["id"])){
       </form>
 
       <div class="todo-container">
-        <ul id="tasks" class="todo-list">
+      <ul id="tasks" class="todo-list">
           <div class="todo"></div>
         </ul>
+        <ul class="todo-list"></ul>
       </div>
     </div>
 
@@ -171,6 +172,7 @@ if (!isset($_SESSION["id"])){
     const todoInput = document.querySelector(".todo-input");
     const timecalendar = document.getElementById("calendar").value;
     var task = $("#taskvalue").val();
+    console.log(task);
      $.ajax({
       url: "add-todo.php",
       type :"POST",
