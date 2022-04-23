@@ -56,20 +56,24 @@ function Verify() {
             }
           } else {
             //ADD
-            if (confirm("Are you sure you want to add " + elemvl + " ?")) {
-              console.log("ADD");
-              console.log(elemvl);
+            if (isNaN(elemvl)) {
+              if (confirm("Are you sure you want to add " + elemvl + " ?")) {
+                console.log("ADD");
+                console.log(elemvl);
 
-              $.ajax({
-                url: "varssettings.php",
-                type: "POST",
-                data: { elemvl: elemvl },
-                success: function (data) {
-                  if (data == 0) {
-                    alert("Something wrong went. Please try again.");
-                  }
-                },
-              });
+                $.ajax({
+                  url: "varssettings.php",
+                  type: "POST",
+                  data: { elemvl: elemvl },
+                  success: function (data) {
+                    if (data == 0) {
+                      alert("Something wrong went. Please try again.");
+                    }
+                  },
+                });
+              }
+            } else {
+              alert("You cant add a number. " + elemvl);
             }
           }
         } else if (elemvl == "") {

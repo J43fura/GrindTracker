@@ -94,14 +94,32 @@ if (isset($_SESSION["id"])){
       >
         <input type="text" name="username" placeholder="Username" required />
         <div id="msg2"></div>
-        <?php
+
+        <?php      
             if (isset($_GET["msg"])){
               if ($_GET["msg"] == "usedusername"){
-              //echo "<div id='msg2'>⛔ The username is already used.</div>
               echo "<script>document.getElementById('msg2').innerHTML = '⛔ The username is already used.';
               document.getElementById('popup-1').classList.toggle('active');
                </script>";
-            }}
+            }
+            else if($_GET["msg"] == "charusername"){
+              echo "<script>document.getElementById('msg2').innerHTML = '⛔ The username cant have special characters.';
+              document.getElementById('popup-1').classList.toggle('active');
+               </script>";
+            }
+            else if($_GET["msg"] == "pwc"){
+              echo "<script>document.getElementById('msg2').innerHTML = '⛔ Password must be at least: (8: characters long, 1: number, upper and lower case letter.)';
+              document.getElementById('popup-1').classList.toggle('active');
+               </script>";
+            }
+            else if($_GET["msg"] == "pww"){
+              echo "<script>document.getElementById('msg2').innerHTML = '⛔ Password confirmation is wrong.';
+              document.getElementById('popup-1').classList.toggle('active');
+               </script>";
+            }
+
+
+}
               ?>
         
         <input
@@ -113,14 +131,16 @@ if (isset($_SESSION["id"])){
         <br />
 
         <input
+          id="password"
           type="password"
           name="password"
           placeholder="Enter Password"
           required
         />
         <input
+          id="passwordC"
           type="password"
-          name="password"
+          name="passwordC"
           placeholder="Confirm password"
           required
         />

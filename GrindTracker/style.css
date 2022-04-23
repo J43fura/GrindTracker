@@ -323,6 +323,11 @@ input:focus {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
+.vars .section-header {
+  padding: 8px !important;
+  margin: 0px !important;
+}
+
 .Settings {
   display: none;
 }
