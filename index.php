@@ -1,7 +1,5 @@
 <?php 
-// double password; password compositions, email API, email reminder fel todo, BMI, toul fel register?; welcome 'username' message; 
-//summary button tab3th el graphs lkol lel email ++tlinki vars mb3dhom yjiboulk graph we7ed b checkbox
-
+// double password; password compositions, email API, email reminder fel todo, BMI, toul fel register?;
 // tincludeha marra f lheader lkol lezm dhhrli //Notice: session_start(): Ignoring session_start() because a session is already active in ????
  session_start();
 if (isset($_SESSION["id"])){
@@ -94,56 +92,22 @@ if (isset($_SESSION["id"])){
       >
         <input type="text" name="username" placeholder="Username" required />
         <div id="msg2"></div>
-
-        <?php      
+        <?php
             if (isset($_GET["msg"])){
               if ($_GET["msg"] == "usedusername"){
+              //echo "<div id='msg2'>⛔ The username is already used.</div>
               echo "<script>document.getElementById('msg2').innerHTML = '⛔ The username is already used.';
               document.getElementById('popup-1').classList.toggle('active');
                </script>";
-            }
-            else if($_GET["msg"] == "charusername"){
-              echo "<script>document.getElementById('msg2').innerHTML = '⛔ The username cant have special characters.';
-              document.getElementById('popup-1').classList.toggle('active');
-               </script>";
-            }
-            else if($_GET["msg"] == "pwc"){
-              echo "<script>document.getElementById('msg2').innerHTML = '⛔ Password must be at least: (8: characters long, 1: number, upper and lower case letter.)';
-              document.getElementById('popup-1').classList.toggle('active');
-               </script>";
-            }
-            else if($_GET["msg"] == "pww"){
-              echo "<script>document.getElementById('msg2').innerHTML = '⛔ Password confirmation is wrong.';
-              document.getElementById('popup-1').classList.toggle('active');
-               </script>";
-            }
-
-
-}
+            }}
               ?>
-        
         <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          required
-        />
-        <br />
-
-        <input
-          id="password"
           type="password"
           name="password"
-          placeholder="Enter Password"
+          placeholder="Password"
           required
         />
-        <input
-          id="passwordC"
-          type="password"
-          name="passwordC"
-          placeholder="Confirm password"
-          required
-        />
+
         <br />
         <input type="radio" id="gender" name="gender" value="m" checked />
         <label class="dark-t">Male</label>

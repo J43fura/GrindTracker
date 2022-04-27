@@ -56,24 +56,20 @@ function Verify() {
             }
           } else {
             //ADD
-            if (isNaN(elemvl)) {
-              if (confirm("Are you sure you want to add " + elemvl + " ?")) {
-                console.log("ADD");
-                console.log(elemvl);
+            if (confirm("Are you sure you want to add " + elemvl + " ?")) {
+              console.log("ADD");
+              console.log(elemvl);
 
-                $.ajax({
-                  url: "varssettings.php",
-                  type: "POST",
-                  data: { elemvl: elemvl },
-                  success: function (data) {
-                    if (data == 0) {
-                      alert("Something wrong went. Please try again.");
-                    }
-                  },
-                });
-              }
-            } else {
-              alert("You cant add a number. " + elemvl);
+              $.ajax({
+                url: "varssettings.php",
+                type: "POST",
+                data: { elemvl: elemvl },
+                success: function (data) {
+                  if (data == 0) {
+                    alert("Something wrong went. Please try again.");
+                  }
+                },
+              });
             }
           }
         } else if (elemvl == "") {
@@ -156,11 +152,7 @@ function Verify() {
 }
 
 function ADDvar() {
-  let darkMode = localStorage.getItem("darkMode");
   const li = document.createElement("li");
-  if (darkMode === "enabled") {
-    li.classList.toggle("dark-var");
-  }
   const input = document.createElement("input");
   const button = document.createElement("button");
   const textnode = document.createTextNode("❌");
@@ -218,3 +210,7 @@ function GRAPHvar(t) {
     console.log(e);
   }*/
 }
+
+/*----------------------------to do list-----------------*/
+
+

@@ -57,22 +57,18 @@ if (!isset($_SESSION["id"])){
       //charge vars:
       require_once('connection.php');
       $id = $_SESSION["id"];
+
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED'";
       $result = mysqli_query($conn,$sql);
       if (mysqli_num_rows($result)>0){
         while ($row=mysqli_fetch_assoc($result)){
           ?>
           <li>
-              <input type="number" placeholder="<?php echo $row['Field'] ?>" title="<?php echo $row['Field'] ?>" id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" />
-              <button class="button BtnS" onclick="GRAPHvar(this)" title="Graph of <?php echo $row['Field'] ?>">📈</button>
-          </li>
+                <input type="number" placeholder="<?php echo $row['Field'] ?>" title="<?php echo $row['Field'] ?>" id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" />
+                <button class="button BtnS" onclick="GRAPHvar(this)" title="Graph of <?php echo $row['Field'] ?>">📈</button>
+              </li>
       <?php
         }
-      }
-      else{
-        echo ("
-        <h2 class='section-header dark-t'>Empty.</h2>
-      ");
       }
     ?>
 
@@ -129,7 +125,7 @@ if (!isset($_SESSION["id"])){
 
       <form class="todo-form">
         <div class="listing">
-        <input type="text" id="taskvalue" class="todo-input" required/>
+          <input type="text" placeholder="Enter a task" id="taskvalue" class="todo-input" />
           <button id="addbtn" class="todo-button button BtnS" type="submit">➕</button>
         </div>
 
@@ -143,10 +139,9 @@ if (!isset($_SESSION["id"])){
       </form>
 
       <div class="todo-container">
-      <ul id="tasks" class="todo-list">
-          <div class="todo"></div>
+        <ul id="tasks" class="todo-list">
+          
         </ul>
-        <ul class="todo-list"></ul>
       </div>
     </div>
 
@@ -170,14 +165,12 @@ if (!isset($_SESSION["id"])){
   });
   }
   loadTasks();
-  //tchouf l value mta3 el todos -uncompleted wl fazet tzidhom fel post, te5ohom mel show todo, if statement == value edheka 3la 7sebou kifech tselecti + fama fazet trasilk t3mlhom
+  
   $("#addbtn").on("click",function(e){
     e.preventDefault();
     const todoInput = document.querySelector(".todo-input");
     const timecalendar = document.getElementById("calendar").value;
     var task = $("#taskvalue").val();
-    if (task !== ""){
-    console.log(task);
      $.ajax({
       url: "add-todo.php",
       type :"POST",
@@ -190,7 +183,26 @@ if (!isset($_SESSION["id"])){
         }
       }
     });
-  }})
+
+  });
+  //remove task
+  $(document).on("click","#removeBtn",function(e){
+    e.preventDefault();
+    var id = $(this).data('id');
+    alert(id);
+    $ajax({
+      url:"remove-task.php",
+      type:"POST",
+      data:{id:id},
+      success: function(data){
+        if(data==0){
+          alert("something went wrong");
+        }
+      }
+    })
+  });
+
+
 });
     </script>
     <script src="darkmode.js" defer></script>
