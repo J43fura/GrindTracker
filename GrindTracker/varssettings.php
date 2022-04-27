@@ -10,7 +10,7 @@ $axe = $_POST['elemph'];
 if(!empty($axe)){
 	if(!empty($axejdid)){
 	/*RENAME*/
-	$sql ="ALTER TABLE pr$id CHANGE $axe $axejdid INT(7) NULL DEFAULT NULL";
+	$sql ="ALTER TABLE pr$id CHANGE $axe $axejdid float NULL DEFAULT NULL";
 	$result = mysqli_query($conn, $sql);
 }
 else if(empty($axejdid)){
@@ -21,7 +21,7 @@ else if(empty($axejdid)){
 }
 else if(empty($axe)){
 	/*ADD*/
-	$sql = "ALTER TABLE pr$id ADD $axejdid int(7)";
+	$sql = "ALTER TABLE pr$id ADD $axejdid float";
 	$result = mysqli_query($conn, $sql);
 
 }
