@@ -13,13 +13,6 @@ if (!isset($_SESSION["id"])){
     <script src="Adds/chart.js"></script>
     <script src="Adds/chartjs-adapter-date-fns.bundle.min.js"></script>
     <title weight="normal">GrindTracker 🔺| Profile</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -57,18 +50,22 @@ if (!isset($_SESSION["id"])){
       //charge vars:
       require_once('connection.php');
       $id = $_SESSION["id"];
-
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED'";
       $result = mysqli_query($conn,$sql);
       if (mysqli_num_rows($result)>0){
         while ($row=mysqli_fetch_assoc($result)){
           ?>
           <li>
-                <input type="number" placeholder="<?php echo $row['Field'] ?>" title="<?php echo $row['Field'] ?>" id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" />
-                <button class="button BtnS" onclick="GRAPHvar(this)" title="Graph of <?php echo $row['Field'] ?>">📈</button>
-              </li>
+              <input type="number" placeholder="<?php echo $row['Field'] ?>" title="<?php echo $row['Field'] ?>" id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" />
+              <button class="button BtnS" onclick="GRAPHvar(this)" title="Graph of <?php echo $row['Field'] ?>">📈</button>
+          </li>
       <?php
         }
+      }
+      else{
+        echo ("
+        <h2 class='section-header dark-t'>Empty.</h2>
+      ");
       }
     ?>
 
@@ -124,8 +121,8 @@ if (!isset($_SESSION["id"])){
       </header>
 
       <form class="todo-form">
-        <div class="listing">
-          <input type="text" placeholder="Enter a task" id="taskvalue" class="todo-input" />
+        <div id="todoinput" class="listing">
+        <input type="text" id="taskvalue" class="todo-input" required/>
           <button id="addbtn" class="todo-button button BtnS" type="submit">➕</button>
         </div>
 
@@ -138,11 +135,10 @@ if (!isset($_SESSION["id"])){
         </div>
       </form>
 
-      <div class="todo-container">
-        <ul id="tasks" class="todo-list">
-          
-        </ul>
-      </div>
+
+      <ul id="tasks" class="listing">
+      </ul>
+
     </div>
 
     <footer class="main-footer">
@@ -155,26 +151,19 @@ if (!isset($_SESSION["id"])){
     <script>
      $(document).ready(function(){
   //show tasks
-  function loadTasks(){
-    $.ajax({
-    url: "show-todo.php",
-    type :"POST",
-    success: function(data){
-      $("#tasks").html(data);
-    }
-  });
-  }
   loadTasks();
-  
+  //tchouf l value mta3 el todos -uncompleted wl fazet tzidhom fel post, te5ohom mel show todo, if statement == value edheka 3la 7sebou kifech tselecti + fama fazet trasilk t3mlhom
   $("#addbtn").on("click",function(e){
     e.preventDefault();
     const todoInput = document.querySelector(".todo-input");
     const timecalendar = document.getElementById("calendar").value;
     var task = $("#taskvalue").val();
+    if (task !== ""){
+    console.log(task);
      $.ajax({
-      url: "add-todo.php",
+      url: "varstodo.php",
       type :"POST",
-      data :{task: task,timecalendar: timecalendar,},
+      data :{task: task,timecalendar: timecalendar},
       success: function(data){
         if (data == 1) {
           loadTasks();
@@ -183,17 +172,17 @@ if (!isset($_SESSION["id"])){
         }
       }
     });
-
-  });
-  //remove task
-  $(document).on("click","#removeBtn",function(e){
+  }})
+    //Confirm task
+    //input disabled nzid nchallet leklem? + confirm alert
+    $(document).on("click","#Complete",function(e){
     e.preventDefault();
     var id = $(this).data('id');
     alert(id);
     $ajax({
-      url:"remove-task.php",
+      url:"varstodo.php",
       type:"POST",
-      data:{id:id},
+      data:{task: task,timecalendar: timecalendar, delete:true},
       success: function(data){
         if(data==0){
           alert("something went wrong");
@@ -201,7 +190,22 @@ if (!isset($_SESSION["id"])){
       }
     })
   });
-
+    //remove task
+    $(document).on("click","#DeleteCompleted",function(e){
+    e.preventDefault();
+    var id = $(this).data('id');
+    alert(id);
+    $ajax({
+      url:"varstodo.php",
+      type:"POST",
+      data:{task: task,timecalendar: timecalendar, delete:true},
+      success: function(data){
+        if(data==0){
+          alert("something went wrong");
+        }
+      }
+    })
+  });
 
 });
     </script>

@@ -102,7 +102,7 @@ const enableDarkMode = () => {
   }
 
   try {
-    const darke = document.querySelectorAll(".todo-div .listing");
+    const darke = document.querySelectorAll("#todoinput");
     for (let i = 0; i < darke.length; i++) {
       darke[i].classList.toggle("dark-var");
     }
@@ -213,7 +213,7 @@ const disableDarkMode = () => {
   }
 
   try {
-    const darke = document.querySelectorAll(".todo-div .listing");
+    const darke = document.querySelectorAll("#todoinput");
     for (let i = 0; i < darke.length; i++) {
       darke[i].classList.remove("dark-var");
     }

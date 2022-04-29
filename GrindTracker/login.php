@@ -3,11 +3,16 @@ session_start();
 
 require_once('connection.php');
 
+
+/*
+$username = $_POST['username'];
+$password = $_POST['password'];
+*/
+
 $username = filter_input(INPUT_POST, 'username');
 $password = filter_input(INPUT_POST, 'password');
 
 if (!empty($username) && !empty($password) ){
-
     $sql = "SELECT password FROM register WHERE username='$username'";
     $result = mysqli_query($conn,$sql);
     $num = mysqli_num_rows($result);
@@ -29,6 +34,8 @@ if (!empty($username) && !empty($password) ){
         }
 }
 
+
+//echo "<script>document.getElementById('msg1').innerHTML = '⛔ The username or password is incorrect.'; </script>";
 header("location:index.php?msg=incorrect");
 
     //b fazt el link %--= %  %

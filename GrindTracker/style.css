@@ -286,7 +286,9 @@ input:focus {
   width: 37px !important;
   text-align: center;
 }
-
+.popup form {
+  font-size: 1em;
+}
 #gender {
   height: 25px;
   width: 25px;
@@ -319,6 +321,11 @@ input:focus {
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.vars .section-header {
+  padding: 8px !important;
+  margin: 0px !important;
 }
 
 .Settings {
@@ -373,6 +380,7 @@ input:focus {
 
 /*-------------------------todo list  --------------------------------*/
 .todo-div {
+  text-align: center !important;
   background: linear-gradient(180deg, #9acfe0, #cbe6ef);
   margin: 0;
   padding: 10px;
@@ -382,7 +390,6 @@ input:focus {
 }
 .todo-head,
 .todo-form {
-  min-height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -392,9 +399,6 @@ input:focus {
 }
 .todo-form input {
   margin: 0;
-}
-.todo-form input:hover{
-  border-color: red;
 }
 
 .todo-form input,
@@ -411,16 +415,18 @@ input:focus {
   min-width: 30%;
   list-style: none;
 }
-/*.todo {
+.todo {
   margin: 0.5rem;
-  background: orange;
+  background: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: all 0.5s ease;
   box-shadow: 0 0 10px rgb(0 52 60 / 70%);
-}*/
-
+}
+.todo li {
+  flex: 1;
+}
 .trash-btn,
 .complete-btn {
   border: none;
@@ -436,43 +442,11 @@ input:focus {
   background: green;
 }
 .todo-item {
-  display: flex;
-  flex-wrap: wrap;
-  background: #fff;
-  margin: 8px 0;
   padding: 0rem 0.5rem;
-  border-radius: 5px;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
 }
-.small{
-  
-    width: 100%;
-    padding: 5px 0px;
-    color: #888;
-    font-size: 14px;
-    font-family: sans-serif;
-}
-
-.todo-container li .icon{
-  width: 50px;
-  height: 100%;
-  background: #e74c3c;
-  position: absolute;
-  top: 0;
-  right:-50px;
-  border-radius: 0 5px 5px 0;
-  color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.3s linear;
-  cursor: pointer;
-}
-.todo-container li:hover .icon{
-  right: 0;
+.fa-check,
+.fa-trash {
+  pointer-events: none;
 }
 
 .completed {
@@ -509,6 +483,7 @@ select {
   font-size: 1rem;
   transition: 0.1s;
 }
+/****/
 .filter-todo {
   font-size: 0.9rem;
 }
@@ -531,6 +506,56 @@ select {
   width: 300px;
   height: 58px !important;
 }
+
+/****/
+
+#tasks {
+  flex-direction: column !important;
+  align-items: center !important;
+  min-height: 20vh;
+}
+
+#tasks li {
+  justify-content: space-between !important;
+  flex-wrap: wrap;
+  max-width: 800px;
+}
+
+#tasks li input {
+  width: 34vw !important;
+  cursor: default;
+}
+#DeleteCompleted {
+  width: 40px !important;
+  height: 40px !important;
+  font-size: 0.5em;
+}
+small {
+  font-size: 0.7em;
+}
+smaller {
+  font-size: 0.5em;
+}
+/*
+.tasks li {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center !important;
+  width: none;
+  padding: 10px !important;
+  border-radius: 25px;
+  top: 50%;
+  left: 50%;
+  background-color: #69c9e9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+.listing {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 0px 100px;
+  gap: 10px;
+}
+*/
 /*-------------------------todo list: KMEL.  --------------------------------*/
 
 #RASF {
@@ -548,6 +573,7 @@ select {
 }
 
 #calendar {
+  cursor: pointer;
   font-size: 40px;
   size: 900px !important;
 }

@@ -3,31 +3,35 @@
 session_start();
 require_once('connection.php');
 $id = $_SESSION["id"];
+$v = $_POST["filtertodovalue"];
 
-
-$sql = "SELECT * from pr$id ORDER BY idd DESC";
+$sql = "SELECT * from pr$id WHERE TODO IS NOT NULL ORDER BY PrDate";
 $result = mysqli_query($conn,$sql);
 
-if(mysqli_num_rows($result)> 0){
+    if ($v=="all"){
+        $sql = "SELECT * from pr$id WHERE TODO IS NOT NULL ORDER BY PrDate";
+    }
+    else if ($v == "completed"){
+        $sql = "SELECT * from pr$id WHERE TODO IS NOT NULL ORDER BY PrDate AND Completed IS TRUE";
+    }
+    else if ($v == "uncompleted"){
+        $sql = "SELECT * from pr$id WHERE TODO IS NOT NULL ORDER BY PrDate AND Completed IS FALSE";
+
+    }
+
+    $result = mysqli_query($conn,$sql);
     while($row = mysqli_fetch_assoc($result)) {
         ?>
-        
-            <li class="todo-item"> 
-                <?php echo $row['TODO'];?>
-                <div class="break" style="flex-basis: 100%;height: 0;"></div>
-
-                <small class="small" >added on :<?php echo $row['TODOADDED'];?></small>
-
-                <div class="break" style="flex-basis: 100%;height: 0;"></div>
-                
-                <small class="small" >for :<?php echo $row['PrDate'];?></small>
-                <i id="removeBtn" class="icon fa fa-trash" data-id="<?php echo $row['idd'];?>"></i>
-                
+            <li> 
+            <input readonly type ="text" value="<?php echo $row['TODO']?>";></input>
+            <button id="Complete" class="button BtnS" onclick="Verify()" title="Complete <?php echo $row['TODO'] ?>">✔️</button>
+            <button id="DeleteCompleted"class="button BtnS" onclick="DELETEvar(this)" title="Delete <?php echo $row['TODO'] ?>">❌</button>
+            <small class="dark-t">&nbsp&nbsp due to: <?php echo $row['PrDate']?>.</small>
+            <smaller class="dark-t">created: <?php echo $row['TODOADDED']?>.</smaller>
             </li>
-        
         <?php
     }
-}
+
 
 
  
