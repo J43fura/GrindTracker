@@ -24,7 +24,11 @@ if (!isset($_SESSION["id"])){
     />
   </head>
   <body>
-    <!--<div class="loader" id="loader"></div>-->
+  
+
+  <div class="loader1" id="loader"></div>
+  <div class="loader" id="loader"></div>
+    
     <header id="RAS" class="main-header dark-h">
       <nav class="nav main-nav">
         <ul>
@@ -50,7 +54,7 @@ if (!isset($_SESSION["id"])){
       //charge vars:
       require_once('connection.php');
       $id = $_SESSION["id"];
-      $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED'";
+      $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
       $result = mysqli_query($conn,$sql);
       if (mysqli_num_rows($result)>0){
         while ($row=mysqli_fetch_assoc($result)){
@@ -128,7 +132,7 @@ if (!isset($_SESSION["id"])){
 
         <div class="select">
           <select name="todos" class="filter-todo">
-            <option value="all ">All</option>
+            <option value="all">All</option>
             <option value="completed">Completed</option>
             <option value="uncompleted">Uncompleted</option>
           </select>
@@ -152,14 +156,12 @@ if (!isset($_SESSION["id"])){
      $(document).ready(function(){
   //show tasks
   loadTasks();
-  //tchouf l value mta3 el todos -uncompleted wl fazet tzidhom fel post, te5ohom mel show todo, if statement == value edheka 3la 7sebou kifech tselecti + fama fazet trasilk t3mlhom
   $("#addbtn").on("click",function(e){
     e.preventDefault();
     const todoInput = document.querySelector(".todo-input");
     const timecalendar = document.getElementById("calendar").value;
-    var task = $("#taskvalue").val();
+    const task = $("#taskvalue").val();
     if (task !== ""){
-    console.log(task);
      $.ajax({
       url: "varstodo.php",
       type :"POST",
@@ -177,38 +179,50 @@ if (!isset($_SESSION["id"])){
     //input disabled nzid nchallet leklem? + confirm alert
     $(document).on("click","#Complete",function(e){
     e.preventDefault();
-    var id = $(this).data('id');
-    alert(id);
-    $ajax({
+    const task = this.parentElement.querySelector("input").getAttribute("value");
+    if(confirm("Do you want to complete " + task)){
+    const timecalendar = this.parentElement.querySelector("#CompleteTime").getAttribute("placeholder");
+    $.ajax({
       url:"varstodo.php",
       type:"POST",
-      data:{task: task,timecalendar: timecalendar, delete:true},
+      data:{task: task,timecalendar: timecalendar, delete:"FALSE"},
       success: function(data){
         if(data==0){
           alert("something went wrong");
         }
       }
-    })
+    })      
+    loadTasks();
+            
+}
+    
   });
     //remove task
     $(document).on("click","#DeleteCompleted",function(e){
     e.preventDefault();
-    var id = $(this).data('id');
-    alert(id);
-    $ajax({
+    const task = this.parentElement.querySelector("input").getAttribute("value");
+    if(confirm("Do you want to delete " + task)){
+    const timecalendar = this.parentElement.querySelector("#CompleteTime").getAttribute("placeholder");
+    $.ajax({
       url:"varstodo.php",
       type:"POST",
-      data:{task: task,timecalendar: timecalendar, delete:true},
+      data:{task: task,timecalendar: timecalendar, delete:"TRUE"},
       success: function(data){
         if(data==0){
           alert("something went wrong");
         }
       }
-    })
+    })}
+    else{
+      loadTasks();
+
+    }
+    
   });
 
 });
+
     </script>
-    <script src="darkmode.js" defer></script>
+  <script src="darkmode.js" defer></script>
   </body>
 </html>

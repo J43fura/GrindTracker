@@ -2,10 +2,8 @@
 session_start();
 require_once('connection.php');
 $id = $_SESSION["id"];
-
 $axejdid = $_POST['elemvl'];
 $axe = $_POST['elemph'];
-
 
 if(!empty($axe)){
 	if(!empty($axejdid)){
@@ -33,5 +31,4 @@ if ($result) {
 } else {
     echo 0;
 }
-
 ?>

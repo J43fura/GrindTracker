@@ -27,7 +27,8 @@ if (isset($_SESSION["id"])){
     />
   </head>
   <body>
-  <!--<div class="loader" id="loader"></div>-->
+  <div class="loader1" id="loader"></div>
+  <div class="loader" id="loader"></div>
     <header id="RAS" class="main-header dark-h">
       <nav class="nav main-nav">
         <ul>
@@ -71,12 +72,9 @@ if (isset($_SESSION["id"])){
         <?php
             if (isset($_GET["msg"])){
               if ($_GET["msg"] == "incorrect"){
-              //echo "<div id='msg1'>⛔ The username or password is incorrect.</div>"
               echo "<script>document.getElementById('msg1').innerHTML = '⛔ The username or password is incorrect.'; </script>";
             }
             else if($_GET["msg"] == "accountcreated"){
-
-              //echo "<div id='msg1'>Your account has been created.</div>
               echo "<script>document.getElementById('msg1').innerHTML = 'Your account has been created.'; </script>";
             }}
               ?>

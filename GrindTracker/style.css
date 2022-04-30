@@ -143,15 +143,23 @@ input:checked + .slider:before {
   font-size: 1.15em;
   transition: 0.3s;
 }
-/*
+
+.loader1 {
+  background-color: #b3b3b3 !important;
+  position: fixed !important;
+  display: block !important;
+  z-index: 2 !important;
+  width: 100%;
+  height: 100%;
+}
 .loader {
+  z-index: 2;
   position: fixed;
   display: block;
   right: 45%;
   top: 45%;
-
-  border: 16px solid #f3f3f3; 
-  border-top: 16px solid #3498db; 
+  border: 16px solid #e9f9ff;
+  border-top: 16px solid #c0002a;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -168,9 +176,9 @@ input:checked + .slider:before {
 }
 
 .loaderstop {
-  display: none;
+  display: none !important;
 }
-*/
+
 .login {
   width: none;
   padding: 50px;
