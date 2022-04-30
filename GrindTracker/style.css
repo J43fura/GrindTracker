@@ -544,26 +544,10 @@ small {
 smaller {
   font-size: 0.5em;
 }
-/*
-.tasks li {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center !important;
-  width: none;
-  padding: 10px !important;
-  border-radius: 25px;
-  top: 50%;
-  left: 50%;
-  background-color: #69c9e9;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+#tasks .dark-var input:disabled {
+  color: white;
 }
-.listing {
-  display: inline-flex;
-  flex-wrap: wrap;
-  padding: 0px 100px;
-  gap: 10px;
-}
-*/
+
 /*-------------------------todo list: KMEL.  --------------------------------*/
 
 #RASF {

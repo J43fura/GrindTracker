@@ -1,127 +1,126 @@
-var enableDarkMode = () => {
-  try {
-    const darke = document.querySelectorAll(".TitleGT1-d");
-    for (let i = 0; i < darke.length; i++) {
-      darke[i].classList.toggle("dark-text-b");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-  try {
-    const darke = document.querySelectorAll(".login");
-    for (let i = 0; i < darke.length; i++) {
-      darke[i].classList.toggle("dark-container");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-  try {
-    const darke = document.querySelectorAll(".main-footer");
-    for (let i = 0; i < darke.length; i++) {
-      darke[i].classList.toggle("dark-footer");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-  try {
-    const darke = document.querySelectorAll(".div-about");
-    for (let i = 0; i < darke.length; i++) {
-      darke[i].classList.toggle("dark-about");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-  try {
-    const darke = document.querySelectorAll(".dark-t-w");
-    for (let i = 0; i < darke.length; i++) {
-      darke[i].classList.toggle("dark-text-w");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-  try {
-    const darke = document.querySelectorAll(".dark-h");
-    for (let i = 0; i < darke.length; i++) {
-      darke[i].classList.toggle("dark-header");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-
-  const darke = document.querySelectorAll(".nav-elements");
-  for (let i = 0; i < darke.length; i++) {
-    darke[i].classList.toggle("dark-text-w");
-  }
-
-  try {
-    const darkt = document.querySelectorAll(".dark-t");
-    for (let i = 0; i < darkt.length; i++) {
-      darkt[i].classList.toggle("dark-text");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-
-  try {
-    const darke = document.querySelectorAll(".vars");
-    for (let i = 0; i < darke.length; i++) {
-      darke[i].classList.toggle("dark-container");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-
-  try {
-    const darke = document.querySelectorAll(".listing li");
-    for (let i = 0; i < darke.length; i++) {
-      darke[i].classList.toggle("dark-var");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-
-  try {
-    const darke = document.querySelectorAll("#tasks li");
-    for (let i = 0; i < darke.length; i++) {
-      darke[i].classList.toggle("dark-var");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-
-  try {
-    const darke = document.querySelectorAll(".calendar");
-    for (let i = 0; i < darke.length; i++) {
-      darke[i].classList.toggle("dark-container");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-
-  try {
-    const darke = document.querySelectorAll(".todo-div");
-    for (let i = 0; i < darke.length; i++) {
-      darke[i].classList.toggle("dark-container");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-
-  try {
-    const darke = document.querySelectorAll("#todoinput");
-    for (let i = 0; i < darke.length; i++) {
-      darke[i].classList.toggle("dark-var");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-
-  localStorage.setItem("darkMode", "enabled");
-};
 window.addEventListener("load", function () {
   let darkMode = localStorage.getItem("darkMode");
-  var darkModeToggle = document.getElementById("darkmode");
+  var darkModeadd = document.getElementById("darkmode");
+  var enableDarkMode = () => {
+    try {
+      const darke = document.querySelectorAll(".TitleGT1-d");
+      for (let i = 0; i < darke.length; i++) {
+        darke[i].classList.add("dark-text-b");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    try {
+      const darke = document.querySelectorAll(".login");
+      for (let i = 0; i < darke.length; i++) {
+        darke[i].classList.add("dark-container");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    try {
+      const darke = document.querySelectorAll(".main-footer");
+      for (let i = 0; i < darke.length; i++) {
+        darke[i].classList.add("dark-footer");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    try {
+      const darke = document.querySelectorAll(".div-about");
+      for (let i = 0; i < darke.length; i++) {
+        darke[i].classList.add("dark-about");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    try {
+      const darke = document.querySelectorAll(".dark-t-w");
+      for (let i = 0; i < darke.length; i++) {
+        darke[i].classList.add("dark-text-w");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    try {
+      const darke = document.querySelectorAll(".dark-h");
+      for (let i = 0; i < darke.length; i++) {
+        darke[i].classList.add("dark-header");
+      }
+    } catch (e) {
+      console.log(e);
+    }
 
+    const darke = document.querySelectorAll(".nav-elements");
+    for (let i = 0; i < darke.length; i++) {
+      darke[i].classList.add("dark-text-w");
+    }
+
+    try {
+      const darkt = document.querySelectorAll(".dark-t");
+      for (let i = 0; i < darkt.length; i++) {
+        darkt[i].classList.add("dark-text");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      const darke = document.querySelectorAll(".vars");
+      for (let i = 0; i < darke.length; i++) {
+        darke[i].classList.add("dark-container");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      const darke = document.querySelectorAll(".listing li");
+      for (let i = 0; i < darke.length; i++) {
+        darke[i].classList.add("dark-var");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      const darke = document.querySelectorAll("#tasks li");
+      for (let i = 0; i < darke.length; i++) {
+        darke[i].classList.add("dark-var");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      const darke = document.querySelectorAll(".calendar");
+      for (let i = 0; i < darke.length; i++) {
+        darke[i].classList.add("dark-container");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      const darke = document.querySelectorAll(".todo-div");
+      for (let i = 0; i < darke.length; i++) {
+        darke[i].classList.add("dark-container");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      const darke = document.querySelectorAll("#todoinput");
+      for (let i = 0; i < darke.length; i++) {
+        darke[i].classList.add("dark-var");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    localStorage.setItem("darkMode", "enabled");
+  };
   var disableDarkMode = () => {
     try {
       const darke = document.querySelectorAll(".TitleGT1-d");
@@ -244,11 +243,11 @@ window.addEventListener("load", function () {
   };
 
   if (darkMode === "enabled") {
-    darkModeToggle.checked = true;
+    darkModeadd.checked = true;
     enableDarkMode();
   }
 
-  darkModeToggle.addEventListener("change", () => {
+  darkModeadd.addEventListener("change", () => {
     let darkMode = localStorage.getItem("darkMode");
     if (darkMode !== "enabled") {
       enableDarkMode();
@@ -406,7 +405,7 @@ function ADDvar() {
   let darkMode = localStorage.getItem("darkMode");
   const li = document.createElement("li");
   if (darkMode === "enabled") {
-    li.classList.toggle("dark-var");
+    li.classList.add("dark-var");
   }
   const input = document.createElement("input");
   const button = document.createElement("button");
@@ -476,21 +475,20 @@ function loadTasks() {
     data: { filtertodovalue: filtertodovalue },
     success: function (data) {
       $("#tasks").html(data);
-      var darkModeToggle = document.getElementById("darkmode").value;
-      if (darkModeToggle == "on") {
+      let darkMode = localStorage.getItem("darkMode");
+      if (darkMode == "enabled") {
         try {
           const darke = document.querySelectorAll("#tasks li");
           for (let i = 0; i < darke.length; i++) {
-            darke[i].classList.toggle("dark-var");
+            darke[i].classList.add("dark-var");
           }
         } catch (e) {
           console.log(e);
         }
-
         try {
           const darkt = document.querySelectorAll("#tasks .dark-t");
           for (let i = 0; i < darkt.length; i++) {
-            darkt[i].classList.toggle("dark-text");
+            darkt[i].classList.add("dark-text");
           }
         } catch (e) {
           console.log(e);
