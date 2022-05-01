@@ -75,7 +75,7 @@ if (isset($_SESSION["id"])){
               echo "<script>document.getElementById('msg1').innerHTML = '⛔ The username or password is incorrect.'; </script>";
             }
             else if($_GET["msg"] == "accountcreated"){
-              echo "<script>document.getElementById('msg1').innerHTML = 'Your account has been created.'; </script>";
+              echo "<script>document.getElementById('msg1').innerHTML = 'A verification code was sent at your email.'; </script>";
             }}
               ?>
         <button class="button" role="submit" id="btnLogin">Log In</button>

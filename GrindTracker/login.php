@@ -22,6 +22,13 @@ if (!empty($username) && !empty($password) ){
         $value = $value["password"];
 
         if(password_verify($password,$value)){
+            //tchouf ken el email mverifici walla le , ken ey tkamel ken le temchi l header("location:index.php?msg=emailverif"); emailverif popup togglePopup()
+
+
+
+
+
+
             $sql = "SELECT id FROM register WHERE username = '$username'";
             $result = mysqli_query($conn,$sql);
             $value = mysqli_fetch_assoc($result);

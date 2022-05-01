@@ -8,7 +8,6 @@ if (!isset($_SESSION["id"])){
 <html>
   <head>
     <script src="script.js" defer></script>
-    <script src="profile.js" defer></script>
     <script src="Adds/jquery-3.6.0.js"></script>
     <script src="Adds/chart.js"></script>
     <script src="Adds/chartjs-adapter-date-fns.bundle.min.js"></script>
