@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('connection.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -77,9 +78,9 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 		$mail->Body = "Your GrindTracker verification code is:
 			<h3 style='color: #db0a40; display: inline-block'>$code_auth</h3>";
 		if($mail->send()){
-			//header("location:index.php?msg=emailverif"); // emailverif popup togglePopup()
-
-			//header("location:index.php?msg=accountcreated");
+			$_SESSION["id"] = $id;
+			$_SESSION["username"] = $username;
+			header("location:index.php?msg=emailverif");
 		}
 		else{
 			echo "ERROR email was not sent.";

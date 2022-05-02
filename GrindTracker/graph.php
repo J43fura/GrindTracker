@@ -1,4 +1,5 @@
 <?php
+//https://stackoverflow.com/questions/38577556/sending-reporting-mail-with-chart
 session_start();
 require_once('connection.php');
 $id = $_SESSION["id"];
@@ -12,6 +13,7 @@ $axe = $_POST['elemph'];
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="Adds/chart.js"></script>
 	<script src="Adds/chartjs-adapter-date-fns.bundle.min.js"></script> 
+  <script src="Adds/jquery-3.6.0.js"></script>
   <link rel="stylesheet" href="style.css" />
     <title><?= $axe ?></title>
     <style>
@@ -44,7 +46,6 @@ $axe = $_POST['elemph'];
       }
       .chartCard {
         padding:40px;
-        padding-bottom:100px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -57,12 +58,20 @@ $axe = $_POST['elemph'];
         background:#f8fdff;
       }
       .main-footer {
+        font-size: 1.5vh;
         position: relative;
         padding:0px;
         background: #181a20;
       }
       #RASF{
         cursor: pointer;
+      }
+      #SendGraph{
+        font-size: 1.1em;
+        width: 235px;
+      }
+      #SendGraph:hover{
+        width: 255px;
       }
     </style>
 
@@ -110,13 +119,26 @@ try{
       </div>
     </div>
 
-    <script>
+  <script>
 	const dateArrayJS = <?= json_encode($dateArray); ?>;
 	const AxeArrayJS = <?= json_encode($AxeArray); ?>;
 	const dateChartJS = dateArrayJS.map((day, index) =>{
 		let dayjs = new Date(day);
 		return dayjs;
 	})
+
+  //background puglin
+  const plugin = {
+  id: 'custom_canvas_background_color',
+  beforeDraw: (chart) => {
+    const ctx = chart.canvas.getContext('2d');
+    ctx.save();
+    ctx.globalCompositeOperation = 'destination-over';
+    ctx.fillStyle = '#f8fdff';
+    ctx.fillRect(0, 0, chart.width, chart.height);
+    ctx.restore();
+  }
+};
 
     // setup 
     const data = {
@@ -128,13 +150,14 @@ try{
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 3,
 		tension: 0.2
+
       }]
     };
 
     // config 
     
     const config = {
-      
+      plugins: [plugin],
       type: 'line',
       data,
       options: {
@@ -159,6 +182,8 @@ try{
       config
     );
     </script>
+        <button class="button" id="DownloadGraph">Download this graph.</button>
+        <button class="button" id="SendGraph">Email me this graph.</button>
 
     <footer class="main-footer">
       <div class="container main-footer-container">
@@ -172,7 +197,43 @@ try{
   var RASF = document.getElementById('RASF');
   RASF.addEventListener("click", () => {
     window.close();
-});</script>
+  });
+
+
+  // Convert canvas to image
+  document.getElementById('DownloadGraph').addEventListener("click", function(e) {
+    var canvas = document.querySelector('#myChart');
+    var dataURL = canvas.toDataURL("image/jpeg", 1.0);
+    downloadImage(dataURL, 'Chart <?= $axe ?>.jpeg');
+});
+
+  // Save | Download image
+  function downloadImage(data, filename = 'untitled.jpeg') {
+    var a = document.createElement('a');
+    a.href = data;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+}
+
+  // Send image
+  document.getElementById('SendGraph').addEventListener("click", function(e) {
+    var canvas = document.querySelector('#myChart');
+    var dataURL = canvas.toDataURL("image/jpeg", 1.0);
+    console.log("TEST");
+    $.ajax({
+    type: "POST",
+    url: "test1.php",
+    data: { 
+      imageString: dataURL
+    },
+    success: function(response){ 
+      alert("image sent"); 
+    }
+  })
+  });
+
+</script>
 <?php
 unset($axe);
  ?>

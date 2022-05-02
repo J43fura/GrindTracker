@@ -4,7 +4,7 @@
 
 // tincludeha marra f lheader lkol lezm dhhrli //Notice: session_start(): Ignoring session_start() because a session is already active in ????
  session_start();
-if (isset($_SESSION["id"])){
+if (isset($_SESSION["id"]) && !isset($_SESSION["username"])){
   header("location:profile.php");
 }
 ?>
@@ -74,8 +74,8 @@ if (isset($_SESSION["id"])){
               if ($_GET["msg"] == "incorrect"){
               echo "<script>document.getElementById('msg1').innerHTML = '⛔ The username or password is incorrect.'; </script>";
             }
-            else if($_GET["msg"] == "accountcreated"){
-              echo "<script>document.getElementById('msg1').innerHTML = 'A verification code was sent at your email.'; </script>";
+            else if($_GET["msg"] == "veriferr"){
+              echo "<script>document.getElementById('msg1').innerHTML = 'The verification code is wrong.'; </script>";
             }}
               ?>
         <button class="button" role="submit" id="btnLogin">Log In</button>
@@ -119,9 +119,7 @@ if (isset($_SESSION["id"])){
               document.getElementById('popup-1').classList.toggle('active');
                </script>";
             }
-
-
-}
+          }
               ?>
         
         <input
@@ -156,6 +154,32 @@ if (isset($_SESSION["id"])){
         <button class="button" role="submit" id="btnRegister">Register</button>
       </form>
     </section>
+
+    <section class="content-section container login popup" id="popup-Ver">
+      <h2 class="section-header dark-t-w">Email Verification</h2>
+      <form
+        class="section-paragraph"
+        id="myForm2"
+        method="post"
+        action="emailverif.php"
+      >
+        <div id="msg2">A 6-digit verification code was sent to your email.</div>
+        <input
+          id="emailverif"
+          type="number"
+          name="emailverif"
+          required
+        />
+        <button class="button" role="submit" id="btnRegister">Verifiy</button>
+      </form>
+    </section>
+    <?php 
+    if (isset($_GET["msg"])){
+    if($_GET["msg"] == "emailverif"){
+              echo "<script>document.getElementById('popup-Ver').classList.toggle('active');</script>";
+            }
+            }
+            ?>
 
     <div class="div-about">
       <section class="content-section container about" id="About">

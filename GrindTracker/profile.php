@@ -1,6 +1,6 @@
 <?php 
   session_start();
-if (!isset($_SESSION["id"])){
+if (!isset($_SESSION["id"]) || isset($_SESSION["username"])){
   header("location:index.php");
 }
 ?>
@@ -87,7 +87,7 @@ if (!isset($_SESSION["id"])){
       $id = $_SESSION["id"];
 
 
-      $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED'";
+      $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
       $result = mysqli_query($conn,$sql);
       if (mysqli_num_rows($result)>0){
         while ($row=mysqli_fetch_assoc($result)){
