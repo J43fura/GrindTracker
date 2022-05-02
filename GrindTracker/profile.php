@@ -1,6 +1,6 @@
 <?php 
   session_start();
-if (!isset($_SESSION["id"]) || isset($_SESSION["username"])){
+if (!isset($_SESSION["id"])){
   header("location:index.php");
 }
 ?>
@@ -33,6 +33,7 @@ if (!isset($_SESSION["id"]) || isset($_SESSION["username"])){
         <ul>
           <li><a class="nav-elements" href="#RAS">Home</a></li>
           <li><a class="nav-elements" href="logout.php">Logout</a></li>
+          <li><a class="nav-elements" href="summary.php">Summary</a></li>
           <li>
             <label class="switch">
               <input type="checkbox" id="darkmode" />

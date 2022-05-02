@@ -204,7 +204,7 @@ try{
   document.getElementById('DownloadGraph').addEventListener("click", function(e) {
     var canvas = document.querySelector('#myChart');
     var dataURL = canvas.toDataURL("image/jpeg", 1.0);
-    downloadImage(dataURL, 'Chart <?= $axe ?>.jpeg');
+    downloadImage(dataURL, 'Graph <?= $axe ?>.jpeg');
 });
 
   // Save | Download image
@@ -220,15 +220,15 @@ try{
   document.getElementById('SendGraph').addEventListener("click", function(e) {
     var canvas = document.querySelector('#myChart');
     var dataURL = canvas.toDataURL("image/jpeg", 1.0);
-    console.log("TEST");
     $.ajax({
     type: "POST",
-    url: "test1.php",
+    url: "emailGraph.php",
     data: { 
-      imageString: dataURL
+      img: dataURL,
+      axe: '<?= $axe ?>'
     },
     success: function(response){ 
-      alert("image sent"); 
+      alert("<?= $axe ?>'s Graph has been sent to your email."); 
     }
   })
   });

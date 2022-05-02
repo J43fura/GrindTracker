@@ -23,8 +23,13 @@ if (!empty($username) && !empty($password) ){
             $result = mysqli_query($conn,$sql);
             $value = mysqli_fetch_assoc($result);
             $code_auth = $value["code_auth"];
-            $_SESSION["id"] = $id;
             if ($code_auth == NULL){
+                $_SESSION["id"] = $id;
+                try{
+                    unset($_SESSION["username"]);}
+                catch(e){
+
+                }
                 header("location:profile.php");
             }
             else{

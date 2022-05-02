@@ -4,7 +4,7 @@
 
 // tincludeha marra f lheader lkol lezm dhhrli //Notice: session_start(): Ignoring session_start() because a session is already active in ????
  session_start();
-if (isset($_SESSION["id"]) && !isset($_SESSION["username"])){
+if (isset($_SESSION["id"])){
   header("location:profile.php");
 }
 ?>
@@ -156,6 +156,7 @@ if (isset($_SESSION["id"]) && !isset($_SESSION["username"])){
     </section>
 
     <section class="content-section container login popup" id="popup-Ver">
+    <button class="button btnx" onclick="togglePopupVer()">&times;</button>
       <h2 class="section-header dark-t-w">Email Verification</h2>
       <form
         class="section-paragraph"
