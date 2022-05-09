@@ -3,9 +3,10 @@ session_start();
 require_once('connection.php');
 $id = $_SESSION["id"];
 $axejdid = $_POST['elemvl'];
-$axe = $_POST['elemph'];
 
-if(!empty($axe)){
+
+if(isset($_POST['elemph'])){
+	$axe = $_POST['elemph'];
 	if(!empty($axejdid)){
 	/*RENAME*/
 	$sql ="ALTER TABLE pr$id CHANGE $axe $axejdid float NULL DEFAULT NULL";
@@ -19,12 +20,18 @@ else if(empty($axejdid)){
 }
 else if(empty($axe)){
 	/*ADD*/
-	$sql = "ALTER TABLE pr$id ADD $axejdid float";
-	$result = mysqli_query($conn, $sql);
-
+	$sql = "SHOW COLUMNS FROM pr$id WHERE field = '$axejdid'";
+	$result = mysqli_query($conn,$sql);
+	if (mysqli_num_rows($result)==0){
+		$sql = "ALTER TABLE pr$id ADD $axejdid float";
+		$result = mysqli_query($conn, $sql);
+	}
+	else{
+		echo 2;
+		exit();
+	}
 }
-header("location:profile.php?msg=done");
-exit();
+
 
 if ($result) {
     echo 1;

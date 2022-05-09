@@ -156,6 +156,7 @@ if (!isset($_SESSION["id"])){
      $(document).ready(function(){
   //show tasks
   loadTasks();
+  //ADD task
   $("#addbtn").on("click",function(e){
     e.preventDefault();
     const todoInput = document.querySelector(".todo-input");
@@ -170,11 +171,16 @@ if (!isset($_SESSION["id"])){
         if (data == 1) {
           loadTasks();
           todoInput.value = "";
-          
+        }
+        else if (data == 2){
+          alert("TODO's are made for the future. (change time).");
+        }
+        else if (data == 3){
+          alert("You cant add the same name of a task more than once a day. (but you can numerate each one.)");
         }
       }
     });
-  }})
+  }});
     //Confirm task
     //input disabled nzid nchallet leklem? + confirm alert
     $(document).on("click","#Complete",function(e){

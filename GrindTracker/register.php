@@ -66,9 +66,7 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 		$mail->Password = "yylvtgbvgwcbloax";
 		$mail->SMTPSecure = "tls"; //ssl
 		$mail->Port = 587;  //465; 
-		
-		$sql = "SELECT * FROM register WHERE id = '$id'";
-	
+			
 		//Email Settings
 		$mail->setFrom("aatrouss.mailing@gmail.com","GrindTracker");
 		$mail->addAddress("$email","$username");
@@ -78,7 +76,6 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 		$mail->Body = "Your GrindTracker verification code is:
 			<h3 style='color: #db0a40; display: inline-block'>$code_auth</h3>";
 		if($mail->send()){
-			$_SESSION["id"] = $id;
 			$_SESSION["username"] = $username;
 			header("location:index.php?msg=emailverif");
 		}

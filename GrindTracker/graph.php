@@ -2,6 +2,9 @@
 //https://stackoverflow.com/questions/38577556/sending-reporting-mail-with-chart
 session_start();
 require_once('connection.php');
+if (!isset($_POST['elemph'])){
+  header("location:index.php");
+}
 $id = $_SESSION["id"];
 $axe = $_POST['elemph'];
 ?>
@@ -30,7 +33,6 @@ $axe = $_POST['elemph'];
         background: #13151b;
       }
       .chartMenu {
-        width: 100vw;
         height: 80px;
         background: #181a20;
         
@@ -95,7 +97,6 @@ $axe = $_POST['elemph'];
         <canvas id="myChart"></canvas>
 		<?php
 try{
-
 	$sql = "SELECT PrDate,$axe FROM pr$id WHERE $axe IS NOT NULL ORDER BY PrDate";
 	$result = mysqli_query($conn,$sql);
 	$num = mysqli_num_rows($result);
@@ -106,12 +107,10 @@ try{
 			$dateArray[] = $value["PrDate"];
 			$AxeArray[] = $value[$axe];
 		}
-
 	  } else{
 		echo "Empty.";
 	  }
 	}
-	
 	catch(e){
 	  die("ERROR");
 	}
@@ -201,7 +200,7 @@ try{
 
 
   // Convert canvas to image
-  document.getElementById('DownloadGraph').addEventListener("click", function(e) {
+    document.getElementById('DownloadGraph').addEventListener("click", function(e) {
     var canvas = document.querySelector('#myChart');
     var dataURL = canvas.toDataURL("image/jpeg", 1.0);
     downloadImage(dataURL, 'Graph <?= $axe ?>.jpeg');

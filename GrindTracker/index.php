@@ -169,6 +169,7 @@ if (isset($_SESSION["id"])){
           id="emailverif"
           type="number"
           name="emailverif"
+          placeholder="6-digit code"
           required
         />
         <button class="button" role="submit" id="btnRegister">Verifiy</button>

@@ -304,6 +304,7 @@ function Verify() {
                 type: "POST",
                 data: { elemvl: elemvl, elemph: elemph },
                 success: function (data) {
+                  console.log("ytest wallajh");
                   if (data == 0) {
                     alert("Something wrong went. Please try again.");
                   }
@@ -321,6 +322,8 @@ function Verify() {
                   success: function (data) {
                     if (data == 0) {
                       alert("Something wrong went. Please try again.");
+                    } else if (data == 2) {
+                      alert(elemvl + " Already exists.");
                     }
                   },
                 });
@@ -350,8 +353,7 @@ function Verify() {
             }
           }
         }
-
-        //ALTER TABLE pr$id ADD $axe int(7) : colon jdida lel jdod (else>value)
+        window.location.reload(true);
         //varssettings
       }
     } catch (e) {

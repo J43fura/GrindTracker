@@ -6,7 +6,7 @@
 }
 
 .chartMenu p {
-  color: #cbe6ef !important;
+  color: #eafaff !important;
   text-shadow: 0 0 0.05em #000000;
 }
 
@@ -16,4 +16,33 @@
 }
 .main-footer {
   background-color: #182c39 !important;
+}
+
+.todo-div {
+  background: #cbe6ef !important;
+  border-radius: 0px;
+}
+#task1 li {
+  color: white;
+}
+.listing li {
+  background: #69c9e9;
+}
+.nav a {
+  display: inline-block;
+  color: #181a20 !important;
+}
+.dark-t1 {
+  color: rgb(22, 22, 22);
+}
+.TitleGT {
+  color: #e8faff;
+  text-shadow: 0 0 0.05em #333744;
+}
+.main-header {
+  background: linear-gradient(120deg, #9acfe0, #cbe6ef) !important;
+}
+
+.login {
+  background: linear-gradient(120deg, #9acfe0, #cbe6ef) !important;
 }
