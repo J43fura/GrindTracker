@@ -3,11 +3,18 @@
 if (!isset($_SESSION["id"])){
   header("location:index.php");
 }
+require_once('connection.php');
+$id = $_SESSION["id"];
+$sql = "SELECT username FROM register WHERE id = '$id'";
+$result = mysqli_query($conn,$sql);
+$value = mysqli_fetch_assoc($result);
+$username = $value["username"];
 ?>
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="script.js" defer></script>
+    <script src="profile.js" defer></script>
+    <script src="loader.js" defer></script>
     <script src="Adds/jquery-3.6.0.js"></script>
     <script src="Adds/chart.js"></script>
     <script src="Adds/chartjs-adapter-date-fns.bundle.min.js"></script>
@@ -31,9 +38,16 @@ if (!isset($_SESSION["id"])){
     <header id="RAS" class="main-header dark-h">
       <nav class="nav main-nav">
         <ul>
-          <li><a class="nav-elements" href="#RAS">Home</a></li>
-          <li><a class="nav-elements" href="logout.php">Logout</a></li>
           <li><a class="nav-elements" href="summary.php">Summary</a></li>
+          <li><a style="cursor: pointer;" class="nav-elements" id = "logout" >Logout</a></li>
+          <script>
+            var logoutBut = document.querySelector("#logout");
+            logoutBut.addEventListener("click", () => {
+            if(confirm("Do you really want to logout?")){
+              window.location.href = "logout.php";
+            }
+          });
+          </script>
           <li>
             <label class="switch">
               <input type="checkbox" id="darkmode" />
@@ -43,6 +57,8 @@ if (!isset($_SESSION["id"])){
         </ul>
       </nav>
       <h1 class="TitleGT TitleGT1 TitleGT1-d">GrindTracker</h1>
+      <h4 class="TitleGT TitleGT1 TitleGT1-d" style="font-size:4em; background-color: rgba(22, 22, 22,0.03);">Hello, <?=$username?></h4>
+
     </header>
 
 
@@ -160,6 +176,10 @@ if (!isset($_SESSION["id"])){
   $("#addbtn").on("click",function(e){
     e.preventDefault();
     const todoInput = document.querySelector(".todo-input");
+    if (todoInput.value.length>89){
+      alert("TODO max length is 89 characters.");
+      return;
+    }
     const timecalendar = document.getElementById("calendar").value;
     const task = $("#taskvalue").val();
     if (task !== ""){
@@ -185,7 +205,7 @@ if (!isset($_SESSION["id"])){
     //input disabled nzid nchallet leklem? + confirm alert
     $(document).on("click","#Complete",function(e){
     e.preventDefault();
-    const task = this.parentElement.querySelector("input").getAttribute("value");
+    const task = this.parentElement.querySelector("textarea").getAttribute("value");
     if(confirm("Do you want to complete " + task)){
     const timecalendar = this.parentElement.querySelector("#CompleteTime").getAttribute("placeholder");
     $.ajax({
@@ -206,7 +226,7 @@ if (!isset($_SESSION["id"])){
     //remove task
     $(document).on("click","#DeleteCompleted",function(e){
     e.preventDefault();
-    const task = this.parentElement.querySelector("input").getAttribute("value");
+    const task = this.parentElement.querySelector("textarea").getAttribute("value");
     if(confirm("Do you want to delete " + task)){
     const timecalendar = this.parentElement.querySelector("#CompleteTime").getAttribute("placeholder");
     $.ajax({

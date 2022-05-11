@@ -13,17 +13,20 @@ $username = $value["username"];
 
 date_default_timezone_set('UTC');
 $timenow = date("Y-m-d");
+$datenow=date_create($timenow);
 ?>
 <!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="script.js" defer></script>
+    <script src="loader.js" defer></script>
     <script src="Adds/chart.js"></script>
     <script src="Adds/chartjs-adapter-date-fns.bundle.min.js"></script> 
     <script src="Adds/jquery-3.6.0.js"></script>
     <script src="Adds/jspdf-1.3.4.js"></script>
+    
+
     
     <link rel="stylesheet" href="style.css" />
     <title>Summary</title>
@@ -36,7 +39,15 @@ $timenow = date("Y-m-d");
         <ul>
           <li><a class="nav-elements" href="profile.php">Home</a></li>
           <li><a class="nav-elements" href="#RASF1">🔻</a></li>
-          <li><a class="nav-elements" href="logout.php">Logout</a></li>
+          <li><a style="cursor: pointer;" class="nav-elements" id = "logout" >Logout</a></li>
+          <script>
+            var logoutBut = document.querySelector("#logout");
+            logoutBut.addEventListener("click", () => {
+            if(confirm("Do you really want to logout?")){
+              window.location.href = "logout.php";
+            }
+          });
+          </script>
         </ul>
       </nav>
       <h1 class="TitleGT TitleGT1 TitleGT1-d">GrindTracker</h1>
@@ -48,8 +59,13 @@ $timenow = date("Y-m-d");
         font-family: Kanit;
         src: url(Fonts/Kanit-Regular.ttf);
       }
+      @font-face {
+          font-family: Raleway;
+          src: url(Fonts/Raleway-VariableFont_wght.ttf);
+        }
       * {
-        font-family: Kanit;
+        font-family: Raleway;
+        color: rgb(22, 22, 22);
         margin: 0;
         padding: 0;
       }
@@ -69,6 +85,7 @@ $timenow = date("Y-m-d");
         font-weight: bold;
         color:#db0a40;
         text-shadow: 0 0 0.05em #db0a40;
+        font-family: Kanit;
      }
       
       .chartCard {
@@ -157,21 +174,31 @@ $timenow = date("Y-m-d");
 
 <!-- SUMMARY OF -->
   <div class="chartMenu">
-     <p>Summary of <?=$username?></p>
-     <p class="todosing"> TODOS </p>
+     <p><?=$username?>, WELCOME TO YOUR SUMMARY</p>
+     <p class="todosing"> GRAPHS </p>
+     <?php
+    $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
+    $result = mysqli_query($conn,$sql);
+    if (mysqli_num_rows($result)==0){
+      echo"<p class='todosing'>Empty.</p>"; 
+    }
+?>
     </div>
 
 
 <!-- Graphs -->
+
 <div class="chartMenu">
       <p>GRAPHS</p>
     </div>
 
 <body class="chartBody">
-
 <?php
-    $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
-    $result = mysqli_query($conn,$sql);
+
+    if (mysqli_num_rows($result)==0){
+      echo "<div class='todo-div'><p style='font-size: 1.3em; min-height: 20vh; ';>Empty.</p></div> ";
+    }
+      else{
     while($axe = mysqli_fetch_assoc($result)) {
       $axe = $axe['Field'];
  ?>
@@ -180,8 +207,8 @@ $timenow = date("Y-m-d");
     <div class="chartCard">
       <div class="chartBox">
         <canvas id="myChart<?=$axe?>"></canvas>
+        </div>
       </div>
-    </div>
 
 		<?php
       try{
@@ -200,7 +227,6 @@ $timenow = date("Y-m-d");
         } else{
           $dateArray = [];
           $valueArray = [];
-          echo "Empty.";
           }
         }
         catch(e){
@@ -260,7 +286,7 @@ $timenow = date("Y-m-d");
         config<?=$axe?>);
   </script>
 <?php
-  }
+  }}
 ?>
 <!-- TODOS -->
   <div id="lfeyda">
@@ -273,25 +299,44 @@ $timenow = date("Y-m-d");
         <?php
           $sql = "SELECT * from pr$id WHERE TODO IS NOT NULL ORDER BY PrDate";
           $result = mysqli_query($conn,$sql);
+          if (mysqli_num_rows($result)>0){
           while($row = mysqli_fetch_assoc($result)) {
+
+            $DueToDate=date_create($row['PrDate']);
+            $interval = date_diff($datenow, $DueToDate);
+            $intervalnum = $interval->format('%R%a');
               ?>
                   <li> 
-                  <p class="todosing"> <?= $row['TODO']?> </p>
+                    
                     <?php if ($row['Completed'] == TRUE){?>
-                      <input disabled type ="text" value="<?= $row['TODO']?> ";></input>
-                      <span class="todosing" type ="text">Completed:</span>
+                      <textarea disabled type ="text" class="dark-t1"><?= $row['TODO']?></textarea>
+                      <span class="todosing" type ="text">Completed /</span>
                     <?php }
                   else{ ?>
-                      <input readonly type ="text" value="<?= $row['TODO']?>";></input>
-                      <span class="todosing" type ="text">Not Completed:</span>
+                      <textarea readonly type ="text" ><?= $row['TODO']?> </textarea>
+                      <span class="todosing" type ="text">Not Completed /</span>
                   <?php } ?>
                   
-                  <smaller  id="CompleteTime" class="dark-t1" placeholder="<?= $row['PrDate']?>">&nbsp&nbsp due to: <?= $row['PrDate']?>.</smaller>
+                  <?php
+            if ($intervalnum<0){
+                ?>
+              <small  id="CompleteTime" class="dark-t1" placeholder="<?= $row['PrDate']?>" title="⚰️ due date is over, been <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>
+            <?php }
+            else if ($intervalnum==0){?> 
+              <small  id="CompleteTime" class="dark-t1" placeholder="<?= $row['PrDate']?>" title="🚨 due today!">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>            <?php }
+            else if ($intervalnum < 3){?> 
+              <small  id="CompleteTime" class="dark-t1" placeholder="<?= $row['PrDate']?>" title="⚠️ due to less than <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>            <?php }
+            else{?> 
+                <small  id="CompleteTime" class="dark-t1" placeholder="<?= $row['PrDate']?>" title="<?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>
+            <?php }?>
                   <small id="CreatedTime" class="dark-t1" placeholder="<?= $row['TODOADDED']?>">created: <?= $row['TODOADDED']?>.</small>
+                  <span class="todosing" type ="text"> \ due <?=$intervalnum?> days.</span>
                   </li>
       
               <?php
-      
+          }}
+          else{
+            echo "Empty.";
           }
         ?>
         </ul>
@@ -341,6 +386,11 @@ $timenow = date("Y-m-d");
     //DOWNLOAD PDF
     $("html").css("cursor", "progress");
     var doc = new jsPDF();
+    /*
+    doc.addFont("Fonts/Kanit-Regular.ttf", "Kanit", "normal");
+    doc.setFont("Kanit"); // set font
+    doc.setFontSize(10);
+*/
     doc.fromHTML($('.chartMenu').html(), 15, 15, {
           'width': 700,
           'elementHandlers': specialElementHandlers
@@ -359,11 +409,17 @@ $timenow = date("Y-m-d");
           var y= 40;
           doc.addPage();
         }
+        else if (i == (darke.length - 1)){
+          doc.addPage();
+        }
+      }
+      if (darke.length == 0){
+        doc.addPage();
       }
     } catch (e) {
       console.log(e);
     }
-      doc.addPage();
+    //doc.addPage();
       doc.fromHTML($('#lfeyda').html(), 15, 15, {
           'width': 700,
           'elementHandlers': specialElementHandlers
@@ -406,7 +462,7 @@ $timenow = date("Y-m-d");
           'width': 700,
           'elementHandlers': specialElementHandlers
       });
-		//DOWNLOAD PDF
+		//EMAIL PDF
     // Making Data URI
     var out = doc.output();
     var url = 'data:application/pdf;base64,' + btoa(out);

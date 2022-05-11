@@ -115,7 +115,12 @@ input:checked + .slider:before {
   font-family: Kanit;
   color: black;
   font-size: 2em;
+  text-shadow: 0.05em 0.05em #ffffff;
 }
+.section-header1 {
+  text-shadow: 0.05em 0.05em #3594b9;
+}
+
 .section-paragraph {
   font-size: 1.5em;
 }
@@ -361,13 +366,12 @@ input:focus {
 }
 
 .listing input {
-  width: 100px;
   height: 52px;
   font-size: 25px;
 }
-
-.listing input:focus {
-  width: 120px;
+.todo-form .listing input:focus {
+  width: 460px;
+  height: 58px !important;
 }
 
 #msg1 {
@@ -540,9 +544,11 @@ select {
 }
 small {
   font-size: 0.7em;
+  font-family: Kanit;
 }
 smaller {
   font-size: 0.5em;
+  font-family: Kanit;
 }
 #tasks .dark-var input:disabled {
   color: white;
@@ -574,4 +580,25 @@ smaller {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
   border-radius: 25px;
   padding: 50px;
+}
+
+#tasks li textarea {
+  width: 34vw !important;
+  cursor: default;
+}
+.listing textarea {
+  height: 52px;
+  font-size: 25px;
+}
+textarea {
+  border: 0;
+  background-color: none;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  border: 2px solid #3594b9;
+  padding: 14px 10px;
+  width: 370px;
+  outline: none;
+  border-radius: 24px;
 }

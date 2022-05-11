@@ -14,7 +14,8 @@ if (isset($_SESSION["id"])){
 <html>
   <head>
     <script src="Adds/jquery-3.6.0.js"></script>
-    <script src="script.js" defer></script>
+    <script src="index.js" defer></script>
+    <script src="loader.js" defer></script>
     <title weight="normal">GrindTracker 🔺</title>
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
