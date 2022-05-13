@@ -137,20 +137,42 @@ try{
     ctx.fillRect(0, 0, chart.width, chart.height);
     ctx.restore();
   }
-};
+};  
 
-    // setup 
-    const data = {
-      labels: dateChartJS,
-      datasets: [{
-        label: '<?= $axe ?>',
-        data: AxeArrayJS,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 3,
-		tension: 0.2
 
-      }]
+  // setup 
+
+  //hedhi background color bch nrodha kol chhar yetbaddel lounha bch youdh7ou lochhra
+  const backgroundcolor = [];
+  for (i=0; i < dateArrayJS.length; i++){
+      if (dateArrayJS[i][6] % 2 == 1){
+        backgroundcolor.push('rgba(255, 99, 132, 0.2)');
+      }
+      else{
+        backgroundcolor.push('rgba(99, 255, 132, 0.2)');
+      }
+    }
+
+  const up = (ctx, value) => ctx.p0.parsed.y < ctx.p1.parsed.y ? value:
+  undefined;
+  const down = (ctx, value) => ctx.p0.parsed.y > ctx.p1.parsed.y ? value:
+  undefined;
+
+
+  const data = {
+    labels: dateChartJS,
+    datasets: [{
+      label: '<?= $axe ?>',
+      data: AxeArrayJS,
+      borderColor: 'rgba(75, 192, 192, 0.6)',
+      borderWidth: 3,
+		  tension: 0.2,
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      segment:{
+        borderColor: ctx => up(ctx, 'rgba(75, 192, 75, 1)') || down(ctx, 'rgba(255, 99, 132, 1)') || 'rgba(75, 192, 192, 1)',
+      }
+
+    }]
     };
 
     // config 
