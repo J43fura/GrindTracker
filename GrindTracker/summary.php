@@ -170,6 +170,10 @@ $datenow=date_create($timenow);
       ctx.restore();
       }
     };
+      const up = (ctx, value) => ctx.p0.parsed.y < ctx.p1.parsed.y ? value:
+  undefined;
+  const down = (ctx, value) => ctx.p0.parsed.y > ctx.p1.parsed.y ? value:
+  undefined;
     </script>
 
 <!-- SUMMARY OF -->
@@ -202,7 +206,6 @@ $datenow=date_create($timenow);
     while($axe = mysqli_fetch_assoc($result)) {
       $axe = $axe['Field'];
  ?>
-
 
     <div class="chartCard">
       <div class="chartBox">
@@ -245,6 +248,8 @@ $datenow=date_create($timenow);
       })
 
       // setup 
+
+
       const data<?=$axe?> = {
         labels: dateChartJS<?=$axe?>,
         datasets: [{
@@ -253,7 +258,10 @@ $datenow=date_create($timenow);
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderColor: 'rgba(255, 99, 132, 1)',
           borderWidth: 3,
-      tension: 0.2
+      tension: 0.2,
+            segment:{
+        borderColor: ctx => up(ctx, 'rgba(75, 192, 75, 1)') || down(ctx, 'rgba(255, 99, 132, 1)') || 'rgba(75, 192, 192, 1)',
+      }
 
         }]
       };
@@ -386,11 +394,7 @@ $datenow=date_create($timenow);
     //DOWNLOAD PDF
     $("html").css("cursor", "progress");
     var doc = new jsPDF();
-    /*
-    doc.addFont("Fonts/Kanit-Regular.ttf", "Kanit", "normal");
-    doc.setFont("Kanit"); // set font
-    doc.setFontSize(10);
-*/
+
     doc.fromHTML($('.chartMenu').html(), 15, 15, {
           'width': 700,
           'elementHandlers': specialElementHandlers
@@ -403,7 +407,7 @@ $datenow=date_create($timenow);
         const CanvasID = darke[i].id;
         var canvas = document.getElementById(CanvasID);
         var dataURL = canvas.toDataURL("image/jpeg", 1.0);
-        doc.addImage(dataURL, 'JPEG', 12, y, 190, 95,'','FAST');
+        doc.addImage(dataURL, 'JPEG', 12, y, 190, 95,null,'FAST');
         var y = y+ 106;
         if (i % 2 != 0){
           var y= 40;
@@ -447,7 +451,7 @@ $datenow=date_create($timenow);
         const CanvasID = darke[i].id;
         var canvas = document.getElementById(CanvasID);
         var dataURL = canvas.toDataURL("image/jpeg", 1.0);
-        doc.addImage(dataURL, 'JPEG', 12, y, 190, 95,'','FAST');
+        doc.addImage(dataURL, 'JPEG', 12, y, 190, 95,null,'FAST');
         var y = y+ 106;
         if (i % 2 != 0){
           var y= 40;
