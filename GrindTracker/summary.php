@@ -457,11 +457,17 @@ $datenow=date_create($timenow);
           var y= 40;
           doc.addPage();
         }
+        else if (i == (darke.length - 1)){
+          doc.addPage();
+        }
+      }
+      if (darke.length == 0){
+        doc.addPage();
       }
     } catch (e) {
       console.log(e);
     }
-      doc.addPage();
+    //doc.addPage();
       doc.fromHTML($('#lfeyda').html(), 15, 15, {
           'width': 700,
           'elementHandlers': specialElementHandlers
