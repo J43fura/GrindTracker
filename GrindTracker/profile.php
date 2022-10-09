@@ -13,6 +13,7 @@ $username = $value["username"];
 <!DOCTYPE html>
 <html>
   <head>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <script src="profile.js" defer></script>
     <script src="loader.js" defer></script>
     <script src="Adds/jquery-3.6.0.js"></script>
@@ -21,7 +22,7 @@ $username = $value["username"];
     <title weight="normal">GrindTracker 🔺| Profile</title>
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=0.6" />
     <meta
       name="description"
       content="GrindTracker is a tool that let you keep track of your progress and
@@ -148,9 +149,10 @@ $username = $value["username"];
 
         <div class="select">
           <select name="todos" class="filter-todo">
-            <option value="all">All</option>
-            <option value="completed">Completed</option>
             <option value="uncompleted">Uncompleted</option>
+            <option value="completed">Completed</option>
+            <option value="all">All</option>
+            
           </select>
         </div>
       </form>
@@ -176,8 +178,8 @@ $username = $value["username"];
   $("#addbtn").on("click",function(e){
     e.preventDefault();
     const todoInput = document.querySelector(".todo-input");
-    if (todoInput.value.length>89){
-      alert("TODO max length is 89 characters.");
+    if (todoInput.value.length>247){
+      alert("TODO max length is 247 characters.");
       return;
     }
     const timecalendar = document.getElementById("calendar").value;

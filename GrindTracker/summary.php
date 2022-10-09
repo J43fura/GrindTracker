@@ -19,7 +19,7 @@ $datenow=date_create($timenow);
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=0.6">
     <script src="loader.js" defer></script>
     <script src="Adds/chart.js"></script>
     <script src="Adds/chartjs-adapter-date-fns.bundle.min.js"></script> 

@@ -19,7 +19,7 @@ if (isset($_SESSION["id"])){
     <title weight="normal">GrindTracker 🔺</title>
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=0.6" />
     <meta
       name="description"
       content="GrindTracker is a tool that let you keep track of your progress and
