@@ -1,10 +1,13 @@
-Connect to your data base in:
+### Connect to your data base in:
 connection.php
 
-Connect your mailer in:
+### Connect your mailer in:
 emailgraphGraph.php
+<br>
 emailSummary.php
+<br>
 register.php
 
-Safety:
+### Safety:
 Beware of SQL injections, fix before any public use.
+<hr>
