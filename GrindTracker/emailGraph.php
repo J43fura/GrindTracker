@@ -36,10 +36,11 @@ $mail->SMTPDebug = 3;
 $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth   = true;  
-$mail->Username = "aatrouss.mailing@gmail.com";
-$mail->Password = "yylvtgbvgwcbloax";
-$mail->SMTPSecure = "tls"; //ssl
-$mail->Port = 587;  //465; 
+//Put your Mailer here:
+$mail->Username = "<Email>";
+$mail->Password = "<Password>";
+$mail->SMTPSecure = "tls";
+$mail->Port = 587;
 
 $sql = "SELECT * FROM register WHERE id = '$id'";
 

@@ -273,7 +273,7 @@ input:focus {
   background: #2b2f3a !important;
 }
 
-/******************************* DARK:KMEL. ****************************************/
+/******************************* DARK ****************************************/
 .popup {
   display: none;
 }
@@ -444,7 +444,6 @@ input:focus {
   border: none;
 
   background: #ff6f47;
-  /* cant change color because of *{color}*/
   color: red !important;
   padding: 1rem;
   cursor: pointer;
@@ -554,7 +553,7 @@ smaller {
   color: white;
 }
 
-/*-------------------------todo list: KMEL.  --------------------------------*/
+/*-------------------------todo list--------------------------------*/
 
 #RASF {
   opacity: 0.7;

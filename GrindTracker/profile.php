@@ -13,7 +13,7 @@ $username = $value["username"];
 <!DOCTYPE html>
 <html>
   <head>
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" />
     <script src="profile.js" defer></script>
     <script src="loader.js" defer></script>
     <script src="Adds/jquery-3.6.0.js"></script>
@@ -59,16 +59,13 @@ $username = $value["username"];
       </nav>
       <h1 class="TitleGT TitleGT1 TitleGT1-d">GrindTracker</h1>
       <h4 class="TitleGT TitleGT1 TitleGT1-d" style="font-size:4em; background-color: rgba(22, 22, 22,0.03);">Hello, <?=$username?></h4>
-
     </header>
-
-
-    <!--load php maghyr refresh lel page; ajax?-->
+    
     <div class="vars">
       <ul class="listing">
 
       <?php
-      //charge vars:
+      //Charge vars:
       require_once('connection.php');
       $id = $_SESSION["id"];
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
@@ -100,7 +97,7 @@ $username = $value["username"];
     <div class="vars Settings">
       <ul id="listing" class="listing">
       <?php
-      //charge varssettings:
+      //Charge varssettings:
       require_once('connection.php');
       $id = $_SESSION["id"];
 
@@ -131,12 +128,9 @@ $username = $value["username"];
 
     <div class="calendar">
       <input type="date" value="today" id="calendar" name="calendar" required />
-      <!--http://jsfiddle.net/trixta/cc7Rt/-->
       <i id="timenow"></i>
     </div>
     <div class="todo-div">
-      <!--https://youtu.be/Ttf3CEsEwMQ-->
-
       <header class="todo-head">
         <h2 class="section-header dark-t">TODO:</h2>
       </header>
@@ -165,16 +159,15 @@ $username = $value["username"];
 
     <footer class="main-footer">
       <div class="container main-footer-container">
-        <!--<hr />-->
         <h3 class="TitleGT TitleGT2">GrindTracker</h3>
         <a href="#RAS" id="RASF">🔺</a>
       </div>
     </footer>
     <script>
      $(document).ready(function(){
-  //show tasks
+  //Show tasks
   loadTasks();
-  //ADD task
+  //Add task
   $("#addbtn").on("click",function(e){
     e.preventDefault();
     const todoInput = document.querySelector(".todo-input");
@@ -204,7 +197,6 @@ $username = $value["username"];
     });
   }});
     //Confirm task
-    //input disabled nzid nchallet leklem? + confirm alert
     $(document).on("click","#Complete",function(e){
     e.preventDefault();
     const task = this.parentElement.querySelector("textarea").getAttribute("value");
@@ -225,7 +217,7 @@ $username = $value["username"];
 }
     
   });
-    //remove task
+    //Remove task
     $(document).on("click","#DeleteCompleted",function(e){
     e.preventDefault();
     const task = this.parentElement.querySelector("textarea").getAttribute("value");

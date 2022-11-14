@@ -18,6 +18,7 @@ $datenow=date_create($timenow);
 <!doctype html>
 <html>
   <head>
+  <link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=0.6">
     <script src="loader.js" defer></script>
@@ -191,7 +192,6 @@ $datenow=date_create($timenow);
 
 
 <!-- Graphs -->
-
 <div class="chartMenu">
       <p>GRAPHS</p>
     </div>
@@ -238,8 +238,6 @@ $datenow=date_create($timenow);
         ?>
 
     <script>
-
-        /*/*/
       const dateArrayJS<?=$axe?> = <?= json_encode($dateArray); ?>;
       const AxeArrayJS<?=$axe?> = <?= json_encode($AxeArray); ?>;
       const dateChartJS<?=$axe?> = dateArrayJS<?=$axe?>.map((day, index) =>{
@@ -248,8 +246,6 @@ $datenow=date_create($timenow);
       })
 
       // setup 
-
-
       const data<?=$axe?> = {
         labels: dateChartJS<?=$axe?>,
         datasets: [{
@@ -265,7 +261,6 @@ $datenow=date_create($timenow);
 
         }]
       };
-      /*/*/
 
       // config
       const config<?=$axe?> = {
@@ -288,7 +283,6 @@ $datenow=date_create($timenow);
         }
       };
 
-      // render init block
       const myChart<?=$axe?> = new Chart(
         document.getElementById('myChart<?=$axe?>'),
         config<?=$axe?>);
@@ -423,13 +417,11 @@ $datenow=date_create($timenow);
     } catch (e) {
       console.log(e);
     }
-    //doc.addPage();
       doc.fromHTML($('#lfeyda').html(), 15, 15, {
           'width': 700,
           'elementHandlers': specialElementHandlers
       });
 		//DOWNLOAD PDF
-    //margins.left, // x coord   margins.top, { // y coord
     $("html").css("cursor", "default");
     doc.save('GrindTracker Summary <?= $username ?>.pdf');
     });
@@ -467,7 +459,6 @@ $datenow=date_create($timenow);
     } catch (e) {
       console.log(e);
     }
-    //doc.addPage();
       doc.fromHTML($('#lfeyda').html(), 15, 15, {
           'width': 700,
           'elementHandlers': specialElementHandlers
@@ -498,7 +489,6 @@ $datenow=date_create($timenow);
 
   <footer class="main-footer" id="RASF1">
       <div class="container main-footer-container">
-        <!--<hr />-->
         <h3 class="TitleGT TitleGT2">GrindTracker</h3>
         <a href="#RAS" id="RASF">🔺</a>
       </div>

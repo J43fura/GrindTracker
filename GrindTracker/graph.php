@@ -1,5 +1,4 @@
 <?php
-//https://stackoverflow.com/questions/38577556/sending-reporting-mail-with-chart
 session_start();
 require_once('connection.php');
 if (!isset($_POST['elemph'])){
@@ -12,8 +11,9 @@ $axe = $_POST['elemph'];
 <!doctype html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="Adds/chart.js"></script>
 	<script src="Adds/chartjs-adapter-date-fns.bundle.min.js"></script> 
   <script src="Adds/jquery-3.6.0.js"></script>
@@ -126,7 +126,7 @@ try{
 		return dayjs;
 	})
 
-  //background puglin
+  //background plugin
   const plugin = {
   id: 'custom_canvas_background_color',
   beforeDraw: (chart) => {
@@ -141,8 +141,6 @@ try{
 
 
   // setup 
-
-  //hedhi background color bch nrodha kol chhar yetbaddel lounha bch youdh7ou lochhra
   const backgroundcolor = [];
   for (i=0; i < dateArrayJS.length; i++){
       if (dateArrayJS[i][6] % 2 == 1){

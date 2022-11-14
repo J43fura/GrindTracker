@@ -20,13 +20,13 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 	$num = mysqli_num_rows($result);
 	if($num==1){
 		header("location:index.php?msg=usedusername");
-		exit(); /*SUS*/ 
+		exit();
 		}
 	else{
 
 		$specialChars = preg_match('@[^\w]@', $username);
 		if ($specialChars){
-			header("location:index.php?msg=charusername"); //username cant have characters
+			header("location:index.php?msg=charusername");
 			exit();
 		}
 
@@ -62,13 +62,14 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 		$mail->isSMTP();
 		$mail->Host = "smtp.gmail.com";
 		$mail->SMTPAuth   = true;  
-		$mail->Username = "aatrouss.mailing@gmail.com";
-		$mail->Password = "yylvtgbvgwcbloax";
-		$mail->SMTPSecure = "tls"; //ssl
-		$mail->Port = 587;  //465; 
+		//Put your Mailer here:
+		$mail->Username = "<Email>";
+		$mail->Password = "<Password>";
+		$mail->SMTPSecure = "tls";
+		$mail->Port = 587;
 			
 		//Email Settings
-		$mail->setFrom("aatrouss.mailing@gmail.com","GrindTracker");
+		$mail->setFrom("<Email>","GrindTracker");
 		$mail->addAddress("$email","$username");
 		
 		$mail->isHTML(true);
@@ -82,8 +83,6 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 		else{
 			echo "ERROR email was not sent.";
 		}
-
-		
 	}
 	else{
 		echo "Error: ". $sql ."". $conn->error;

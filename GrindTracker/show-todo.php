@@ -1,5 +1,4 @@
 <?php 
-
 session_start();
 require_once('connection.php');
 if (!isset($_POST["filtertodovalue"])){
@@ -55,18 +54,10 @@ $datenow=date_create($timenow);
             else{?> 
                 <small  id="CompleteTime" class="dark-t" placeholder="<?php echo $row['PrDate']?>" title="<?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?php echo $row['PrDate']?>.</small>
             <?php }?>
-
-
             <smaller id="CreatedTime" class="dark-t" placeholder="<?php echo $row['TODOADDED']?>">created: <?php echo $row['TODOADDED']?>.</smaller>
             </li>
 
         <?php
 
     }
-
-    
-
-
-
- 
 ?>

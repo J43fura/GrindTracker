@@ -4,9 +4,6 @@
 session_start();
 require_once('connection.php');
 $id = $_SESSION["id"];
-
-
-
 $axe = $_POST['elemph'];
 $elemvl = $_POST['elemvl'];
 $timecalendar = $_POST['timecalendar'];

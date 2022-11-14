@@ -6,11 +6,6 @@ $task = $_POST['task'];
 $timecalendar = $_POST['timecalendar'];
 date_default_timezone_set('UTC');
 $timenow = date("Y-m-d");
-
-
-
-
-
 if (!isset($_POST['delete'])){
     $sql = "SELECT * FROM pr$id WHERE TODO='$task' AND PrDate='$timecalendar'";
 	$result = mysqli_query($conn,$sql);

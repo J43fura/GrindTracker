@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once('connection.php');
-$username = $_POST['username']; //filter_input(INPUT_POST, 'username');
-$password = $_POST['password']; //filter_input(INPUT_POST, 'password');
+$username = $_POST['username'];
+$password = $_POST['password'];
 
 if (!empty($username) && !empty($password) ){
     $sql = "SELECT password FROM register WHERE username='$username'";
@@ -39,13 +39,11 @@ if (!empty($username) && !empty($password) ){
             exit();
         }
 }
-//echo "<script>document.getElementById('msg1').innerHTML = '⛔ The username or password is incorrect.'; </script>";
 header("location:index.php?msg=incorrect");
     $conn->close();
 }
 else{
     header("location:index.php");
-    //header("location:index.html/<script>document.getElementById('error').innerHTML = 'The username or password is incorrect.'; </script>");
 }
 ?>
 

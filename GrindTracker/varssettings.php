@@ -23,7 +23,7 @@ else if(empty($axe)){
 	$sql = "SHOW COLUMNS FROM pr$id WHERE field = '$axejdid'";
 	$result = mysqli_query($conn,$sql);
 	if (mysqli_num_rows($result)==0){
-		$sql = "ALTER TABLE pr$id ADD $axejdid float"; // tnjm tsir SQL injection lennas
+		$sql = "ALTER TABLE pr$id ADD $axejdid float"; //SQL injection could be used. BEWARY.
 		$result = mysqli_query($conn, $sql);
 	}
 	else{

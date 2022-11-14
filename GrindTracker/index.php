@@ -1,18 +1,14 @@
 <?php 
-// double password; password compositions, email API, email reminder fel todo, BMI, toul fel register?; welcome 'username' message; 
-//summary button tab3th el graphs lkol lel email ++tlinki vars mb3dhom yjiboulk graph we7ed b checkbox
-
-// tincludeha marra f lheader lkol lezm dhhrli //Notice: session_start(): Ignoring session_start() because a session is already active in ????
- session_start();
+session_start();
 if (isset($_SESSION["id"])){
   header("location:profile.php");
 }
 ?>
 
-
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" />
     <script src="Adds/jquery-3.6.0.js"></script>
     <script src="index.js" defer></script>
     <script src="loader.js" defer></script>
@@ -26,6 +22,7 @@ if (isset($_SESSION["id"])){
     visualise them to better grind your way up reaching your desired
     goals."
     />
+    
   </head>
   <body>
   <div class="loader1" id="loader"></div>
@@ -44,7 +41,6 @@ if (isset($_SESSION["id"])){
           </li>
         </ul>
       </nav>
-      <!--<hr /> -->
       
 
       
@@ -52,7 +48,6 @@ if (isset($_SESSION["id"])){
     </header>
 
     <section class="content-section container login" id="Login">
-      <!--<hr /> -->
       <h2 class="section-header dark-t-w">LOGIN</h2>
       <form
         class="section-paragraph"
@@ -186,16 +181,12 @@ if (isset($_SESSION["id"])){
 
     <div class="div-about">
       <section class="content-section container about" id="About">
-        <!--<hr /> -->
-
         <h2 class="section-header dark-t">About:</h2>
-
         <p class="section-paragraph dark-t">
           GrindTracker is a tool that let you keep track of your progress and
           visualise them to better grind your way up reaching your desired
           goals.
         </p>
-
         <img class="ImageGrind" src="Images/Grind.png" />
         <p class="section-paragraph dark-t">
           GRIND > is a term that refers to persevering when doing something
@@ -208,7 +199,6 @@ if (isset($_SESSION["id"])){
 
     <footer class="main-footer">
       <div class="container main-footer-container">
-        <!--<hr />-->
         <h3 class="TitleGT TitleGT2">GrindTracker</h3>
         <a href="#RAS">🔺</a>
       </div>

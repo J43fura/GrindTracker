@@ -1,10 +1,5 @@
-/**********************************::::matensech el darkmode lel todo */
-
 document.getElementById("calendar").valueAsDate = new Date();
 const NowDate = document.getElementById("calendar").valueAsDate;
-
-// ("yyyy-MM-dd")> console.log(newLocal.toISOString().slice(0, 10));
-
 function DisplaySettings() {
   if (document.querySelector(".Settings").style.display != "block") {
     //vars > settings
@@ -202,23 +197,6 @@ function GRAPHvar(t) {
   } catch (e) {
     console.log(e);
   }
-  //PHP SQL
-  /*
-    $.ajax({
-      url: "graph.php",
-      type: "POST",
-      data: { elemph: elemph },
-      success: function (line_graph) {
-        $("divGraph").html(line_graph);
-        $("#graph").chart = new Chart(
-          $("#graph"),
-          $("#graph").data("settings")
-        );
-      },
-    });
-  } catch (e) {
-    console.log(e);
-  }*/
 }
 
 var filtertodo = document.querySelector(".filter-todo");
