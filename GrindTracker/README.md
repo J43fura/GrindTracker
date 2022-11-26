@@ -1,3 +1,6 @@
+### Import the data base in:
+Adds/grindtracker.sql
+
 ### Connect to your data base in:
 connection.php
 
