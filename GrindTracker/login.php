@@ -27,7 +27,7 @@ if (!empty($username) && !empty($password) ){
                 $_SESSION["id"] = $id;
                 try{
                     unset($_SESSION["username"]);}
-                catch(e){
+                catch(Error $e){
 
                 }
                 header("location:profile.php");
