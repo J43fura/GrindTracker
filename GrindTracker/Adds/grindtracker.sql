@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `grindtracker`
 --
+CREATE DATABASE grindtracker;
+USE grindtracker;
+
 
 -- --------------------------------------------------------
 
