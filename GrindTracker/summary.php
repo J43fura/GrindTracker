@@ -22,10 +22,10 @@ $datenow=date_create($timenow);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=0.6">
     <script src="loader.js" defer></script>
-    <script src="Adds/chart.js"></script>
-    <script src="Adds/chartjs-adapter-date-fns.bundle.min.js"></script> 
-    <script src="Adds/jquery-3.6.0.js"></script>
-    <script src="Adds/jspdf-1.3.4.js"></script>
+    <script src="Addons/chart.js"></script>
+    <script src="Addons/chartjs-adapter-date-fns.bundle.min.js"></script> 
+    <script src="Addons/jquery-3.6.0.js"></script>
+    <script src="Addons/jspdf-1.3.4.js"></script>
     
 
     

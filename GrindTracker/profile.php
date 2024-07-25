@@ -16,9 +16,9 @@ $username = $value["username"];
   <link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" />
     <script src="profile.js" defer></script>
     <script src="loader.js" defer></script>
-    <script src="Adds/jquery-3.6.0.js"></script>
-    <script src="Adds/chart.js"></script>
-    <script src="Adds/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="Addons/jquery-3.6.0.js"></script>
+    <script src="Addons/chart.js"></script>
+    <script src="Addons/chartjs-adapter-date-fns.bundle.min.js"></script>
     <title weight="normal">GrindTracker 🔺| Profile</title>
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />

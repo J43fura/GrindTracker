@@ -9,7 +9,7 @@ if (isset($_SESSION["id"])){
 <html>
   <head>
     <link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" />
-    <script src="Adds/jquery-3.6.0.js"></script>
+    <script src="Addons/jquery-3.6.0.js"></script>
     <script src="index.js" defer></script>
     <script src="loader.js" defer></script>
     <title weight="normal">GrindTracker 🔺</title>
