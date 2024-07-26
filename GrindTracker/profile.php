@@ -6,7 +6,7 @@ if (!isset($_SESSION["id"])){
 require_once('connection.php');
 $id = $_SESSION["id"];
 $sql = "SELECT username FROM register WHERE id = '$id'";
-$result = mysqli_query($conn,$sql);
+$result = $conn->query($sql);
 $value = mysqli_fetch_assoc($result);
 $username = $value["username"];
 ?>
@@ -16,9 +16,9 @@ $username = $value["username"];
   <link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" />
     <script src="profile.js" defer></script>
     <script src="loader.js" defer></script>
-    <script src="Adds/jquery-3.6.0.js"></script>
-    <script src="Adds/chart.js"></script>
-    <script src="Adds/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="Addons/jquery-3.6.0.js"></script>
+    <script src="Addons/chart.js"></script>
+    <script src="Addons/chartjs-adapter-date-fns.bundle.min.js"></script>
     <title weight="normal">GrindTracker 🔺| Profile</title>
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
@@ -69,7 +69,7 @@ $username = $value["username"];
       require_once('connection.php');
       $id = $_SESSION["id"];
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
-      $result = mysqli_query($conn,$sql);
+      $result = $conn->query($sql);
       if (mysqli_num_rows($result)>0){
         while ($row=mysqli_fetch_assoc($result)){
           ?>
@@ -103,7 +103,7 @@ $username = $value["username"];
 
 
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
-      $result = mysqli_query($conn,$sql);
+      $result = $conn->query($sql);
       if (mysqli_num_rows($result)>0){
         while ($row=mysqli_fetch_assoc($result)){
           ?>

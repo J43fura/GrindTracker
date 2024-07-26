@@ -14,9 +14,9 @@ $axe = $_POST['elemph'];
   <link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="Adds/chart.js"></script>
-	<script src="Adds/chartjs-adapter-date-fns.bundle.min.js"></script> 
-  <script src="Adds/jquery-3.6.0.js"></script>
+	<script src="Addons/chart.js"></script>
+	<script src="Addons/chartjs-adapter-date-fns.bundle.min.js"></script> 
+  <script src="Addons/jquery-3.6.0.js"></script>
   <link rel="stylesheet" href="style.css" />
     <title><?= $axe ?></title>
     <style>
@@ -98,7 +98,7 @@ $axe = $_POST['elemph'];
 		<?php
 try{
 	$sql = "SELECT PrDate,$axe FROM pr$id WHERE $axe IS NOT NULL ORDER BY PrDate";
-	$result = mysqli_query($conn,$sql);
+	$result = $conn->query($sql);
 	$num = mysqli_num_rows($result);
 	  if($num>0){
 		$dateArray = [];

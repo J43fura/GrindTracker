@@ -3,9 +3,9 @@ session_start();
 require_once('connection.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require_once "Adds/PHPMailer/PHPmailer.php";
-require_once "Adds/PHPMailer/SMTP.php";
-require_once "Adds/PHPMailer/Exception.php";
+require_once "Addons/PHPMailer/PHPmailer.php";
+require_once "Addons/PHPMailer/SMTP.php";
+require_once "Addons/PHPMailer/Exception.php";
 
 $username = filter_input(INPUT_POST, 'username');
 $password = filter_input(INPUT_POST, 'password');
@@ -16,7 +16,7 @@ $passwordC = filter_input(INPUT_POST, 'passwordC');
 
 if (!empty($username) && !empty($password) && !empty($gender)){
 	$sql = "SELECT * FROM register WHERE username ='$username'";
-	$result = mysqli_query($conn,$sql);
+	$result = $conn->query($sql);
 	$num = mysqli_num_rows($result);
 	if($num==1){
 		header("location:index.php?msg=usedusername");
@@ -49,11 +49,14 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 
 	if ($conn->query($sql)){
 		$sql = "SELECT id FROM register WHERE username = '$username'";
-		$result = mysqli_query($conn,$sql);
+		$result = $conn->query($sql);
 		$value = mysqli_fetch_assoc($result);
 		$id = $value["id"];
-		$sql = "CREATE TABLE pr$id (PrDate DATE,TODOADDED DATE DEFAULT CURRENT_TIMESTAMP, TODO varchar(124), Completed boolean)";
+		$sql = "CREATE TABLE pr$id (PrDate DATE,TODOADDED TIMESTAMP DEFAULT CURRENT_TIMESTAMP, TODO varchar(124), Completed boolean)";
 		$conn->query($sql);
+
+		$mailerUsername = "<Email>";
+		$mailerPassword = "<Password>";
 
 		$mail = new PHPMailer();
 		
@@ -63,13 +66,13 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 		$mail->Host = "smtp.gmail.com";
 		$mail->SMTPAuth   = true;  
 		//Put your Mailer here:
-		$mail->Username = "<Email>";
-		$mail->Password = "<Password>";
+		$mail->Username = $mailerUsername;
+		$mail->Password = $mailerPassword;
 		$mail->SMTPSecure = "tls";
 		$mail->Port = 587;
 			
 		//Email Settings
-		$mail->setFrom("<Email>","GrindTracker");
+		$mail->setFrom($mailerUsername,"GrindTracker");
 		$mail->addAddress("$email","$username");
 		
 		$mail->isHTML(true);

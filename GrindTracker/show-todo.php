@@ -22,7 +22,7 @@ $datenow=date_create($timenow);
 
     }
 
-    $result = mysqli_query($conn,$sql);
+    $result = $conn->query($sql);
     while($row = mysqli_fetch_assoc($result)) {
         $DueToDate=date_create($row['PrDate']);
         $interval = date_diff($datenow, $DueToDate);

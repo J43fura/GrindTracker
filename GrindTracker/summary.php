@@ -7,7 +7,7 @@ require_once('connection.php');
 $id = $_SESSION["id"];
 
 $sql = "SELECT username FROM register WHERE id = '$id'";
-$result = mysqli_query($conn,$sql);
+$result = $conn->query($sql);
 $value = mysqli_fetch_assoc($result);
 $username = $value["username"];
 
@@ -22,10 +22,10 @@ $datenow=date_create($timenow);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=0.6">
     <script src="loader.js" defer></script>
-    <script src="Adds/chart.js"></script>
-    <script src="Adds/chartjs-adapter-date-fns.bundle.min.js"></script> 
-    <script src="Adds/jquery-3.6.0.js"></script>
-    <script src="Adds/jspdf-1.3.4.js"></script>
+    <script src="Addons/chart.js"></script>
+    <script src="Addons/chartjs-adapter-date-fns.bundle.min.js"></script> 
+    <script src="Addons/jquery-3.6.0.js"></script>
+    <script src="Addons/jspdf-1.3.4.js"></script>
     
 
     
@@ -183,7 +183,7 @@ $datenow=date_create($timenow);
      <p class="todosing"> GRAPHS </p>
      <?php
     $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
-    $result = mysqli_query($conn,$sql);
+    $result = $conn->query($sql);
     if (mysqli_num_rows($result)==0){
       echo"<p class='todosing'>Empty.</p>"; 
     }
@@ -300,7 +300,7 @@ $datenow=date_create($timenow);
 
         <?php
           $sql = "SELECT * from pr$id WHERE TODO IS NOT NULL ORDER BY PrDate";
-          $result = mysqli_query($conn,$sql);
+          $result = $conn->query($sql);
           if (mysqli_num_rows($result)>0){
           while($row = mysqli_fetch_assoc($result)) {
 
