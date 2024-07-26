@@ -98,7 +98,7 @@ $axe = $_POST['elemph'];
 		<?php
 try{
 	$sql = "SELECT PrDate,$axe FROM pr$id WHERE $axe IS NOT NULL ORDER BY PrDate";
-	$result = mysqli_query($conn,$sql);
+	$result = $conn->query($sql);
 	$num = mysqli_num_rows($result);
 	  if($num>0){
 		$dateArray = [];

@@ -16,7 +16,7 @@ $passwordC = filter_input(INPUT_POST, 'passwordC');
 
 if (!empty($username) && !empty($password) && !empty($gender)){
 	$sql = "SELECT * FROM register WHERE username ='$username'";
-	$result = mysqli_query($conn,$sql);
+	$result = $conn->query($sql);
 	$num = mysqli_num_rows($result);
 	if($num==1){
 		header("location:index.php?msg=usedusername");
@@ -49,7 +49,7 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 
 	if ($conn->query($sql)){
 		$sql = "SELECT id FROM register WHERE username = '$username'";
-		$result = mysqli_query($conn,$sql);
+		$result = $conn->query($sql);
 		$value = mysqli_fetch_assoc($result);
 		$id = $value["id"];
 		$sql = "CREATE TABLE pr$id (PrDate DATE,TODOADDED TIMESTAMP DEFAULT CURRENT_TIMESTAMP, TODO varchar(124), Completed boolean)";

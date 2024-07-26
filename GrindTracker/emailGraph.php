@@ -19,11 +19,11 @@ $data = base64_decode($img);
 
 $sql = "SELECT * FROM register WHERE id = '$id'";
 
-$result = mysqli_query($conn,$sql);
+$result = $conn->query($sql);
 $value = mysqli_fetch_assoc($result);
 $username = $value["username"];
 
-$result = mysqli_query($conn,$sql);
+$result = $conn->query($sql);
 $value = mysqli_fetch_assoc($result);
 $email = $value["email"];
 

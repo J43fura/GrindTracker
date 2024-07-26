@@ -67,22 +67,22 @@ if (isset($_SESSION["id"])){
         <div id="msg1"></div>
         <?php
             if (isset($_GET["msg"])){
-              if ($_GET["msg"] == "incorrect"){
+              if ($_GET["msg"] == "login_error"){
               echo "<script>document.getElementById('msg1').innerHTML = '⛔ The username or password is incorrect.'; </script>";
             }
-            else if($_GET["msg"] == "veriferr"){
+            else if($_GET["msg"] == "verification_error"){
               echo "<script>document.getElementById('msg1').innerHTML = 'The verification code is wrong.'; </script>";
             }}
               ?>
         <button class="button" role="submit" id="btnLogin">Log In</button>
-        <button type="button" class="button signup" onclick="togglePopup()">
+        <button type="button" class="button signup" onclick="togglePopupSignUp()">
           Sign Up
         </button>
       </form>
     </section>
 
     <section class="content-section container login popup" id="popup-1">
-      <button class="button btnx" onclick="togglePopup()">&times;</button>
+      <button class="button btnx" onclick="togglePopupSignUp()">&times;</button>
       <h2 class="section-header dark-t-w">Sign Up</h2>
       <form
         class="section-paragraph"
@@ -152,7 +152,7 @@ if (isset($_SESSION["id"])){
     </section>
 
     <section class="content-section container login popup" id="popup-Ver">
-    <button class="button btnx" onclick="togglePopupVer()">&times;</button>
+    <button class="button btnx" onclick="togglePopupVerif()">&times;</button>
       <h2 class="section-header dark-t-w">Email Verification</h2>
       <form
         class="section-paragraph"

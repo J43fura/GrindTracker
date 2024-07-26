@@ -9,7 +9,7 @@ $elemvl = $_POST['elemvl'];
 $timecalendar = $_POST['timecalendar'];
 
 $sql="SELECT $axe FROM pr$id WHERE PrDate= '$timecalendar'";
-$result = mysqli_query($conn,$sql);
+$result = $conn->query($sql);
 $num = mysqli_num_rows($result);
 
 if($num==0)
@@ -18,7 +18,7 @@ else{
     $sql="UPDATE pr$id SET $axe = $elemvl where PrDate= '$timecalendar'";
 }
 
-$result = mysqli_query($conn, $sql);
+$result = $conn->query($sql);
 
 if ($result) {
     echo 1;

@@ -10,21 +10,21 @@ if(isset($_POST['elemph'])){
 	if(!empty($axejdid)){
 	/*RENAME*/
 	$sql ="ALTER TABLE pr$id CHANGE $axe $axejdid float NULL DEFAULT NULL";
-	$result = mysqli_query($conn, $sql);
+	$result = $conn->query($sql);
 }
 else if(empty($axejdid)){
 	/*DELETE*/
 	$sql = "ALTER TABLE pr$id DROP $axe";
-	$result = mysqli_query($conn, $sql);
+	$result = $conn->query($sql);
 }
 }
 else if(empty($axe)){
 	/*ADD*/
 	$sql = "SHOW COLUMNS FROM pr$id WHERE field = '$axejdid'";
-	$result = mysqli_query($conn,$sql);
+	$result = $conn->query($sql);
 	if (mysqli_num_rows($result)==0){
 		$sql = "ALTER TABLE pr$id ADD $axejdid float"; //SQL injection could be used. BEWARY.
-		$result = mysqli_query($conn, $sql);
+		$result = $conn->query($sql);
 	}
 	else{
 		echo 2;
