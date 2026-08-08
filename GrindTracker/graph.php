@@ -111,9 +111,10 @@ try{
 		echo "Empty.";
 	  }
 	}
-	catch(e){
-	  die("ERROR");
-	}
+        catch(e){
+          error_log("Error in graph.php: " . $e->getMessage());
+          die("ERROR");
+        }
  ?>
       </div>
     </div>

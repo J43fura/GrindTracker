@@ -229,11 +229,12 @@ $datenow=date_create($timenow);
 
         } else{
           $dateArray = [];
-          $valueArray = [];
-          }
+          $AxeArray = [];
         }
-        catch(e){
-          die("ERROR");
+        }
+        catch (Throwable $e) {
+          error_log("Error in summary.php: " . $e->getMessage());
+          die("Internal Server Error");
         }
         ?>
 

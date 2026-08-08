@@ -4,9 +4,9 @@
 session_start();
 require_once('connection.php');
 $id = $_SESSION["id"];
-$axe = $_POST['elemph'];
-$elemvl = $_POST['elemvl'];
-$timecalendar = $_POST['timecalendar'];
+$axe = mysqli_real_escape_string($conn, $_POST['elemph']);
+$elemvl = mysqli_real_escape_string($conn, $_POST['elemvl']);
+$timecalendar = mysqli_real_escape_string($conn, $_POST['timecalendar']);
 
 $sql="SELECT $axe FROM pr$id WHERE PrDate= '$timecalendar'";
 $result = $conn->query($sql);
