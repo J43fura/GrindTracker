@@ -127,7 +127,7 @@ $username = $value["username"];
     </div>
 
     <div class="calendar">
-      <input type="date" value="today" id="calendar" name="calendar" required />
+      <input type="date" value="<?= date('Y-m-d') ?>" id="calendar" name="calendar" required />
       <i id="timenow"></i>
     </div>
     <div class="todo-div">
