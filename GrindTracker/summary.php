@@ -390,16 +390,16 @@ $datenow=date_create($timenow);
                   <?php
             if ($intervalnum<0){
                 ?>
-              <small  id="CompleteTime" class="dark-t1" placeholder="<?= $row['PrDate']?>" title="⚰️ due date is over, been <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>
+              <small  class="complete-time dark-t1" placeholder="<?= $row['PrDate']?>" title="⚰️ due date is over, been <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>
             <?php }
             else if ($intervalnum==0){?> 
-              <small  id="CompleteTime" class="dark-t1" placeholder="<?= $row['PrDate']?>" title="🚨 due today!">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>            <?php }
+              <small  class="complete-time dark-t1" placeholder="<?= $row['PrDate']?>" title="🚨 due today!">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>            <?php }
             else if ($intervalnum < 3){?> 
-              <small  id="CompleteTime" class="dark-t1" placeholder="<?= $row['PrDate']?>" title="⚠️ due to less than <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>            <?php }
+              <small  class="complete-time dark-t1" placeholder="<?= $row['PrDate']?>" title="⚠️ due to less than <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>            <?php }
             else{?> 
-                <small  id="CompleteTime" class="dark-t1" placeholder="<?= $row['PrDate']?>" title="<?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>
+                <small  class="complete-time dark-t1" placeholder="<?= $row['PrDate']?>" title="<?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>
             <?php }?>
-                  <small id="CreatedTime" class="dark-t1" placeholder="<?= $row['TODOADDED']?>">created: <?= $row['TODOADDED']?>.</small>
+                  <small class="created-time dark-t1" placeholder="<?= $row['TODOADDED']?>">created: <?= $row['TODOADDED']?>.</small>
                   <span class="todosing" type ="text"> \ due <?=$intervalnum?> days.</span>
                   </li>
       

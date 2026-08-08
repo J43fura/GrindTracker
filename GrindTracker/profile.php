@@ -201,7 +201,7 @@ $username = $value["username"];
     e.preventDefault();
     const task = this.parentElement.querySelector("textarea").getAttribute("value");
     if(confirm("Do you want to complete " + task)){
-    const timecalendar = this.parentElement.querySelector("#CompleteTime").getAttribute("placeholder");
+    const timecalendar = this.parentElement.querySelector(".complete-time").getAttribute("placeholder");
     $.ajax({
       url:"varstodo.php",
       type:"POST",
@@ -222,7 +222,7 @@ $username = $value["username"];
     e.preventDefault();
     const task = this.parentElement.querySelector("textarea").getAttribute("value");
     if(confirm("Do you want to delete " + task)){
-    const timecalendar = this.parentElement.querySelector("#CompleteTime").getAttribute("placeholder");
+    const timecalendar = this.parentElement.querySelector(".complete-time").getAttribute("placeholder");
     $.ajax({
       url:"varstodo.php",
       type:"POST",

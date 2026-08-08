@@ -43,18 +43,18 @@ $datenow=date_create($timenow);
             <?php
             if ($intervalnum<0){
                 ?>
-            <small  id="CompleteTime" class="dark-t" placeholder="<?php echo $row['PrDate']?>" title="⚰️ due date is over, been <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?php echo $row['PrDate']?>. ⚰️</small>
+            <small  class="complete-time dark-t" placeholder="<?php echo $row['PrDate']?>" title="⚰️ due date is over, been <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?php echo $row['PrDate']?>. ⚰️</small>
             <?php }
             else if ($intervalnum==0){?> 
-            <small  id="CompleteTime" class="dark-t" placeholder="<?php echo $row['PrDate']?>" title="🚨 due today!">&nbsp&nbsp due to: <?php echo $row['PrDate']?>. 🚨</small>
+            <small  class="complete-time dark-t" placeholder="<?php echo $row['PrDate']?>" title="🚨 due today!">&nbsp&nbsp due to: <?php echo $row['PrDate']?>. 🚨</small>
             <?php }
             else if ($intervalnum < 3){?> 
-                <small  id="CompleteTime" class="dark-t" placeholder="<?php echo $row['PrDate']?>" title="⚠️ due to less than <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?php echo $row['PrDate']?>. ⚠️</small>
+                <small  class="complete-time dark-t" placeholder="<?php echo $row['PrDate']?>" title="⚠️ due to less than <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?php echo $row['PrDate']?>. ⚠️</small>
             <?php }
             else{?> 
-                <small  id="CompleteTime" class="dark-t" placeholder="<?php echo $row['PrDate']?>" title="<?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?php echo $row['PrDate']?>.</small>
+                <small  class="complete-time dark-t" placeholder="<?php echo $row['PrDate']?>" title="<?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?php echo $row['PrDate']?>.</small>
             <?php }?>
-            <smaller id="CreatedTime" class="dark-t" placeholder="<?php echo $row['TODOADDED']?>">created: <?php echo $row['TODOADDED']?>.</smaller>
+            <small class="created-time dark-t" placeholder="<?php echo $row['TODOADDED']?>">created: <?php echo $row['TODOADDED']?>.</small>
             </li>
 
         <?php
