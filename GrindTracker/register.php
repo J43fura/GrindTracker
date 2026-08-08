@@ -13,6 +13,10 @@ $gender = filter_input(INPUT_POST, 'gender');
 $email = filter_input(INPUT_POST, 'email');
 $passwordC = filter_input(INPUT_POST, 'passwordC');
 
+$username = $conn->real_escape_string($username);
+$email = $conn->real_escape_string($email);
+$gender = $conn->real_escape_string($gender);
+
 
 if (!empty($username) && !empty($password) && !empty($gender)){
 	$sql = "SELECT * FROM register WHERE username ='$username'";

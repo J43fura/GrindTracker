@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('connection.php');
-$id = $_SESSION["id"];
+$id = (int)$_SESSION["id"];
 $axejdid = isset($_POST['elemvl']) ? $_POST['elemvl'] : '';
 
 

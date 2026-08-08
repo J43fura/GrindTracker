@@ -1,9 +1,9 @@
 <?php 
 session_start();
 require_once('connection.php');
-$id = $_SESSION["id"];
-$task = $_POST['task'];
-$timecalendar = $_POST['timecalendar'];
+$id = (int)$_SESSION["id"];
+$task = mysqli_real_escape_string($conn, $_POST['task']);
+$timecalendar = mysqli_real_escape_string($conn, $_POST['timecalendar']);
 date_default_timezone_set('UTC');
 $timenow = date("Y-m-d");
 if (!isset($_POST['delete'])){

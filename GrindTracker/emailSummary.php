@@ -9,7 +9,7 @@ require_once "Addons/PHPMailer/SMTP.php";
 require_once "Addons/PHPMailer/Exception.php";
 
 
-$id = $_SESSION["id"];
+$id = (int)$_SESSION["id"];
 $doc = $_POST['doc'];
 
 $data = trim( str_replace( 'data:application/pdf;base64,', '', $doc ) );

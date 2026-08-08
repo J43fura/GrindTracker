@@ -4,7 +4,7 @@ if (!isset($_SESSION["id"])){
   header("location:index.php");
 }
 require_once('connection.php');
-$id = $_SESSION["id"];
+$id = (int)$_SESSION["id"];
 
 $sql = "SELECT username FROM register WHERE id = '$id'";
 $result = $conn->query($sql);

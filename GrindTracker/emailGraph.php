@@ -9,7 +9,7 @@ require_once "Addons/PHPMailer/SMTP.php";
 require_once "Addons/PHPMailer/Exception.php";
 
 
-$id = $_SESSION["id"];
+$id = (int)$_SESSION["id"];
 $axe = $_POST['axe'];
 $img = $_POST['img'];
 $img = str_replace('data:image/jpeg;base64,', '', $img);

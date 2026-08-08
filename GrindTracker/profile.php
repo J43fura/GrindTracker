@@ -4,7 +4,7 @@ if (!isset($_SESSION["id"])){
   header("location:index.php");
 }
 require_once('connection.php');
-$id = $_SESSION["id"];
+$id = (int)$_SESSION["id"];
 $sql = "SELECT username FROM register WHERE id = '$id'";
 $result = $conn->query($sql);
 $value = mysqli_fetch_assoc($result);
@@ -67,7 +67,7 @@ $username = $value["username"];
       <?php
       //Charge vars:
       require_once('connection.php');
-      $id = $_SESSION["id"];
+      $id = (int)$_SESSION["id"];
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
       $result = $conn->query($sql);
       if (mysqli_num_rows($result)>0){
@@ -99,7 +99,7 @@ $username = $value["username"];
       <?php
       //Charge varssettings:
       require_once('connection.php');
-      $id = $_SESSION["id"];
+      $id = (int)$_SESSION["id"];
 
 
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";

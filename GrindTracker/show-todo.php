@@ -4,7 +4,7 @@ require_once('connection.php');
 if (!isset($_POST["filtertodovalue"])){
     header("location:index.php");
   }
-$id = $_SESSION["id"];
+$id = (int)$_SESSION["id"];
 $v = $_POST["filtertodovalue"];
 date_default_timezone_set('UTC');
 $timenow = date("Y-m-d");

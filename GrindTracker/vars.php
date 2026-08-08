@@ -3,7 +3,7 @@
 
 session_start();
 require_once('connection.php');
-$id = $_SESSION["id"];
+$id = (int)$_SESSION["id"];
 $axe = mysqli_real_escape_string($conn, $_POST['elemph']);
 $elemvl = mysqli_real_escape_string($conn, $_POST['elemvl']);
 $timecalendar = mysqli_real_escape_string($conn, $_POST['timecalendar']);

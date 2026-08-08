@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('connection.php');
-$username = $_POST['username'];
+$username = mysqli_real_escape_string($conn, $_POST['username']);
 $password = $_POST['password'];
 
 if (!empty($username) && !empty($password) ){
