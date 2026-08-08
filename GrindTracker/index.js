@@ -1,9 +1,15 @@
 function togglePopupSignUp() {
-  document.getElementById("popup-1").classList.toggle("active");
-  document.body.style.overflow = "hidden";
+  var popup = document.getElementById("popup-1");
+  popup.classList.toggle("active");
+  document.body.style.overflow = popup.classList.contains("active")
+    ? "hidden"
+    : "";
 }
 
 function togglePopupVerif() {
-  document.getElementById("popup-Ver").classList.toggle("active");
-  document.body.style.overflow = "hidden";
+  var popup = document.getElementById("popup-Ver");
+  popup.classList.toggle("active");
+  document.body.style.overflow = popup.classList.contains("active")
+    ? "hidden"
+    : "";
 }

@@ -55,7 +55,7 @@ if (isset($_SESSION["id"])){
         method="post"
         action="login.php"
       >
-        <input type="text" id="username" name="username" placeholder="Username" required />
+        <input type="text" id="username" name="username" placeholder="Username" required autofocus autocomplete="username" />
         <br />
         <input
           id="password"
@@ -63,6 +63,7 @@ if (isset($_SESSION["id"])){
           name="password"
           placeholder="Password"
           required
+          autocomplete="current-password"
         />
         <div id="msg1"></div>
         <?php
@@ -74,7 +75,7 @@ if (isset($_SESSION["id"])){
               echo "<script>document.getElementById('msg1').innerHTML = 'The verification code is wrong.'; </script>";
             }}
               ?>
-        <button class="button" role="submit" id="btnLogin">Log In</button>
+        <button class="button" type="submit" id="btnLogin">Log In</button>
         <button type="button" class="button signup" onclick="togglePopupSignUp()">
           Sign Up
         </button>
@@ -90,7 +91,7 @@ if (isset($_SESSION["id"])){
         method="post"
         action="register.php"
       >
-        <input type="text" id="username" name="username" placeholder="Username" required />
+        <input type="text" id="username" name="username" placeholder="Username" required autocomplete="username" />
         <div id="msg2"></div>
 
         <?php      
@@ -124,6 +125,7 @@ if (isset($_SESSION["id"])){
           name="email"
           placeholder="Email"
           required
+          autocomplete="email"
         />
         <br />
 
@@ -133,6 +135,7 @@ if (isset($_SESSION["id"])){
           name="password"
           placeholder="Enter Password"
           required
+          autocomplete="new-password"
         />
         <input
           id="passwordC"
@@ -140,6 +143,7 @@ if (isset($_SESSION["id"])){
           name="passwordC"
           placeholder="Confirm password"
           required
+          autocomplete="new-password"
         /> 
         <br />
         <input type="radio" id="gender" name="gender" value="m" checked />
@@ -147,7 +151,7 @@ if (isset($_SESSION["id"])){
         <input type="radio" id="gender" name="gender" value="f" />
         <label class="dark-t">Female</label>
         <br />
-        <button class="button" role="submit" id="btnRegister">Register</button>
+        <button class="button" type="submit" id="btnRegister">Register</button>
       </form>
     </section>
 
@@ -168,7 +172,7 @@ if (isset($_SESSION["id"])){
           placeholder="6-digit code"
           required
         />
-        <button class="button" role="submit" id="btnRegister">Verifiy</button>
+        <button class="button" type="submit" id="btnRegister">Verifiy</button>
       </form>
     </section>
     <?php 
