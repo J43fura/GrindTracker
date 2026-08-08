@@ -390,6 +390,26 @@ input:focus {
   order: 1;
 }
 
+/*-------------------------activity heatmap --------------------------------*/
+.heatmap {
+  background: #181a20;
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+.heatmap .day {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #f8fdff;
+}
+
 /*-------------------------todo list  --------------------------------*/
 .todo-div {
   text-align: center !important;

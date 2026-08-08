@@ -203,12 +203,9 @@ try{
         config
       );
     } else {
+      window.__grindChartEmpty = true;
       const box = document.getElementById('myChart').parentElement;
       if (box) box.style.display = 'none';
-      const dl = document.getElementById('DownloadGraph');
-      const em = document.getElementById('SendGraph');
-      if (dl) dl.style.display = 'none';
-      if (em) em.style.display = 'none';
     }
     </script>
         <button class="button" id="DownloadGraph">Download this graph.</button>
@@ -227,6 +224,12 @@ try{
   RASF.addEventListener("click", () => {
     window.close();
   });
+  if (window.__grindChartEmpty) {
+    var dl = document.getElementById('DownloadGraph');
+    var sm = document.getElementById('SendGraph');
+    if (dl) dl.style.display = 'none';
+    if (sm) sm.style.display = 'none';
+  }
 
 
   // Convert canvas to image

@@ -188,6 +188,35 @@ $datenow=date_create($timenow);
       echo"<p class='todosing'>Empty.</p>"; 
     }
 ?>
+
+
+<!-- Activity calendar -->
+<div class="chartMenu">
+      <p>LAST 30 DAYS ACTIVITY</p>
+    </div>
+    <div class="heatmap">
+      <?php
+        $activity = [];
+        $sql = "SELECT PrDate, COUNT(*) AS c FROM pr$id
+                WHERE PrDate >= DATE_SUB(CURRENT_DATE, INTERVAL 30 DAY)
+                GROUP BY PrDate ORDER BY PrDate";
+        $result2 = $conn->query($sql);
+        if ($result2){
+          while($a = mysqli_fetch_assoc($result2)){
+            $activity[$a['PrDate']] = (int)$a['c'];
+          }
+        }
+        $max = $activity ? max($activity) : 0;
+        for ($d = 30; $d >= 0; $d--){
+          $day = date('Y-m-d', strtotime("-$d day"));
+          $count = isset($activity[$day]) ? $activity[$day] : 0;
+          $lvl = $max > 0 ? round($count / $max * 5) : 0;
+          $bg = $count === 0 ? '#2c2f38' : "rgba(219, 10, 64, " . (0.25 + $lvl * 0.15) . ")";
+          $number = (int)date('j', strtotime($day));
+          echo "<div class='day' title='$day · $count log entries' style='background:$bg'>$number</div>";
+        }
+      ?>
+    </div>
     </div>
 
 
