@@ -194,6 +194,44 @@ $datenow=date_create($timenow);
 <div class="chartMenu">
       <p>LAST 30 DAYS ACTIVITY</p>
     </div>
+    <?php
+      $allDays = [];
+      $sql = "SELECT DISTINCT PrDate AS d FROM pr$id WHERE PrDate IS NOT NULL ORDER BY PrDate";
+      $result3 = $conn->query($sql);
+      if ($result3){
+        while($a = mysqli_fetch_assoc($result3)){
+          $allDays[] = $a['d'];
+        }
+      }
+      $today = date('Y-m-d');
+      $yday = date('Y-m-d', strtotime('-1 day'));
+      $todayActive = in_array($today, $allDays);
+      $ydayActive = in_array($yday, $allDays);
+
+      $longest = 0;
+      $run = 0;
+      $prev = null;
+      foreach ($allDays as $d){
+        if ($prev !== null && (strtotime($d) - strtotime($prev)) == 86400){
+          $run++;
+        } else {
+          $run = 1;
+        }
+        if ($run > $longest) $longest = $run;
+        $prev = $d;
+      }
+
+      $streak = 0;
+      $cursor = $todayActive ? $today : ($ydayActive ? $yday : null);
+      while ($cursor !== null && in_array($cursor, $allDays)){
+        $streak++;
+        $cursor = date('Y-m-d', strtotime('-1 day', strtotime($cursor)));
+      }
+    ?>
+    <div class="streak-note">
+      <p><?= $streak > 0 ? '🔥 Current streak: ' . $streak . ' day' . ($streak>1?'s':'') : 'No streak yet — log today to start one.' ?></p>
+      <p>Record: <?= $longest ?> day<?= $longest != 1 ? 's' : '' ?></p>
+    </div>
     <div class="heatmap">
       <?php
         $activity = [];

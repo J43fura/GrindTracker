@@ -410,6 +410,24 @@ input:focus {
   color: #f8fdff;
 }
 
+.streak-note {
+  background: #181a20;
+  color: #f8fdff;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 1.1em;
+}
+.streak-note p {
+  margin: 0;
+  padding: 2px 0;
+  color: #db0a40;
+  font-weight: bold;
+}
+.streak-note p:last-child {
+  color: #f8fdff;
+  font-weight: normal;
+}
+
 /*-------------------------todo list  --------------------------------*/
 .todo-div {
   text-align: center !important;
