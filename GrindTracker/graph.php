@@ -95,25 +95,25 @@ $axe = $_POST['elemph'];
     <div class="chartCard">
       <div class="chartBox">
         <canvas id="myChart"></canvas>
-		<?php
+<?php
+$dateArray = [];
+$AxeArray = [];
 try{
 	$sql = "SELECT PrDate,$axe FROM pr$id WHERE $axe IS NOT NULL ORDER BY PrDate";
 	$result = $conn->query($sql);
 	$num = mysqli_num_rows($result);
 	  if($num>0){
-		$dateArray = [];
-		$valueArray = [];
 		while($value = mysqli_fetch_assoc($result)){
 			$dateArray[] = $value["PrDate"];
 			$AxeArray[] = $value[$axe];
 		}
 	  } else{
-		echo "Empty.";
+		echo "<p class='empty-chart'>No data yet for this grind. Log a value on your profile to see it here.</p>";
 	  }
 	}
-        catch(e){
+        catch (Throwable $e){
           error_log("Error in graph.php: " . $e->getMessage());
-          die("ERROR");
+          die("Internal Server Error");
         }
  ?>
       </div>
@@ -197,10 +197,19 @@ try{
     };
 
     // render init block
-    const myChart = new Chart(
-      document.getElementById('myChart'),
-      config
-    );
+    if (dateArrayJS.length > 0) {
+      const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+      );
+    } else {
+      const box = document.getElementById('myChart').parentElement;
+      if (box) box.style.display = 'none';
+      const dl = document.getElementById('DownloadGraph');
+      const em = document.getElementById('SendGraph');
+      if (dl) dl.style.display = 'none';
+      if (em) em.style.display = 'none';
+    }
     </script>
         <button class="button" id="DownloadGraph">Download this graph.</button>
         <button class="button" id="SendGraph">Email me this graph.</button>
