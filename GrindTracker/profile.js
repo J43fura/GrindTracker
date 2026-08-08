@@ -17,6 +17,7 @@ function DisplaySettings() {
 function Verify() {
   if (document.querySelector(".Settings").style.display == "block") {
     //settings
+    let changed = false;
     try {
       const elemvar = document.querySelectorAll(".Settings input[type=text]");
       for (let i = 0; i < elemvar.length; i++) {
@@ -31,7 +32,7 @@ function Verify() {
                 elemvl +
                   " is greater than >30 characters. Choose a smaller name."
               );
-              return;
+              continue;
             }
             if (
               confirm(
@@ -42,6 +43,7 @@ function Verify() {
                   " ?"
               )
             ) {
+              changed = true;
               $.ajax({
                 url: "varssettings.php",
                 type: "POST",
@@ -50,6 +52,8 @@ function Verify() {
                   console.log("ytest wallajh");
                   if (data == 0) {
                     alert("Something wrong went. Please try again.");
+                  } else if (data == 2) {
+                    alert(elemvl + " Already exists.");
                   }
                 },
               });
@@ -62,9 +66,10 @@ function Verify() {
                   elemvl +
                     " is greater than >30 characters. Choose a smaller name."
                 );
-                return;
+                continue;
               }
               if (confirm("Are you sure you want to add " + elemvl + " ?")) {
+                changed = true;
                 $.ajax({
                   url: "varssettings.php",
                   type: "POST",
@@ -86,10 +91,10 @@ function Verify() {
           }
         } else if (elemvl == "") {
           if (elemph != "") {
-            if (elemvar[i].parentElement.id == "ToDelete") {
+if (elemvar[i].parentElement.id == "ToDelete") {
               if (confirm("Are you sure you want to delete " + elemph + " ?")) {
                 //DELETE
-
+                changed = true;
                 $.ajax({
                   url: "varssettings.php",
                   type: "POST",
@@ -105,8 +110,11 @@ function Verify() {
             }
           }
         }
-        window.location.reload(true);
-        //varssettings
+      }
+      if (changed) {
+        setTimeout(function () {
+          window.location.reload(true);
+        }, 400);
       }
     } catch (e) {
       console.log(e);
