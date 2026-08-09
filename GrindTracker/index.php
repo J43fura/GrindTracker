@@ -2,6 +2,7 @@
 session_start();
 if (isset($_SESSION["id"])){
   header("location:profile.php");
+  exit();
 }
 ?>
 
@@ -178,7 +179,9 @@ if (isset($_SESSION["id"])){
     <?php 
     if (isset($_GET["msg"])){
     if($_GET["msg"] == "emailverif"){
-              echo "<script>document.getElementById('popup-Ver').classList.toggle('active');</script>";
+              echo "<script>document.getElementById('popup-Ver').classList.add('active');
+              document.body.style.overflow = 'hidden';
+              </script>";
             }
             }
             ?>
