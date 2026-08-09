@@ -132,38 +132,48 @@ if (elemvar[i].parentElement.id == "ToDelete") {
     try {
       const elemvar = document.querySelectorAll(".vars input[type=number]");
       const timecalendar = document.getElementById("calendar").value;
+      const pending = [];
       for (let i = 0; i < elemvar.length; i++) {
-        elemph = elemvar[i].placeholder;
-        elemvl = elemvar[i].value;
-        //PHP SQL
+        const elemph = elemvar[i].placeholder;
+        const elemvl = elemvar[i].value;
         if (elemvl != "") {
-          if (
-            confirm(
-              "Are you sure you want to save: " +
-                elemvl +
-                " > " +
-                timecalendar +
-                " >> " +
-                elemph +
-                " ?"
-            )
-          ) {
-            $.ajax({
-              url: "vars.php",
-              type: "POST",
-              data: {
-                elemvl: elemvl,
-                elemph: elemph,
-                timecalendar: timecalendar,
-              },
-              success: function (data) {
-                if (data == 0) {
-                  alert("Something wrong went. Please try again.");
-                }
-              },
-            });
-          }
+          pending.push({ elemph: elemph, elemvl: elemvl });
         }
+      }
+      if (pending.length == 0) {
+        return;
+      }
+      let msg = "Save " + pending.length + " value" + (pending.length > 1 ? "s" : "") + " for " + timecalendar + "?\n";
+      for (let i = 0; i < pending.length; i++) {
+        msg += "\n• " + pending[i].elemph + " = " + pending[i].elemvl;
+      }
+      if (!confirm(msg)) {
+        return;
+      }
+      let done = 0;
+      for (let i = 0; i < pending.length; i++) {
+        (function (p) {
+          $.ajax({
+            url: "vars.php",
+            type: "POST",
+            data: {
+              elemvl: p.elemvl,
+              elemph: p.elemph,
+              timecalendar: timecalendar,
+            },
+            success: function (data) {
+              if (data == 0) {
+                alert("Something wrong went. Please try again.");
+              }
+            },
+            complete: function () {
+              done++;
+              if (done >= pending.length) {
+                window.location.reload(true);
+              }
+            },
+          });
+        })(pending[i]);
       }
     } catch (e) {
       console.log(e);
