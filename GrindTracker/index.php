@@ -55,10 +55,10 @@ if (isset($_SESSION["id"])){
         method="post"
         action="login.php"
       >
-        <input type="text" id="username" name="username" placeholder="Username" required autofocus autocomplete="username" />
+        <input type="text" id="loginUsername" name="username" placeholder="Username" required autofocus autocomplete="username" />
         <br />
         <input
-          id="password"
+          id="loginPassword"
           type="password"
           name="password"
           placeholder="Password"
@@ -91,28 +91,28 @@ if (isset($_SESSION["id"])){
         method="post"
         action="register.php"
       >
-        <input type="text" id="username" name="username" placeholder="Username" required autocomplete="username" />
-        <div id="msg2"></div>
+        <input type="text" id="regUsername" name="username" placeholder="Username" required autocomplete="username" />
+        <div id="regMsg"></div>
 
         <?php      
             if (isset($_GET["msg"])){
               if ($_GET["msg"] == "usedusername"){
-              echo "<script>document.getElementById('msg2').innerHTML = '⛔ The username is already used.';
+              echo "<script>document.getElementById('regMsg').innerHTML = '⛔ The username is already used.';
               document.getElementById('popup-1').classList.toggle('active');
                </script>";
             }
             else if($_GET["msg"] == "charusername"){
-              echo "<script>document.getElementById('msg2').innerHTML = '⛔ The username cant have special characters.';
+              echo "<script>document.getElementById('regMsg').innerHTML = '⛔ The username cant have special characters.';
               document.getElementById('popup-1').classList.toggle('active');
                </script>";
             }
             else if($_GET["msg"] == "pwc"){
-              echo "<script>document.getElementById('msg2').innerHTML = '⛔ Password must be at least: (8: characters long, 1: number, upper and lower case letter.)';
+              echo "<script>document.getElementById('regMsg').innerHTML = '⛔ Password must be at least: (8: characters long, 1: number, upper and lower case letter.)';
               document.getElementById('popup-1').classList.toggle('active');
                </script>";
             }
             else if($_GET["msg"] == "pww"){
-              echo "<script>document.getElementById('msg2').innerHTML = '⛔ Password confirmation is wrong.';
+              echo "<script>document.getElementById('regMsg').innerHTML = '⛔ Password confirmation is wrong.';
               document.getElementById('popup-1').classList.toggle('active');
                </script>";
             }
@@ -120,7 +120,7 @@ if (isset($_SESSION["id"])){
               ?>
         
         <input
-          id="email"
+          id="regEmail"
           type="email"
           name="email"
           placeholder="Email"
@@ -130,7 +130,7 @@ if (isset($_SESSION["id"])){
         <br />
 
         <input
-          id="password"
+          id="regPassword"
           type="password"
           name="password"
           placeholder="Enter Password"
@@ -146,9 +146,9 @@ if (isset($_SESSION["id"])){
           autocomplete="new-password"
         /> 
         <br />
-        <input type="radio" id="gender" name="gender" value="m" checked />
+        <input type="radio" id="genderM" name="gender" value="m" checked />
         <label class="dark-t">Male</label>
-        <input type="radio" id="gender" name="gender" value="f" />
+        <input type="radio" id="genderF" name="gender" value="f" />
         <label class="dark-t">Female</label>
         <br />
         <button class="button" type="submit" id="btnRegister">Register</button>
@@ -164,7 +164,7 @@ if (isset($_SESSION["id"])){
         method="post"
         action="emailverif.php"
       >
-        <div id="msg2">A 6-digit verification code was sent to your email.</div>
+        <div id="verifyMsg">A 6-digit verification code was sent to your email.</div>
         <input
           id="emailverif"
           type="number"
@@ -172,7 +172,7 @@ if (isset($_SESSION["id"])){
           placeholder="6-digit code"
           required
         />
-        <button class="button" type="submit" id="btnRegister">Verifiy</button>
+        <button class="button" type="submit" id="btnVerify">Verify</button>
       </form>
     </section>
     <?php 

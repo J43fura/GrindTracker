@@ -171,8 +171,8 @@ $username = $value["username"];
   $("#addbtn").on("click",function(e){
     e.preventDefault();
     const todoInput = document.querySelector(".todo-input");
-    if (todoInput.value.length>247){
-      alert("TODO max length is 247 characters.");
+    if (todoInput.value.length>124){
+      alert("TODO max length is 124 characters.");
       return;
     }
     const timecalendar = document.getElementById("calendar").value;
