@@ -413,6 +413,9 @@ $datenow=date_create($timenow);
   <div class="chartMenu">
       <p>HISTORY (LAST 30 DAYS)</p>
     </div>
+    <div class="history-actions">
+      <button type="button" class="button signup" id="csvDownload">Export as CSV</button>
+    </div>
     <?php
       $histCols = [];
       $cols = $conn->query("SHOW COLUMNS FROM pr$id");
@@ -452,7 +455,7 @@ $datenow=date_create($timenow);
                   $val = isset($hr[$col]) ? $hr[$col] : null;
                   $txt = ($val === null || $val === '') ? '-' : (string)$val;
                 ?>
-                <td class="<?= $col == 'Completed' ? ($val ? 'done-yes' : 'done-no') : '' ?>"><?= htmlspecialchars($txt) ?></td>
+                <td class="<?= $col == 'Completed' ? ($val ? 'done-yes' : 'done-no') : '' ?>" data-raw="<?= $val === null || $val === '' ? '' : htmlspecialchars((string)$val) ?>"><?= htmlspecialchars($txt) ?></td>
               <?php endforeach; ?>
               </tr>
             <?php endforeach; ?>
@@ -460,6 +463,34 @@ $datenow=date_create($timenow);
         </tbody>
       </table>
     </div>
+    <script>
+      document.getElementById("csvDownload").addEventListener("click", function () {
+        var rows = [];
+        var headers = [];
+        var thead = document.querySelectorAll(".history thead th");
+        for (var i = 0; i < thead.length; i++) {
+          headers.push('"' + thead[i].textContent.replace(/"/g, '""') + '"');
+        }
+        rows.push(headers.join(","));
+        var trs = document.querySelectorAll(".history tbody tr");
+        for (var r = 0; r < trs.length; r++) {
+          var tds = trs[r].querySelectorAll("td");
+          var line = [];
+          for (var c = 0; c < tds.length; c++) {
+            var txt = tds[c].textContent.replace(/"/g, '""');
+            var value = tds[c].getAttribute("data-raw");
+            line.push('"' + (value !== null ? value : txt) + '"');
+          }
+          if (tds.length) rows.push(line.join(","));
+        }
+        var blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8" });
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "grindtracker-history.csv";
+        document.body.appendChild(a);
+        a.click();
+      });
+    </script>
 <!-- TODOS -->
   <div id="lfeyda">
     <div class="chartMenu">

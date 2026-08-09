@@ -478,6 +478,14 @@ input:focus {
   padding: 10px;
   overflow-x: auto;
 }
+.history-actions {
+  text-align: center;
+  padding: 10px 0;
+}
+.history-actions .button {
+  font-size: 0.95em;
+  padding: 10px 22px;
+}
 .history table {
   width: 100%;
   border-collapse: collapse;
