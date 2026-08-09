@@ -33,6 +33,7 @@ $datenow=date_create($timenow);
     <link rel="stylesheet" href="style.css" />
     <title>Summary</title>
     </head>
+    <body class="chartBody">
 
     <div class="loader1" id="loader"></div>
     <div class="loader" id="loader"></div>
@@ -42,6 +43,12 @@ $datenow=date_create($timenow);
           <li><a class="nav-elements" href="profile.php">Home</a></li>
           <li><a class="nav-elements" href="#RASF1">🔻</a></li>
           <li><a style="cursor: pointer;" class="nav-elements" id = "logout" >Logout</a></li>
+          <li>
+            <label class="switch">
+              <input type="checkbox" id="darkmode" />
+              <span class="slider"></span>
+            </label>
+          </li>
           <script>
             var logoutBut = document.querySelector("#logout");
             logoutBut.addEventListener("click", () => {
@@ -314,7 +321,6 @@ $datenow=date_create($timenow);
       <p>GRAPHS</p>
     </div>
 
-<body class="chartBody">
 <?php
 
     if (mysqli_num_rows($result)==0){
@@ -698,6 +704,7 @@ $datenow=date_create($timenow);
         <a href="#RAS" id="RASF">🔺</a>
       </div>
     </footer>
+    <script src="darkmode.js" defer></script>
 </html>
 
 <?php
