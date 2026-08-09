@@ -17,6 +17,10 @@ $doc = $_POST['doc'];
 
 $data = trim( str_replace( 'data:application/pdf;base64,', '', $doc ) );
 $data = str_replace( ' ', '+', $data );
+if (strlen($data) > 12500000){
+	echo "ERROR email was not sent.";
+	exit();
+}
 $decoded_pdf = base64_decode( $data );
 
 $sql = "SELECT * FROM register WHERE id = '$id'";

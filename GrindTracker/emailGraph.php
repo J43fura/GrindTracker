@@ -16,7 +16,11 @@ $id = (int)$_SESSION["id"];
 $axe = $_POST['axe'];
 $img = $_POST['img'];
 $img = str_replace('data:image/jpeg;base64,', '', $img);
-$img = str_replace(' ', '+', $img);	
+$img = str_replace(' ', '+', $img);
+if (strlen($img) > 12500000){
+	echo "ERROR email was not sent.";
+	exit();
+}
 $data = base64_decode($img);
 
 
@@ -42,8 +46,6 @@ $mail->Username = $mailerUsername;
 $mail->Password = $mailerPassword;
 $mail->SMTPSecure = "tls";
 $mail->Port = 587;
-
-$sql = "SELECT * FROM register WHERE id = '$id'";
 
 //Email Settings
 $mail->setFrom($mailerUsername,"GrindTracker");
