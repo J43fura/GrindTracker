@@ -2,6 +2,9 @@
 session_start();
 
 require_once('connection.php');
+if (!isset($_SESSION["id"])){
+	exit();
+}
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require_once "Addons/PHPMailer/PHPMailer.php";

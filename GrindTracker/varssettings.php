@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once('connection.php');
+if (!isset($_SESSION["id"])){
+	echo 0;
+	exit();
+}
 $id = (int)$_SESSION["id"];
 $axejdid = isset($_POST['elemvl']) ? $_POST['elemvl'] : '';
 

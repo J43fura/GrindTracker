@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once('connection.php');
+if (!isset($_SESSION["id"])){
+  header("location:index.php");
+  exit();
+}
 if (!isset($_POST['elemph'])){
   header("location:index.php");
   exit();

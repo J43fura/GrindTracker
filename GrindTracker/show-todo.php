@@ -1,6 +1,9 @@
 <?php 
 session_start();
 require_once('connection.php');
+if (!isset($_SESSION["id"])){
+    exit();
+  }
 if (!isset($_POST["filtertodovalue"])){
     header("location:index.php");
     exit();

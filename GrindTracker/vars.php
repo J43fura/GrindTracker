@@ -3,6 +3,10 @@
 
 session_start();
 require_once('connection.php');
+if (!isset($_SESSION["id"])){
+	echo 0;
+	exit();
+}
 $id = (int)$_SESSION["id"];
 $axe = mysqli_real_escape_string($conn, $_POST['elemph']);
 $elemvl = mysqli_real_escape_string($conn, $_POST['elemvl']);
