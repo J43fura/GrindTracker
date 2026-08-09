@@ -72,8 +72,6 @@ $username = $value["username"];
 
       <?php
       //Charge vars:
-      require_once('connection.php');
-      $id = (int)$_SESSION["id"];
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
       $result = $conn->query($sql);
       $today = $todayStr;
@@ -110,10 +108,6 @@ $username = $value["username"];
       <ul id="listing" class="listing">
       <?php
       //Charge varssettings:
-      require_once('connection.php');
-      $id = (int)$_SESSION["id"];
-
-
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
       $result = $conn->query($sql);
       if (mysqli_num_rows($result)>0){
