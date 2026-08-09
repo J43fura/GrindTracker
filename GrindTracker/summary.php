@@ -543,11 +543,15 @@ $datenow=date_create($timenow);
 		doc: url
 		},
 		success: function(response){ 
-		alert("Summary has been sent to your email."); 
+    if (response.indexOf("ERROR") !== -1) {
+      alert("Failed to email the summary. Check your mailer settings.");
+    } else {
+      alert("Summary has been sent to your email.");
+    }
     $("html").css("cursor", "default");
 		},
     error: function(response){
-      alert("An error has occured."); 
+      alert("An error has occured. Please try again."); 
     $("html").css("cursor", "default");
     }
 	  }) 

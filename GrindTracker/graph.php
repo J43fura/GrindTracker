@@ -266,7 +266,14 @@ try{
       axe: axeJS
     },
     success: function(response){ 
-      alert(axeJS + "'s Graph has been sent to your email."); 
+      if (response.indexOf("ERROR") !== -1) {
+        alert("Failed to email the graph. Check your mailer settings.");
+      } else {
+        alert(axeJS + "'s Graph has been sent to your email.");
+      }
+    },
+    error: function(){
+      alert("An error has occured while sending the email.");
     }
   })
   });
