@@ -4,7 +4,7 @@ session_start();
 require_once('connection.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require_once "Addons/PHPMailer/PHPmailer.php";
+require_once "Addons/PHPMailer/PHPMailer.php";
 require_once "Addons/PHPMailer/SMTP.php";
 require_once "Addons/PHPMailer/Exception.php";
 
