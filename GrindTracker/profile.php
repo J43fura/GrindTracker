@@ -130,6 +130,36 @@ $username = $value["username"];
       <input type="date" value="<?= date('Y-m-d') ?>" id="calendar" name="calendar" required />
       <i id="timenow"></i>
     </div>
+
+    <?php
+      $todayStr = date('Y-m-d');
+      $varCols = [];
+      $cols = $conn->query("SHOW COLUMNS FROM pr$id");
+      if ($cols){
+        while($c = $cols->fetch_assoc()){
+          if (in_array($c['Field'], ['PrDate','TODO','TODOADDED','Completed'])) continue;
+          $varCols[] = $c['Field'];
+        }
+      }
+      $todayVars = 0;
+      if ($varCols){
+        $row = $conn->query("SELECT * FROM pr$id WHERE PrDate = '$todayStr' LIMIT 1")->fetch_assoc();
+        if ($row){
+          foreach ($varCols as $col){
+            if (isset($row[$col]) && $row[$col] !== null) $todayVars++;
+          }
+        }
+      }
+      $todos = $conn->query("SELECT COUNT(*) AS c FROM pr$id WHERE PrDate = '$todayStr' AND TODO IS NOT NULL")->fetch_assoc();
+      $done = $conn->query("SELECT COUNT(*) AS c FROM pr$id WHERE PrDate = '$todayStr' AND Completed = TRUE")->fetch_assoc();
+      $todayTodos = (int)$todos["c"];
+      $todayDone = (int)$done["c"];
+    ?>
+    <div class="today-digest">
+      <span><?= $todayVars ?> variable<?= $todayVars != 1 ? 's' : '' ?> logged</span>
+      <span><?= $todayTodos ?> todo<?= $todayTodos != 1 ? 's' : '' ?></span>
+      <span><?= $todayDone ?> completed</span>
+    </div>
     <div class="todo-div">
       <header class="todo-head">
         <h2 class="section-header dark-t">TODO:</h2>

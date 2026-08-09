@@ -428,6 +428,21 @@ input:focus {
   font-weight: normal;
 }
 
+.today-digest {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 14px;
+}
+.today-digest span {
+  background: linear-gradient(180deg, #9acfe0, #cbe6ef);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  color: #181a20;
+}
+
 /*-------------------------todo list  --------------------------------*/
 .todo-div {
   text-align: center !important;
