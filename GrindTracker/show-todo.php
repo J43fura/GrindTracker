@@ -10,19 +10,24 @@ if (!isset($_POST["filtertodovalue"])){
   }
 $id = (int)$_SESSION["id"];
 $v = $_POST["filtertodovalue"];
+$day = isset($_POST["timecalendar"]) ? $_POST["timecalendar"] : '';
+if ($day !== '' && !DateTime::createFromFormat('Y-m-d', $day)){
+    $day = '';
+}
 date_default_timezone_set('UTC');
 $timenow = date("Y-m-d");
 $datenow=date_create($timenow);
 
+$dayFilter = ($day !== '') ? " AND PrDate = '$day'" : '';
 
     if ($v=="all"){
-        $sql = "SELECT * from pr$id WHERE TODO IS NOT NULL ORDER BY PrDate";
+        $sql = "SELECT * from pr$id WHERE TODO IS NOT NULL$dayFilter ORDER BY PrDate";
     }
     else if ($v == "completed"){
-        $sql = "SELECT * from pr$id WHERE TODO IS NOT NULL AND Completed IS TRUE ORDER BY PrDate";
+        $sql = "SELECT * from pr$id WHERE TODO IS NOT NULL AND Completed IS TRUE$dayFilter ORDER BY PrDate";
     }
     else if ($v == "uncompleted"){
-        $sql = "SELECT * from pr$id WHERE TODO IS NOT NULL AND Completed IS FALSE ORDER BY PrDate";
+        $sql = "SELECT * from pr$id WHERE TODO IS NOT NULL AND Completed IS FALSE$dayFilter ORDER BY PrDate";
 
     }
 

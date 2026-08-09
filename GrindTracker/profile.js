@@ -248,10 +248,11 @@ filtertodo.addEventListener("change", () => {
 
 function loadTasks() {
   var filtertodovalue = filtertodo.value;
+  var timecalendar = document.getElementById("calendar").value;
   $.ajax({
     url: "show-todo.php",
     type: "POST",
-    data: { filtertodovalue: filtertodovalue },
+    data: { filtertodovalue: filtertodovalue, timecalendar: timecalendar },
     success: function (data) {
       $("#tasks").html(data);
       let darkMode = localStorage.getItem("darkMode");
