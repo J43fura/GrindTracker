@@ -1,5 +1,17 @@
 document.getElementById("calendar").valueAsDate = new Date();
 const NowDate = document.getElementById("calendar").valueAsDate;
+function stampDate() {
+  const cal = document.getElementById("calendar");
+  const here = document.getElementById("timenow");
+  if (!cal || !here) return;
+  const d = new Date(cal.value + "T00:00:00");
+  if (isNaN(d)) return;
+  here.textContent = d.toLocaleDateString(undefined, {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+}
 function DisplaySettings() {
   if (document.querySelector(".Settings").style.display != "block") {
     //vars > settings
@@ -269,3 +281,6 @@ for (let i = 0; i < input.length; i++) {
 function resizeInput() {
   this.style.width = this.title.length + 2 + "ch";
 }
+
+stampDate();
+document.getElementById("calendar").addEventListener("change", stampDate);
