@@ -3,6 +3,7 @@ session_start();
 require_once('connection.php');
 if (!isset($_POST["filtertodovalue"])){
     header("location:index.php");
+    exit();
   }
 $id = (int)$_SESSION["id"];
 $v = $_POST["filtertodovalue"];

@@ -4,6 +4,7 @@ require_once('connection.php');
 if (!isset($_POST['elemph'])){
   header("location:index.php");
   exit();
+  exit();
 }
 $id = (int)$_SESSION["id"];
 $axe = $_POST['elemph'];

@@ -2,6 +2,7 @@
   session_start();
 if (!isset($_SESSION["id"])){
   header("location:index.php");
+  exit();
 }
 require_once('connection.php');
 $id = (int)$_SESSION["id"];
