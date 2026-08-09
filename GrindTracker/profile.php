@@ -70,11 +70,17 @@ $username = $value["username"];
       $id = (int)$_SESSION["id"];
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
       $result = $conn->query($sql);
+      $today = date('Y-m-d');
+      $prefill = [];
+      $rowToday = $conn->query("SELECT * FROM `pr$id` WHERE PrDate = '$today' LIMIT 1");
+      if ($rowToday) $prefill = ($rowToday->fetch_assoc() ?: []);
       if (mysqli_num_rows($result)>0){
         while ($row=mysqli_fetch_assoc($result)){
+          $f = $row['Field'];
+          $saved = isset($prefill[$f]) && $prefill[$f] !== null ? htmlspecialchars($prefill[$f]) : '';
           ?>
           <li>
-              <input type="number" placeholder="<?php echo $row['Field'] ?>" title="<?php echo $row['Field'] ?>" id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" />
+              <input type="number" placeholder="<?php echo $row['Field'] ?>" title="<?php echo $row['Field'] ?>" id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" value="<?= $saved ?>" />
               <button class="button BtnS" onclick="GRAPHvar(this)" title="Graph of <?php echo $row['Field'] ?>">📈</button>
           </li>
       <?php
