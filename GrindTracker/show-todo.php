@@ -30,14 +30,14 @@ $datenow=date_create($timenow);
         ?>
             <li> 
                 <?php if ($row['Completed'] == TRUE){?>
-                <textarea disabled type ="text" class="dark-t" value="<?php echo $row['TODO']?>";><?php echo $row['TODO']?></textarea>
+                <textarea disabled type ="text" class="dark-t" value="<?php echo $row['TODO']?>"><?php echo $row['TODO']?></textarea>
                 <?php }
             else{ ?>
-                <textarea readonly type ="text" value="<?php echo $row['TODO']?>";><?php echo $row['TODO']?></textarea>
-                <button id="Complete" class="button BtnS" onclick="Verify()" title="Complete <?php echo $row['TODO'] ?>">✔️</button>
+                <textarea readonly type ="text" value="<?php echo $row['TODO']?>"><?php echo $row['TODO']?></textarea>
+                <button id="Complete" class="button BtnS" title="Complete <?php echo $row['TODO'] ?>">✔️</button>
             <?php } ?>
             
-            <button id="DeleteCompleted" class="button BtnS" onclick="DELETEvar(this)" title="Delete <?php echo $row['TODO'] ?>">❌</button>
+            <button id="DeleteCompleted" class="button BtnS" title="Delete <?php echo $row['TODO'] ?>">❌</button>
 
 
             <?php
