@@ -22,9 +22,6 @@ $sql = "SELECT * FROM register WHERE id = '$id'";
 $result = $conn->query($sql);
 $value = mysqli_fetch_assoc($result);
 $username = $value["username"];
-
-$result = $conn->query($sql);
-$value = mysqli_fetch_assoc($result);
 $email = $value["email"];
 
 $mailerUsername = "<Email>";

@@ -21,9 +21,6 @@ $sql = "SELECT * FROM register WHERE id = '$id'";
 $result = $conn->query($sql);
 $value = mysqli_fetch_assoc($result);
 $username = $value["username"];
-
-$result = $conn->query($sql);
-$value = mysqli_fetch_assoc($result);
 $email = $value["email"];
 
 $mailerUsername = "<Email>";
@@ -41,8 +38,6 @@ $mail->Username = $mailerUsername;
 $mail->Password = $mailerPassword;
 $mail->SMTPSecure = "tls";
 $mail->Port = 587;
-
-$sql = "SELECT * FROM register WHERE id = '$id'";
 
 //Email Settings
 $mail->setFrom($mailerUsername,"GrindTracker");
