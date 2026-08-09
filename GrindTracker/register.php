@@ -88,6 +88,8 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 			header("location:index.php?msg=emailverif");
 		}
 		else{
+			$conn->query("DROP TABLE IF EXISTS pr$id");
+			$conn->query("DELETE FROM register WHERE id = $id");
 			echo "ERROR email was not sent.";
 		}
 	}
