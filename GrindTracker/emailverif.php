@@ -3,6 +3,7 @@ session_start();
 require_once('connection.php');
 if (!isset($_SESSION["username"])){
 	header("location:index.php");
+	exit();
   }
 $username = $_SESSION["username"];
 $emailverif = filter_input(INPUT_POST, 'emailverif');
@@ -19,14 +20,16 @@ if ($code_auth == $emailverif){
 	$result = $conn->query($sql);
 	$value = mysqli_fetch_assoc($result);
 	$id = $value["id"];
-	$_SESSION["id"] = $id;
+	$_SESSION["id"] = (int)$id;
 	
 	unset($_SESSION["username"]);
 	header("location:profile.php");
+	exit();
 }
 else{
 	unset($_SESSION["username"]);
 	header("location:index.php?msg=verification_error");
+	exit();
 }
 
 ?>

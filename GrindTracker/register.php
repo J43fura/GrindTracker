@@ -3,7 +3,7 @@ session_start();
 require_once('connection.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require_once "Addons/PHPMailer/PHPmailer.php";
+require_once "Addons/PHPMailer/PHPMailer.php";
 require_once "Addons/PHPMailer/SMTP.php";
 require_once "Addons/PHPMailer/Exception.php";
 
@@ -12,6 +12,10 @@ $password = filter_input(INPUT_POST, 'password');
 $gender = filter_input(INPUT_POST, 'gender');
 $email = filter_input(INPUT_POST, 'email');
 $passwordC = filter_input(INPUT_POST, 'passwordC');
+
+$username = $conn->real_escape_string($username);
+$email = $conn->real_escape_string($email);
+$gender = $conn->real_escape_string($gender);
 
 
 if (!empty($username) && !empty($password) && !empty($gender)){
@@ -61,7 +65,7 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 		$mail = new PHPMailer();
 		
 		//STMP Settings
-		$mail->SMTPDebug = 3;                               
+		$mail->SMTPDebug = 0;                               
 		$mail->isSMTP();
 		$mail->Host = "smtp.gmail.com";
 		$mail->SMTPAuth   = true;  
@@ -84,6 +88,8 @@ if (!empty($username) && !empty($password) && !empty($gender)){
 			header("location:index.php?msg=emailverif");
 		}
 		else{
+			$conn->query("DROP TABLE IF EXISTS pr$id");
+			$conn->query("DELETE FROM register WHERE id = $id");
 			echo "ERROR email was not sent.";
 		}
 	}

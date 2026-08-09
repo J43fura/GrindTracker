@@ -2,9 +2,15 @@
   session_start();
 if (!isset($_SESSION["id"])){
   header("location:index.php");
+  exit();
 }
 require_once('connection.php');
-$id = $_SESSION["id"];
+$id = (int)$_SESSION["id"];
+
+$calDate = isset($_GET['timecalendar']) ? $_GET['timecalendar'] : '';
+$calCheck = DateTime::createFromFormat('Y-m-d', $calDate);
+$todayStr = $calCheck ? $calDate : date('Y-m-d');
+
 $sql = "SELECT username FROM register WHERE id = '$id'";
 $result = $conn->query($sql);
 $value = mysqli_fetch_assoc($result);
@@ -66,15 +72,19 @@ $username = $value["username"];
 
       <?php
       //Charge vars:
-      require_once('connection.php');
-      $id = $_SESSION["id"];
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
       $result = $conn->query($sql);
+      $today = $todayStr;
+      $prefill = [];
+      $rowToday = $conn->query("SELECT * FROM `pr$id` WHERE PrDate = '$today' LIMIT 1");
+      if ($rowToday) $prefill = ($rowToday->fetch_assoc() ?: []);
       if (mysqli_num_rows($result)>0){
         while ($row=mysqli_fetch_assoc($result)){
+          $f = $row['Field'];
+          $saved = isset($prefill[$f]) && $prefill[$f] !== null ? htmlspecialchars($prefill[$f]) : '';
           ?>
           <li>
-              <input type="number" placeholder="<?php echo $row['Field'] ?>" title="<?php echo $row['Field'] ?>" id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" />
+              <input type="number" placeholder="<?php echo $row['Field'] ?>" title="<?php echo $row['Field'] ?>" id="<?php echo $row['Field'] ?>" name="<?php echo $row['Field'] ?>" value="<?= $saved ?>" />
               <button class="button BtnS" onclick="GRAPHvar(this)" title="Graph of <?php echo $row['Field'] ?>">📈</button>
           </li>
       <?php
@@ -98,10 +108,6 @@ $username = $value["username"];
       <ul id="listing" class="listing">
       <?php
       //Charge varssettings:
-      require_once('connection.php');
-      $id = $_SESSION["id"];
-
-
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
       $result = $conn->query($sql);
       if (mysqli_num_rows($result)>0){
@@ -120,15 +126,44 @@ $username = $value["username"];
           <button class="button BtnS" onclick="ADDvar()">➕</button>
         </li>
       </ul>
-      <button id="Settings" class="button BtnS" onclick="DisplaySettings()">
+      <button id="Settings2" class="button BtnS" onclick="DisplaySettings()">
         ⚙️
       </button>
-      <button id="Verify" class="button BtnS" onclick="Verify()">✔️</button>
+      <button id="Verify2" class="button BtnS" onclick="Verify()">✔️</button>
     </div>
 
     <div class="calendar">
-      <input type="date" value="today" id="calendar" name="calendar" required />
+      <input type="date" value="<?= $todayStr ?>" id="calendar" name="calendar" required />
       <i id="timenow"></i>
+    </div>
+
+    <?php
+      $varCols = [];
+      $cols = $conn->query("SHOW COLUMNS FROM pr$id");
+      if ($cols){
+        while($c = $cols->fetch_assoc()){
+          if (in_array($c['Field'], ['PrDate','TODO','TODOADDED','Completed'])) continue;
+          $varCols[] = $c['Field'];
+        }
+      }
+      $todayVars = 0;
+      if ($varCols){
+        $row = $conn->query("SELECT * FROM pr$id WHERE PrDate = '$todayStr' LIMIT 1")->fetch_assoc();
+        if ($row){
+          foreach ($varCols as $col){
+            if (isset($row[$col]) && $row[$col] !== null) $todayVars++;
+          }
+        }
+      }
+      $todos = $conn->query("SELECT COUNT(*) AS c FROM pr$id WHERE PrDate = '$todayStr' AND TODO IS NOT NULL")->fetch_assoc();
+      $done = $conn->query("SELECT COUNT(*) AS c FROM pr$id WHERE PrDate = '$todayStr' AND Completed = TRUE")->fetch_assoc();
+      $todayTodos = (int)$todos["c"];
+      $todayDone = (int)$done["c"];
+    ?>
+    <div class="today-digest">
+      <span><?= htmlspecialchars($todayStr) ?> · <?= $todayVars ?> variable<?= $todayVars != 1 ? 's' : '' ?> logged</span>
+      <span><?= $todayTodos ?> todo<?= $todayTodos != 1 ? 's' : '' ?></span>
+      <span><?= $todayDone ?> completed</span>
     </div>
     <div class="todo-div">
       <header class="todo-head">
@@ -171,8 +206,8 @@ $username = $value["username"];
   $("#addbtn").on("click",function(e){
     e.preventDefault();
     const todoInput = document.querySelector(".todo-input");
-    if (todoInput.value.length>247){
-      alert("TODO max length is 247 characters.");
+    if (todoInput.value.length>124){
+      alert("TODO max length is 124 characters.");
       return;
     }
     const timecalendar = document.getElementById("calendar").value;
@@ -201,7 +236,7 @@ $username = $value["username"];
     e.preventDefault();
     const task = this.parentElement.querySelector("textarea").getAttribute("value");
     if(confirm("Do you want to complete " + task)){
-    const timecalendar = this.parentElement.querySelector("#CompleteTime").getAttribute("placeholder");
+    const timecalendar = this.parentElement.querySelector(".complete-time").getAttribute("placeholder");
     $.ajax({
       url:"varstodo.php",
       type:"POST",
@@ -222,7 +257,7 @@ $username = $value["username"];
     e.preventDefault();
     const task = this.parentElement.querySelector("textarea").getAttribute("value");
     if(confirm("Do you want to delete " + task)){
-    const timecalendar = this.parentElement.querySelector("#CompleteTime").getAttribute("placeholder");
+    const timecalendar = this.parentElement.querySelector(".complete-time").getAttribute("placeholder");
     $.ajax({
       url:"varstodo.php",
       type:"POST",

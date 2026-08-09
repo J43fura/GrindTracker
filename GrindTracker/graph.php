@@ -1,11 +1,20 @@
 <?php
 session_start();
 require_once('connection.php');
+if (!isset($_SESSION["id"])){
+  header("location:index.php");
+  exit();
+}
 if (!isset($_POST['elemph'])){
   header("location:index.php");
+  exit();
 }
-$id = $_SESSION["id"];
+$id = (int)$_SESSION["id"];
 $axe = $_POST['elemph'];
+if (!preg_match('/^[A-Za-z0-9_]+$/', $axe)){
+  die("Internal Server Error");
+}
+$axeOut = htmlspecialchars($axe, ENT_QUOTES, 'UTF-8');
 ?>
 
 <!doctype html>
@@ -18,7 +27,7 @@ $axe = $_POST['elemph'];
 	<script src="Addons/chartjs-adapter-date-fns.bundle.min.js"></script> 
   <script src="Addons/jquery-3.6.0.js"></script>
   <link rel="stylesheet" href="style.css" />
-    <title><?= $axe ?></title>
+    <title><?= $axeOut ?></title>
     <style>
       @font-face {
         font-family: Kanit;
@@ -80,9 +89,7 @@ $axe = $_POST['elemph'];
 
 <script>
   let darkMode = localStorage.getItem("darkMode");
-  console.log(darkMode);
   if (darkMode !== "enabled") {
-    console.log(darkMode);
       document.write("<link rel='stylesheet' href='graphdarkmode.css'/>");
     }
 </script>
@@ -90,35 +97,37 @@ $axe = $_POST['elemph'];
   </head>
   <body class="chartBody">
     <div class="chartMenu">
-      <p><?= $axe ?></p>
+      <p><?= $axeOut ?></p>
     </div>
     <div class="chartCard">
       <div class="chartBox">
         <canvas id="myChart"></canvas>
-		<?php
+<?php
+$dateArray = [];
+$AxeArray = [];
 try{
 	$sql = "SELECT PrDate,$axe FROM pr$id WHERE $axe IS NOT NULL ORDER BY PrDate";
 	$result = $conn->query($sql);
 	$num = mysqli_num_rows($result);
 	  if($num>0){
-		$dateArray = [];
-		$valueArray = [];
 		while($value = mysqli_fetch_assoc($result)){
 			$dateArray[] = $value["PrDate"];
 			$AxeArray[] = $value[$axe];
 		}
 	  } else{
-		echo "Empty.";
+		echo "<p class='empty-chart'>No data yet for this grind. Log a value on your profile to see it here.</p>";
 	  }
 	}
-	catch(e){
-	  die("ERROR");
-	}
+        catch (Throwable $e){
+          error_log("Error in graph.php: " . $e->getMessage());
+          die("Internal Server Error");
+        }
  ?>
       </div>
     </div>
 
   <script>
+	const axeJS = <?= json_encode($axe) ?>;
 	const dateArrayJS = <?= json_encode($dateArray); ?>;
 	const AxeArrayJS = <?= json_encode($AxeArray); ?>;
 	const dateChartJS = dateArrayJS.map((day, index) =>{
@@ -141,16 +150,6 @@ try{
 
 
   // setup 
-  const backgroundcolor = [];
-  for (i=0; i < dateArrayJS.length; i++){
-      if (dateArrayJS[i][6] % 2 == 1){
-        backgroundcolor.push('rgba(255, 99, 132, 0.2)');
-      }
-      else{
-        backgroundcolor.push('rgba(99, 255, 132, 0.2)');
-      }
-    }
-
   const up = (ctx, value) => ctx.p0.parsed.y < ctx.p1.parsed.y ? value:
   undefined;
   const down = (ctx, value) => ctx.p0.parsed.y > ctx.p1.parsed.y ? value:
@@ -160,7 +159,7 @@ try{
   const data = {
     labels: dateChartJS,
     datasets: [{
-      label: '<?= $axe ?>',
+      label: axeJS,
       data: AxeArrayJS,
       borderColor: 'rgba(75, 192, 192, 0.6)',
       borderWidth: 3,
@@ -196,10 +195,16 @@ try{
     };
 
     // render init block
-    const myChart = new Chart(
-      document.getElementById('myChart'),
-      config
-    );
+    if (dateArrayJS.length > 0) {
+      const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+      );
+    } else {
+      window.__grindChartEmpty = true;
+      const box = document.getElementById('myChart').parentElement;
+      if (box) box.style.display = 'none';
+    }
     </script>
         <button class="button" id="DownloadGraph">Download this graph.</button>
         <button class="button" id="SendGraph">Email me this graph.</button>
@@ -217,13 +222,19 @@ try{
   RASF.addEventListener("click", () => {
     window.close();
   });
+  if (window.__grindChartEmpty) {
+    var dl = document.getElementById('DownloadGraph');
+    var sm = document.getElementById('SendGraph');
+    if (dl) dl.style.display = 'none';
+    if (sm) sm.style.display = 'none';
+  }
 
 
   // Convert canvas to image
     document.getElementById('DownloadGraph').addEventListener("click", function(e) {
     var canvas = document.querySelector('#myChart');
     var dataURL = canvas.toDataURL("image/jpeg", 1.0);
-    downloadImage(dataURL, 'Graph <?= $axe ?>.jpeg');
+    downloadImage(dataURL, 'Graph ' + axeJS + '.jpeg');
 });
 
   // Save | Download image
@@ -244,10 +255,17 @@ try{
     url: "emailGraph.php",
     data: { 
       img: dataURL,
-      axe: '<?= $axe ?>'
+      axe: axeJS
     },
     success: function(response){ 
-      alert("<?= $axe ?>'s Graph has been sent to your email."); 
+      if (response.indexOf("ERROR") !== -1) {
+        alert("Failed to email the graph. Check your mailer settings.");
+      } else {
+        alert(axeJS + "'s Graph has been sent to your email.");
+      }
+    },
+    error: function(){
+      alert("An error has occured while sending the email.");
     }
   })
   });

@@ -1,5 +1,21 @@
-document.getElementById("calendar").valueAsDate = new Date();
+const urlParams = new URLSearchParams(window.location.search);
+const urlDate = urlParams.get("timecalendar");
+if (!urlDate) {
+  document.getElementById("calendar").valueAsDate = new Date();
+}
 const NowDate = document.getElementById("calendar").valueAsDate;
+function stampDate() {
+  const cal = document.getElementById("calendar");
+  const here = document.getElementById("timenow");
+  if (!cal || !here) return;
+  const d = new Date(cal.value + "T00:00:00");
+  if (isNaN(d)) return;
+  here.textContent = d.toLocaleDateString(undefined, {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+}
 function DisplaySettings() {
   if (document.querySelector(".Settings").style.display != "block") {
     //vars > settings
@@ -17,6 +33,7 @@ function DisplaySettings() {
 function Verify() {
   if (document.querySelector(".Settings").style.display == "block") {
     //settings
+    let changed = false;
     try {
       const elemvar = document.querySelectorAll(".Settings input[type=text]");
       for (let i = 0; i < elemvar.length; i++) {
@@ -31,7 +48,7 @@ function Verify() {
                 elemvl +
                   " is greater than >30 characters. Choose a smaller name."
               );
-              return;
+              continue;
             }
             if (
               confirm(
@@ -42,14 +59,20 @@ function Verify() {
                   " ?"
               )
             ) {
+              changed = true;
               $.ajax({
                 url: "varssettings.php",
                 type: "POST",
                 data: { elemvl: elemvl, elemph: elemph },
                 success: function (data) {
-                  console.log("ytest wallajh");
                   if (data == 0) {
                     alert("Something wrong went. Please try again.");
+                  } else if (data == 2) {
+                    alert(elemvl + " Already exists.");
+                  } else if (data == 4) {
+                    alert(
+                      "Invalid characters. Use letters, numbers and underscores only."
+                    );
                   }
                 },
               });
@@ -62,9 +85,10 @@ function Verify() {
                   elemvl +
                     " is greater than >30 characters. Choose a smaller name."
                 );
-                return;
+                continue;
               }
               if (confirm("Are you sure you want to add " + elemvl + " ?")) {
+                changed = true;
                 $.ajax({
                   url: "varssettings.php",
                   type: "POST",
@@ -74,6 +98,10 @@ function Verify() {
                       alert("Something wrong went. Please try again.");
                     } else if (data == 2) {
                       alert(elemvl + " Already exists.");
+                    } else if (data == 4) {
+                      alert(
+                        "Invalid characters. Use letters, numbers and underscores only."
+                      );
                     } else if (data == 3) {
                       alert("Sql ERROR");
                     }
@@ -86,10 +114,11 @@ function Verify() {
           }
         } else if (elemvl == "") {
           if (elemph != "") {
-            if (elemvar[i].parentElement.id == "ToDelete") {
+if (elemvar[i].parentElement.id == "ToDelete") {
               if (confirm("Are you sure you want to delete " + elemph + " ?")) {
                 //DELETE
-
+                changed = true;
+                var delLi = elemvar[i].parentElement;
                 $.ajax({
                   url: "varssettings.php",
                   type: "POST",
@@ -98,15 +127,18 @@ function Verify() {
                     if (data == 0) {
                       alert("Something wrong went. Please try again.");
                     }
+                    if (delLi) delLi.remove();
                   },
                 });
-                document.getElementById(elemph).parentElement.remove();
               }
             }
           }
         }
-        window.location.reload(true);
-        //varssettings
+      }
+      if (changed) {
+        setTimeout(function () {
+          window.location.reload(true);
+        }, 400);
       }
     } catch (e) {
       console.log(e);
@@ -116,38 +148,49 @@ function Verify() {
     try {
       const elemvar = document.querySelectorAll(".vars input[type=number]");
       const timecalendar = document.getElementById("calendar").value;
+      const pending = [];
       for (let i = 0; i < elemvar.length; i++) {
-        elemph = elemvar[i].placeholder;
-        elemvl = elemvar[i].value;
-        //PHP SQL
+        const elemph = elemvar[i].placeholder;
+        const elemvl = elemvar[i].value;
         if (elemvl != "") {
-          if (
-            confirm(
-              "Are you sure you want to save: " +
-                elemvl +
-                " > " +
-                timecalendar +
-                " >> " +
-                elemph +
-                " ?"
-            )
-          ) {
-            $.ajax({
-              url: "vars.php",
-              type: "POST",
-              data: {
-                elemvl: elemvl,
-                elemph: elemph,
-                timecalendar: timecalendar,
-              },
-              success: function (data) {
-                if (data == 0) {
-                  alert("Something wrong went. Please try again.");
-                }
-              },
-            });
-          }
+          pending.push({ elemph: elemph, elemvl: elemvl });
         }
+      }
+      if (pending.length == 0) {
+        return;
+      }
+      let msg = "Save " + pending.length + " value" + (pending.length > 1 ? "s" : "") + " for " + timecalendar + "?\n";
+      for (let i = 0; i < pending.length; i++) {
+        msg += "\n• " + pending[i].elemph + " = " + pending[i].elemvl;
+      }
+      if (!confirm(msg)) {
+        return;
+      }
+      let done = 0;
+      for (let i = 0; i < pending.length; i++) {
+        (function (p) {
+          $.ajax({
+            url: "vars.php",
+            type: "POST",
+            data: {
+              elemvl: p.elemvl,
+              elemph: p.elemph,
+              timecalendar: timecalendar,
+            },
+            success: function (data) {
+              if (data == 0) {
+                alert("Something wrong went. Please try again.");
+              }
+            },
+            complete: function () {
+              done++;
+              if (done >= pending.length) {
+                window.location.href =
+                  "profile.php?timecalendar=" + encodeURIComponent(timecalendar);
+              }
+            },
+          });
+        })(pending[i]);
       }
     } catch (e) {
       console.log(e);
@@ -206,10 +249,11 @@ filtertodo.addEventListener("change", () => {
 
 function loadTasks() {
   var filtertodovalue = filtertodo.value;
+  var timecalendar = document.getElementById("calendar").value;
   $.ajax({
     url: "show-todo.php",
     type: "POST",
-    data: { filtertodovalue: filtertodovalue },
+    data: { filtertodovalue: filtertodovalue, timecalendar: timecalendar },
     success: function (data) {
       $("#tasks").html(data);
       let darkMode = localStorage.getItem("darkMode");
@@ -243,3 +287,16 @@ for (let i = 0; i < input.length; i++) {
 function resizeInput() {
   this.style.width = this.title.length + 2 + "ch";
 }
+
+stampDate();
+document.getElementById("calendar").addEventListener("change", function () {
+  const cal = document.getElementById("calendar");
+  const selected = cal.value;
+  if (!selected) return;
+  if (selected === (urlDate || new Date().toISOString().slice(0, 10))) {
+    stampDate();
+    return;
+  }
+  window.location.href =
+    "profile.php?timecalendar=" + encodeURIComponent(selected);
+});

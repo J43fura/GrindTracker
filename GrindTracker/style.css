@@ -315,12 +315,14 @@ input:focus {
   width: 80px !important;
   height: 80px !important;
 }
-#Verify {
+#Verify,
+#Verify2 {
   position: absolute;
   bottom: 0;
   right: 0;
 }
-#Settings {
+#Settings,
+#Settings2 {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -388,6 +390,136 @@ input:focus {
 
 #ADD1button {
   order: 1;
+}
+
+/*-------------------------activity heatmap --------------------------------*/
+.heatmap {
+  background: #181a20;
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+.heatmap .day {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #f8fdff;
+}
+
+.streak-note {
+  background: #181a20;
+  color: #f8fdff;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 1.1em;
+}
+.streak-note p {
+  margin: 0;
+  padding: 2px 0;
+  color: #db0a40;
+  font-weight: bold;
+}
+.streak-note p:last-child {
+  color: #f8fdff;
+  font-weight: normal;
+}
+
+.today-digest {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 14px;
+}
+.today-digest span {
+  background: linear-gradient(180deg, #9acfe0, #cbe6ef);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  color: #181a20;
+}
+
+.stats-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  padding: 24px 12px;
+}
+.stat-card {
+  background: linear-gradient(180deg, #22262f, #181a20);
+  color: #e2e4e9;
+  min-width: 130px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 1px solid #9acfe0;
+  text-align: center;
+}
+.stat-card .stat-num {
+  display: block;
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #db0a40;
+}
+.stat-card .stat-label {
+  display: block;
+  font-size: 0.75em;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+  color: #cbe6ef;
+}
+
+.history {
+  background: #f8fdff;
+  padding: 10px;
+  overflow-x: auto;
+}
+.history-actions {
+  text-align: center;
+  padding: 10px 0;
+}
+.history-actions .button {
+  font-size: 0.95em;
+  padding: 10px 22px;
+}
+.history table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+.history th,
+.history td {
+  border: 1px solid #9acfe0;
+  padding: 6px 10px;
+  text-align: left;
+  white-space: nowrap;
+}
+.history th {
+  background: linear-gradient(180deg, #9acfe0, #cbe6ef);
+  color: #181a20;
+}
+.history td.done-yes {
+  color: #1d7a3e;
+  font-weight: bold;
+}
+.history td.done-no {
+  color: #db0a40;
+}
+.history td.history-date a {
+  color: #1a5d7a;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 1px dashed #9acfe0;
+}
+.history td.history-date a:hover {
+  color: #db0a40;
+  border-bottom-style: solid;
 }
 
 /*-------------------------todo list  --------------------------------*/

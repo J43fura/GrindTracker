@@ -2,18 +2,25 @@
 session_start();
 
 require_once('connection.php');
+if (!isset($_SESSION["id"])){
+	exit();
+}
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require_once "Addons/PHPMailer/PHPmailer.php";
+require_once "Addons/PHPMailer/PHPMailer.php";
 require_once "Addons/PHPMailer/SMTP.php";
 require_once "Addons/PHPMailer/Exception.php";
 
 
-$id = $_SESSION["id"];
+$id = (int)$_SESSION["id"];
 $axe = $_POST['axe'];
 $img = $_POST['img'];
 $img = str_replace('data:image/jpeg;base64,', '', $img);
-$img = str_replace(' ', '+', $img);	
+$img = str_replace(' ', '+', $img);
+if (strlen($img) > 12500000){
+	echo "ERROR email was not sent.";
+	exit();
+}
 $data = base64_decode($img);
 
 
@@ -22,9 +29,6 @@ $sql = "SELECT * FROM register WHERE id = '$id'";
 $result = $conn->query($sql);
 $value = mysqli_fetch_assoc($result);
 $username = $value["username"];
-
-$result = $conn->query($sql);
-$value = mysqli_fetch_assoc($result);
 $email = $value["email"];
 
 $mailerUsername = "<Email>";
@@ -33,7 +37,7 @@ $mailerPassword = "<Password>";
 $mail = new PHPMailer();
 		
 //STMP Settings
-$mail->SMTPDebug = 3;                               
+$mail->SMTPDebug = 0;                               
 $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth   = true;  
@@ -42,8 +46,6 @@ $mail->Username = $mailerUsername;
 $mail->Password = $mailerPassword;
 $mail->SMTPSecure = "tls";
 $mail->Port = 587;
-
-$sql = "SELECT * FROM register WHERE id = '$id'";
 
 //Email Settings
 $mail->setFrom($mailerUsername,"GrindTracker");

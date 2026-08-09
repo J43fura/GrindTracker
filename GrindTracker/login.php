@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('connection.php');
-$username = $_POST['username'];
+$username = mysqli_real_escape_string($conn, $_POST['username']);
 $password = $_POST['password'];
 
 if (!empty($username) && !empty($password) ){
@@ -24,26 +24,30 @@ if (!empty($username) && !empty($password) ){
             $value = mysqli_fetch_assoc($result);
             $code_auth = $value["code_auth"];
             if ($code_auth == NULL){
-                $_SESSION["id"] = $id;
+                $_SESSION["id"] = (int)$id;
                 try{
                     unset($_SESSION["username"]);}
                 catch(Error $e){
 
                 }
                 header("location:profile.php");
+                exit();
             }
             else{
                 $_SESSION["username"] = $username;
                 header("location:index.php?msg=emailverif");
+                exit();
             }
             exit();
         }
 }
 header("location:index.php?msg=login_error");
     $conn->close();
+    exit();
 }
 else{
     header("location:index.php");
+    exit();
 }
 ?>
 

@@ -2,6 +2,7 @@
 session_start();
 if (isset($_SESSION["id"])){
   header("location:profile.php");
+  exit();
 }
 ?>
 
@@ -55,14 +56,15 @@ if (isset($_SESSION["id"])){
         method="post"
         action="login.php"
       >
-        <input type="text" id="username" name="username" placeholder="Username" required />
+        <input type="text" id="loginUsername" name="username" placeholder="Username" required autofocus autocomplete="username" />
         <br />
         <input
-          id="password"
+          id="loginPassword"
           type="password"
           name="password"
           placeholder="Password"
           required
+          autocomplete="current-password"
         />
         <div id="msg1"></div>
         <?php
@@ -74,7 +76,7 @@ if (isset($_SESSION["id"])){
               echo "<script>document.getElementById('msg1').innerHTML = 'The verification code is wrong.'; </script>";
             }}
               ?>
-        <button class="button" role="submit" id="btnLogin">Log In</button>
+        <button class="button" type="submit" id="btnLogin">Log In</button>
         <button type="button" class="button signup" onclick="togglePopupSignUp()">
           Sign Up
         </button>
@@ -90,49 +92,51 @@ if (isset($_SESSION["id"])){
         method="post"
         action="register.php"
       >
-        <input type="text" id="username" name="username" placeholder="Username" required />
-        <div id="msg2"></div>
+        <input type="text" id="regUsername" name="username" placeholder="Username" required autocomplete="username" />
+        <div id="regMsg"></div>
 
         <?php      
             if (isset($_GET["msg"])){
+              $regErr = "";
               if ($_GET["msg"] == "usedusername"){
-              echo "<script>document.getElementById('msg2').innerHTML = '⛔ The username is already used.';
-              document.getElementById('popup-1').classList.toggle('active');
+                $regErr = "⛔ The username is already used.";
+              }
+              else if($_GET["msg"] == "charusername"){
+                $regErr = "⛔ The username cant have special characters.";
+              }
+              else if($_GET["msg"] == "pwc"){
+                $regErr = "⛔ Password must be at least: (8: characters long, 1: number, upper and lower case letter.)";
+              }
+              else if($_GET["msg"] == "pww"){
+                $regErr = "⛔ Password confirmation is wrong.";
+              }
+              if ($regErr !== ""){
+                $regMsgJS = json_encode($regErr);
+                echo "<script>document.getElementById('regMsg').innerHTML = $regMsgJS;
+                document.getElementById('popup-1').classList.add('active');
+                document.body.style.overflow = 'hidden';
                </script>";
+              }
             }
-            else if($_GET["msg"] == "charusername"){
-              echo "<script>document.getElementById('msg2').innerHTML = '⛔ The username cant have special characters.';
-              document.getElementById('popup-1').classList.toggle('active');
-               </script>";
-            }
-            else if($_GET["msg"] == "pwc"){
-              echo "<script>document.getElementById('msg2').innerHTML = '⛔ Password must be at least: (8: characters long, 1: number, upper and lower case letter.)';
-              document.getElementById('popup-1').classList.toggle('active');
-               </script>";
-            }
-            else if($_GET["msg"] == "pww"){
-              echo "<script>document.getElementById('msg2').innerHTML = '⛔ Password confirmation is wrong.';
-              document.getElementById('popup-1').classList.toggle('active');
-               </script>";
-            }
-          }
               ?>
         
         <input
-          id="email"
+          id="regEmail"
           type="email"
           name="email"
           placeholder="Email"
           required
+          autocomplete="email"
         />
         <br />
 
         <input
-          id="password"
+          id="regPassword"
           type="password"
           name="password"
           placeholder="Enter Password"
           required
+          autocomplete="new-password"
         />
         <input
           id="passwordC"
@@ -140,14 +144,15 @@ if (isset($_SESSION["id"])){
           name="passwordC"
           placeholder="Confirm password"
           required
+          autocomplete="new-password"
         /> 
         <br />
-        <input type="radio" id="gender" name="gender" value="m" checked />
+        <input type="radio" id="genderM" name="gender" value="m" checked />
         <label class="dark-t">Male</label>
-        <input type="radio" id="gender" name="gender" value="f" />
+        <input type="radio" id="genderF" name="gender" value="f" />
         <label class="dark-t">Female</label>
         <br />
-        <button class="button" role="submit" id="btnRegister">Register</button>
+        <button class="button" type="submit" id="btnRegister">Register</button>
       </form>
     </section>
 
@@ -156,11 +161,11 @@ if (isset($_SESSION["id"])){
       <h2 class="section-header dark-t-w">Email Verification</h2>
       <form
         class="section-paragraph"
-        id="myForm2"
+        id="myForm3"
         method="post"
         action="emailverif.php"
       >
-        <div id="msg2">A 6-digit verification code was sent to your email.</div>
+        <div id="verifyMsg">A 6-digit verification code was sent to your email.</div>
         <input
           id="emailverif"
           type="number"
@@ -168,13 +173,15 @@ if (isset($_SESSION["id"])){
           placeholder="6-digit code"
           required
         />
-        <button class="button" role="submit" id="btnRegister">Verifiy</button>
+        <button class="button" type="submit" id="btnVerify">Verify</button>
       </form>
     </section>
     <?php 
     if (isset($_GET["msg"])){
     if($_GET["msg"] == "emailverif"){
-              echo "<script>document.getElementById('popup-Ver').classList.toggle('active');</script>";
+              echo "<script>document.getElementById('popup-Ver').classList.add('active');
+              document.body.style.overflow = 'hidden';
+              </script>";
             }
             }
             ?>

@@ -2,18 +2,25 @@
 session_start();
 
 require_once('connection.php');
+if (!isset($_SESSION["id"])){
+	exit();
+}
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require_once "Addons/PHPMailer/PHPmailer.php";
+require_once "Addons/PHPMailer/PHPMailer.php";
 require_once "Addons/PHPMailer/SMTP.php";
 require_once "Addons/PHPMailer/Exception.php";
 
 
-$id = $_SESSION["id"];
+$id = (int)$_SESSION["id"];
 $doc = $_POST['doc'];
 
 $data = trim( str_replace( 'data:application/pdf;base64,', '', $doc ) );
 $data = str_replace( ' ', '+', $data );
+if (strlen($data) > 12500000){
+	echo "ERROR email was not sent.";
+	exit();
+}
 $decoded_pdf = base64_decode( $data );
 
 $sql = "SELECT * FROM register WHERE id = '$id'";
@@ -21,9 +28,6 @@ $sql = "SELECT * FROM register WHERE id = '$id'";
 $result = $conn->query($sql);
 $value = mysqli_fetch_assoc($result);
 $username = $value["username"];
-
-$result = $conn->query($sql);
-$value = mysqli_fetch_assoc($result);
 $email = $value["email"];
 
 $mailerUsername = "<Email>";
@@ -32,7 +36,7 @@ $mailerPassword = "<Password>";
 $mail = new PHPMailer();
 		
 //STMP Settings
-$mail->SMTPDebug = 3;                               
+$mail->SMTPDebug = 0;                               
 $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth   = true;  
@@ -41,8 +45,6 @@ $mail->Username = $mailerUsername;
 $mail->Password = $mailerPassword;
 $mail->SMTPSecure = "tls";
 $mail->Port = 587;
-
-$sql = "SELECT * FROM register WHERE id = '$id'";
 
 //Email Settings
 $mail->setFrom($mailerUsername,"GrindTracker");

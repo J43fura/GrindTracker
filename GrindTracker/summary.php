@@ -2,9 +2,10 @@
 session_start();
 if (!isset($_SESSION["id"])){
   header("location:index.php");
+  exit();
 }
 require_once('connection.php');
-$id = $_SESSION["id"];
+$id = (int)$_SESSION["id"];
 
 $sql = "SELECT username FROM register WHERE id = '$id'";
 $result = $conn->query($sql);
@@ -32,6 +33,7 @@ $datenow=date_create($timenow);
     <link rel="stylesheet" href="style.css" />
     <title>Summary</title>
     </head>
+    <body class="chartBody">
 
     <div class="loader1" id="loader"></div>
     <div class="loader" id="loader"></div>
@@ -41,6 +43,12 @@ $datenow=date_create($timenow);
           <li><a class="nav-elements" href="profile.php">Home</a></li>
           <li><a class="nav-elements" href="#RASF1">🔻</a></li>
           <li><a style="cursor: pointer;" class="nav-elements" id = "logout" >Logout</a></li>
+          <li>
+            <label class="switch">
+              <input type="checkbox" id="darkmode" />
+              <span class="slider"></span>
+            </label>
+          </li>
           <script>
             var logoutBut = document.querySelector("#logout");
             logoutBut.addEventListener("click", () => {
@@ -188,6 +196,122 @@ $datenow=date_create($timenow);
       echo"<p class='todosing'>Empty.</p>"; 
     }
 ?>
+
+
+<!-- STATS -->
+  <?php
+    $allDays = [];
+    $sql = "SELECT DISTINCT PrDate AS d FROM pr$id WHERE PrDate IS NOT NULL ORDER BY PrDate";
+    $result3 = $conn->query($sql);
+    if ($result3){
+      while($a = mysqli_fetch_assoc($result3)){
+        $allDays[] = $a['d'];
+      }
+    }
+    $todayNow = date('Y-m-d');
+    $yday = date('Y-m-d', strtotime('-1 day'));
+    $todayActive = in_array($todayNow, $allDays);
+    $ydayActive = in_array($yday, $allDays);
+
+    $longest = 0;
+    $run = 0;
+    $prev = null;
+    foreach ($allDays as $d){
+      if ($prev !== null && (strtotime($d) - strtotime($prev)) == 86400){
+        $run++;
+      } else {
+        $run = 1;
+      }
+      if ($run > $longest) $longest = $run;
+      $prev = $d;
+    }
+
+    $streak = 0;
+    $cursor = $todayActive ? $todayNow : ($ydayActive ? $yday : null);
+    while ($cursor !== null && in_array($cursor, $allDays)){
+      $streak++;
+      $cursor = date('Y-m-d', strtotime('-1 day', strtotime($cursor)));
+    }
+
+    $statsCols = [];
+    $cols = $conn->query("SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'");
+    if ($cols){
+      while($c = $cols->fetch_assoc()){
+        $statsCols[] = $c['Field'];
+      }
+    }
+    $totalLogs = 0;
+    $activeDates = [];
+    if ($statsCols){
+      $sel = "SELECT PrDate, " . implode(',', $statsCols) . " FROM pr$id WHERE PrDate IS NOT NULL ORDER BY PrDate";
+      $r = $conn->query($sel);
+      if ($r){
+        while($sr = $r->fetch_assoc()){
+          $rowLogs = 0;
+          foreach ($statsCols as $col){
+            if (isset($sr[$col]) && $sr[$col] !== null){
+              $rowLogs++;
+              $totalLogs++;
+            }
+          }
+          if ($rowLogs > 0){
+            $activeDates[$sr['PrDate']] = true;
+          }
+        }
+      }
+    }
+    $activeDaysCount = count($activeDates);
+  ?>
+  <div class="stats-strip">
+    <div class="stat-card">
+      <span class="stat-num"><?= $totalLogs ?></span>
+      <span class="stat-label">VALUE<?= $totalLogs != 1 ? 'S' : '' ?> LOGGED</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num"><?= $activeDaysCount ?></span>
+      <span class="stat-label">ACTIVE DAY<?= $activeDaysCount != 1 ? 'S' : '' ?></span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num"><?= $streak ?></span>
+      <span class="stat-label">DAY STREAK</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num"><?= $longest ?></span>
+      <span class="stat-label">RECORD</span>
+    </div>
+  </div>
+
+<!-- Activity calendar -->
+<div class="chartMenu">
+      <p>LAST 30 DAYS ACTIVITY</p>
+    </div>
+    <div class="streak-note">
+      <p><?= $streak > 0 ? '🔥 Current streak: ' . $streak . ' day' . ($streak>1?'s':'') : 'No streak yet — log today to start one.' ?></p>
+      <p>Record: <?= $longest ?> day<?= $longest != 1 ? 's' : '' ?></p>
+    </div>
+    <div class="heatmap">
+      <?php
+        $activity = [];
+        $sql = "SELECT PrDate, COUNT(*) AS c FROM pr$id
+                WHERE PrDate >= DATE_SUB(CURRENT_DATE, INTERVAL 30 DAY)
+                GROUP BY PrDate ORDER BY PrDate";
+        $result2 = $conn->query($sql);
+        if ($result2){
+          while($a = mysqli_fetch_assoc($result2)){
+            $activity[$a['PrDate']] = (int)$a['c'];
+          }
+        }
+        $max = $activity ? max($activity) : 0;
+        for ($d = 30; $d >= 0; $d--){
+          $day = date('Y-m-d', strtotime("-$d day"));
+          $count = isset($activity[$day]) ? $activity[$day] : 0;
+          $lvl = $max > 0 ? round($count / $max * 5) : 0;
+          $bg = $count === 0 ? '#2c2f38' : "rgba(219, 10, 64, " . (0.25 + $lvl * 0.15) . ")";
+          $number = (int)date('j', strtotime($day));
+          echo "<div class='day' title='$day · $count log entries' style='background:$bg'>$number</div>";
+        }
+      ?>
+    </div>
     </div>
 
 
@@ -196,7 +320,6 @@ $datenow=date_create($timenow);
       <p>GRAPHS</p>
     </div>
 
-<body class="chartBody">
 <?php
 
     if (mysqli_num_rows($result)==0){
@@ -229,11 +352,12 @@ $datenow=date_create($timenow);
 
         } else{
           $dateArray = [];
-          $valueArray = [];
-          }
+          $AxeArray = [];
         }
-        catch(e){
-          die("ERROR");
+        }
+        catch (Throwable $e) {
+          error_log("Error in summary.php: " . $e->getMessage());
+          die("Internal Server Error");
         }
         ?>
 
@@ -290,6 +414,92 @@ $datenow=date_create($timenow);
 <?php
   }}
 ?>
+<!-- HISTORY -->
+  <div class="chartMenu">
+      <p>HISTORY (LAST 30 DAYS)</p>
+    </div>
+    <div class="history-actions">
+      <button type="button" class="button signup" id="csvDownload">Export as CSV</button>
+    </div>
+    <?php
+      $histCols = [];
+      $cols = $conn->query("SHOW COLUMNS FROM pr$id");
+      if ($cols){
+        while($c = $cols->fetch_assoc()){
+          if (in_array($c['Field'], ['TODOADDED'])) continue;
+          $histCols[] = $c['Field'];
+        }
+      }
+      $histRows = [];
+      if ($histCols){
+        $sel = "SELECT " . implode(',', $histCols) . " FROM pr$id
+                ORDER BY PrDate DESC LIMIT 30";
+        $r = $conn->query($sel);
+        if ($r){
+          while($row = $r->fetch_assoc()) $histRows[] = $row;
+        }
+      }
+    ?>
+    <div class="history">
+      <table>
+        <thead>
+          <tr>
+          <?php foreach ($histCols as $col): ?>
+            <th><?= htmlspecialchars($col) ?></th>
+          <?php endforeach; ?>
+          </tr>
+        </thead>
+        <tbody>
+          <?php if (empty($histRows)): ?>
+            <tr><td colspan="<?= max(1, count($histCols)) ?>">Empty.</td></tr>
+          <?php else: ?>
+            <?php foreach ($histRows as $hr): ?>
+              <tr>
+              <?php foreach ($histCols as $col): ?>
+                <?php
+                  $val = isset($hr[$col]) ? $hr[$col] : null;
+                  $txt = ($val === null || $val === '') ? '-' : (string)$val;
+                ?>
+                <?php if ($col == 'PrDate'): ?>
+                <td class="history-date"><a href="profile.php?timecalendar=<?= urlencode($hr['PrDate']) ?>" title="Open this day in profile"><?= htmlspecialchars($txt) ?></a></td>
+                <?php else: ?>
+                <td class="<?= $col == 'Completed' ? ($val ? 'done-yes' : 'done-no') : '' ?>" data-raw="<?= $val === null || $val === '' ? '' : htmlspecialchars((string)$val) ?>"><?= htmlspecialchars($txt) ?></td>
+                <?php endif; ?>
+              <?php endforeach; ?>
+              </tr>
+            <?php endforeach; ?>
+          <?php endif; ?>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      document.getElementById("csvDownload").addEventListener("click", function () {
+        var rows = [];
+        var headers = [];
+        var thead = document.querySelectorAll(".history thead th");
+        for (var i = 0; i < thead.length; i++) {
+          headers.push('"' + thead[i].textContent.replace(/"/g, '""') + '"');
+        }
+        rows.push(headers.join(","));
+        var trs = document.querySelectorAll(".history tbody tr");
+        for (var r = 0; r < trs.length; r++) {
+          var tds = trs[r].querySelectorAll("td");
+          var line = [];
+          for (var c = 0; c < tds.length; c++) {
+            var txt = tds[c].textContent.replace(/"/g, '""');
+            var value = tds[c].getAttribute("data-raw");
+            line.push('"' + (value !== null ? value : txt) + '"');
+          }
+          if (tds.length) rows.push(line.join(","));
+        }
+        var blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8" });
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "grindtracker-history.csv";
+        document.body.appendChild(a);
+        a.click();
+      });
+    </script>
 <!-- TODOS -->
   <div id="lfeyda">
     <div class="chartMenu">
@@ -322,16 +532,16 @@ $datenow=date_create($timenow);
                   <?php
             if ($intervalnum<0){
                 ?>
-              <small  id="CompleteTime" class="dark-t1" placeholder="<?= $row['PrDate']?>" title="⚰️ due date is over, been <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>
+              <small  class="complete-time dark-t1" placeholder="<?= $row['PrDate']?>" title="⚰️ due date is over, been <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>
             <?php }
             else if ($intervalnum==0){?> 
-              <small  id="CompleteTime" class="dark-t1" placeholder="<?= $row['PrDate']?>" title="🚨 due today!">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>            <?php }
+              <small  class="complete-time dark-t1" placeholder="<?= $row['PrDate']?>" title="🚨 due today!">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>            <?php }
             else if ($intervalnum < 3){?> 
-              <small  id="CompleteTime" class="dark-t1" placeholder="<?= $row['PrDate']?>" title="⚠️ due to less than <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>            <?php }
+              <small  class="complete-time dark-t1" placeholder="<?= $row['PrDate']?>" title="⚠️ due to less than <?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>            <?php }
             else{?> 
-                <small  id="CompleteTime" class="dark-t1" placeholder="<?= $row['PrDate']?>" title="<?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>
+                <small  class="complete-time dark-t1" placeholder="<?= $row['PrDate']?>" title="<?= $intervalnum = $interval->format('%R%a');?> days.">&nbsp&nbsp due to: <?= $row['PrDate']?>.</small>
             <?php }?>
-                  <small id="CreatedTime" class="dark-t1" placeholder="<?= $row['TODOADDED']?>">created: <?= $row['TODOADDED']?>.</small>
+                  <small class="created-time dark-t1" placeholder="<?= $row['TODOADDED']?>">created: <?= $row['TODOADDED']?>.</small>
                   <span class="todosing" type ="text"> \ due <?=$intervalnum?> days.</span>
                   </li>
       
@@ -475,11 +685,15 @@ $datenow=date_create($timenow);
 		doc: url
 		},
 		success: function(response){ 
-		alert("Summary has been sent to your email."); 
+    if (response.indexOf("ERROR") !== -1) {
+      alert("Failed to email the summary. Check your mailer settings.");
+    } else {
+      alert("Summary has been sent to your email.");
+    }
     $("html").css("cursor", "default");
 		},
     error: function(response){
-      alert("An error has occured."); 
+      alert("An error has occured. Please try again."); 
     $("html").css("cursor", "default");
     }
 	  }) 
@@ -493,6 +707,7 @@ $datenow=date_create($timenow);
         <a href="#RAS" id="RASF">🔺</a>
       </div>
     </footer>
+    <script src="darkmode.js" defer></script>
 </html>
 
 <?php
