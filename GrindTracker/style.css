@@ -443,6 +443,35 @@ input:focus {
   color: #181a20;
 }
 
+.history {
+  background: #f8fdff;
+  padding: 10px;
+  overflow-x: auto;
+}
+.history table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+.history th,
+.history td {
+  border: 1px solid #9acfe0;
+  padding: 6px 10px;
+  text-align: left;
+  white-space: nowrap;
+}
+.history th {
+  background: linear-gradient(180deg, #9acfe0, #cbe6ef);
+  color: #181a20;
+}
+.history td.done-yes {
+  color: #1d7a3e;
+  font-weight: bold;
+}
+.history td.done-no {
+  color: #db0a40;
+}
+
 /*-------------------------todo list  --------------------------------*/
 .todo-div {
   text-align: center !important;

@@ -358,6 +358,57 @@ $datenow=date_create($timenow);
 <?php
   }}
 ?>
+<!-- HISTORY -->
+  <div class="chartMenu">
+      <p>HISTORY (LAST 30 DAYS)</p>
+    </div>
+    <?php
+      $histCols = [];
+      $cols = $conn->query("SHOW COLUMNS FROM pr$id");
+      if ($cols){
+        while($c = $cols->fetch_assoc()){
+          if (in_array($c['Field'], ['TODOADDED'])) continue;
+          $histCols[] = $c['Field'];
+        }
+      }
+      $histRows = [];
+      if ($histCols){
+        $sel = "SELECT " . implode(',', $histCols) . " FROM pr$id
+                ORDER BY PrDate DESC LIMIT 30";
+        $r = $conn->query($sel);
+        if ($r){
+          while($row = $r->fetch_assoc()) $histRows[] = $row;
+        }
+      }
+    ?>
+    <div class="history">
+      <table>
+        <thead>
+          <tr>
+          <?php foreach ($histCols as $col): ?>
+            <th><?= htmlspecialchars($col) ?></th>
+          <?php endforeach; ?>
+          </tr>
+        </thead>
+        <tbody>
+          <?php if (empty($histRows)): ?>
+            <tr><td colspan="<?= max(1, count($histCols)) ?>">Empty.</td></tr>
+          <?php else: ?>
+            <?php foreach ($histRows as $hr): ?>
+              <tr>
+              <?php foreach ($histCols as $col): ?>
+                <?php
+                  $val = isset($hr[$col]) ? $hr[$col] : null;
+                  $txt = ($val === null || $val === '') ? '-' : (string)$val;
+                ?>
+                <td class="<?= $col == 'Completed' ? ($val ? 'done-yes' : 'done-no') : '' ?>"><?= htmlspecialchars($txt) ?></td>
+              <?php endforeach; ?>
+              </tr>
+            <?php endforeach; ?>
+          <?php endif; ?>
+        </tbody>
+      </table>
+    </div>
 <!-- TODOS -->
   <div id="lfeyda">
     <div class="chartMenu">
