@@ -1,4 +1,8 @@
-document.getElementById("calendar").valueAsDate = new Date();
+const urlParams = new URLSearchParams(window.location.search);
+const urlDate = urlParams.get("timecalendar");
+if (!urlDate) {
+  document.getElementById("calendar").valueAsDate = new Date();
+}
 const NowDate = document.getElementById("calendar").valueAsDate;
 function stampDate() {
   const cal = document.getElementById("calendar");
@@ -180,7 +184,8 @@ if (elemvar[i].parentElement.id == "ToDelete") {
             complete: function () {
               done++;
               if (done >= pending.length) {
-                window.location.reload(true);
+                window.location.href =
+                  "profile.php?timecalendar=" + encodeURIComponent(timecalendar);
               }
             },
           });
@@ -282,4 +287,14 @@ function resizeInput() {
 }
 
 stampDate();
-document.getElementById("calendar").addEventListener("change", stampDate);
+document.getElementById("calendar").addEventListener("change", function () {
+  const cal = document.getElementById("calendar");
+  const selected = cal.value;
+  if (!selected) return;
+  if (selected === (urlDate || new Date().toISOString().slice(0, 10))) {
+    stampDate();
+    return;
+  }
+  window.location.href =
+    "profile.php?timecalendar=" + encodeURIComponent(selected);
+});

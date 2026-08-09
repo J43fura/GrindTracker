@@ -6,6 +6,11 @@ if (!isset($_SESSION["id"])){
 }
 require_once('connection.php');
 $id = (int)$_SESSION["id"];
+
+$calDate = isset($_GET['timecalendar']) ? $_GET['timecalendar'] : '';
+$calCheck = DateTime::createFromFormat('Y-m-d', $calDate);
+$todayStr = $calCheck ? $calDate : date('Y-m-d');
+
 $sql = "SELECT username FROM register WHERE id = '$id'";
 $result = $conn->query($sql);
 $value = mysqli_fetch_assoc($result);
@@ -71,7 +76,7 @@ $username = $value["username"];
       $id = (int)$_SESSION["id"];
       $sql = "SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND  field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'";
       $result = $conn->query($sql);
-      $today = date('Y-m-d');
+      $today = $todayStr;
       $prefill = [];
       $rowToday = $conn->query("SELECT * FROM `pr$id` WHERE PrDate = '$today' LIMIT 1");
       if ($rowToday) $prefill = ($rowToday->fetch_assoc() ?: []);
@@ -134,12 +139,11 @@ $username = $value["username"];
     </div>
 
     <div class="calendar">
-      <input type="date" value="<?= date('Y-m-d') ?>" id="calendar" name="calendar" required />
+      <input type="date" value="<?= $todayStr ?>" id="calendar" name="calendar" required />
       <i id="timenow"></i>
     </div>
 
     <?php
-      $todayStr = date('Y-m-d');
       $varCols = [];
       $cols = $conn->query("SHOW COLUMNS FROM pr$id");
       if ($cols){
@@ -163,7 +167,7 @@ $username = $value["username"];
       $todayDone = (int)$done["c"];
     ?>
     <div class="today-digest">
-      <span><?= $todayVars ?> variable<?= $todayVars != 1 ? 's' : '' ?> logged</span>
+      <span><?= htmlspecialchars($todayStr) ?> · <?= $todayVars ?> variable<?= $todayVars != 1 ? 's' : '' ?> logged</span>
       <span><?= $todayTodos ?> todo<?= $todayTodos != 1 ? 's' : '' ?></span>
       <span><?= $todayDone ?> completed</span>
     </div>
