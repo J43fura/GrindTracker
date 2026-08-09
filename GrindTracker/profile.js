@@ -54,6 +54,10 @@ function Verify() {
                     alert("Something wrong went. Please try again.");
                   } else if (data == 2) {
                     alert(elemvl + " Already exists.");
+                  } else if (data == 4) {
+                    alert(
+                      "Invalid characters. Use letters, numbers and underscores only."
+                    );
                   }
                 },
               });
@@ -79,6 +83,10 @@ function Verify() {
                       alert("Something wrong went. Please try again.");
                     } else if (data == 2) {
                       alert(elemvl + " Already exists.");
+                    } else if (data == 4) {
+                      alert(
+                        "Invalid characters. Use letters, numbers and underscores only."
+                      );
                     } else if (data == 3) {
                       alert("Sql ERROR");
                     }

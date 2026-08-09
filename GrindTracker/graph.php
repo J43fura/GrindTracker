@@ -3,9 +3,14 @@ session_start();
 require_once('connection.php');
 if (!isset($_POST['elemph'])){
   header("location:index.php");
+  exit();
 }
 $id = (int)$_SESSION["id"];
 $axe = $_POST['elemph'];
+if (!preg_match('/^[A-Za-z0-9_]+$/', $axe)){
+  die("Internal Server Error");
+}
+$axeOut = htmlspecialchars($axe, ENT_QUOTES, 'UTF-8');
 ?>
 
 <!doctype html>
@@ -18,7 +23,7 @@ $axe = $_POST['elemph'];
 	<script src="Addons/chartjs-adapter-date-fns.bundle.min.js"></script> 
   <script src="Addons/jquery-3.6.0.js"></script>
   <link rel="stylesheet" href="style.css" />
-    <title><?= $axe ?></title>
+    <title><?= $axeOut ?></title>
     <style>
       @font-face {
         font-family: Kanit;
@@ -90,7 +95,7 @@ $axe = $_POST['elemph'];
   </head>
   <body class="chartBody">
     <div class="chartMenu">
-      <p><?= $axe ?></p>
+      <p><?= $axeOut ?></p>
     </div>
     <div class="chartCard">
       <div class="chartBox">
@@ -120,6 +125,7 @@ try{
     </div>
 
   <script>
+	const axeJS = <?= json_encode($axe) ?>;
 	const dateArrayJS = <?= json_encode($dateArray); ?>;
 	const AxeArrayJS = <?= json_encode($AxeArray); ?>;
 	const dateChartJS = dateArrayJS.map((day, index) =>{
@@ -161,7 +167,7 @@ try{
   const data = {
     labels: dateChartJS,
     datasets: [{
-      label: '<?= $axe ?>',
+      label: axeJS,
       data: AxeArrayJS,
       borderColor: 'rgba(75, 192, 192, 0.6)',
       borderWidth: 3,
@@ -236,7 +242,7 @@ try{
     document.getElementById('DownloadGraph').addEventListener("click", function(e) {
     var canvas = document.querySelector('#myChart');
     var dataURL = canvas.toDataURL("image/jpeg", 1.0);
-    downloadImage(dataURL, 'Graph <?= $axe ?>.jpeg');
+    downloadImage(dataURL, 'Graph ' + axeJS + '.jpeg');
 });
 
   // Save | Download image
@@ -257,10 +263,10 @@ try{
     url: "emailGraph.php",
     data: { 
       img: dataURL,
-      axe: '<?= $axe ?>'
+      axe: axeJS
     },
     success: function(response){ 
-      alert("<?= $axe ?>'s Graph has been sent to your email."); 
+      alert(axeJS + "'s Graph has been sent to your email."); 
     }
   })
   });
