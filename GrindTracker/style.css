@@ -315,12 +315,14 @@ input:focus {
   width: 80px !important;
   height: 80px !important;
 }
-#Verify {
+#Verify,
+#Verify2 {
   position: absolute;
   bottom: 0;
   right: 0;
 }
-#Settings {
+#Settings,
+#Settings2 {
   position: absolute;
   bottom: 0;
   left: 0;

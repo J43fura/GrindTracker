@@ -126,10 +126,10 @@ $username = $value["username"];
           <button class="button BtnS" onclick="ADDvar()">➕</button>
         </li>
       </ul>
-      <button id="Settings" class="button BtnS" onclick="DisplaySettings()">
+      <button id="Settings2" class="button BtnS" onclick="DisplaySettings()">
         ⚙️
       </button>
-      <button id="Verify" class="button BtnS" onclick="Verify()">✔️</button>
+      <button id="Verify2" class="button BtnS" onclick="Verify()">✔️</button>
     </div>
 
     <div class="calendar">
