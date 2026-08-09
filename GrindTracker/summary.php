@@ -191,6 +191,56 @@ $datenow=date_create($timenow);
 ?>
 
 
+<!-- STATS -->
+  <?php
+    $statsCols = [];
+    $cols = $conn->query("SHOW COLUMNS FROM pr$id WHERE field != 'PrDate' AND field != 'TODO' AND field != 'TODOADDED' AND field != 'Completed'");
+    if ($cols){
+      while($c = $cols->fetch_assoc()){
+        $statsCols[] = $c['Field'];
+      }
+    }
+    $totalLogs = 0;
+    $activeDates = [];
+    if ($statsCols){
+      $sel = "SELECT PrDate, " . implode(',', $statsCols) . " FROM pr$id WHERE PrDate IS NOT NULL ORDER BY PrDate";
+      $r = $conn->query($sel);
+      if ($r){
+        while($sr = $r->fetch_assoc()){
+          $rowLogs = 0;
+          foreach ($statsCols as $col){
+            if (isset($sr[$col]) && $sr[$col] !== null){
+              $rowLogs++;
+              $totalLogs++;
+            }
+          }
+          if ($rowLogs > 0){
+            $activeDates[$sr['PrDate']] = true;
+          }
+        }
+      }
+    }
+    $activeDaysCount = count($activeDates);
+  ?>
+  <div class="stats-strip">
+    <div class="stat-card">
+      <span class="stat-num"><?= $totalLogs ?></span>
+      <span class="stat-label">VALUE<?= $totalLogs != 1 ? 'S' : '' ?> LOGGED</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num"><?= $activeDaysCount ?></span>
+      <span class="stat-label">ACTIVE DAY<?= $activeDaysCount != 1 ? 'S' : '' ?></span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num"><?= $streak ?></span>
+      <span class="stat-label">DAY STREAK</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num"><?= $longest ?></span>
+      <span class="stat-label">RECORD</span>
+    </div>
+  </div>
+
 <!-- Activity calendar -->
 <div class="chartMenu">
       <p>LAST 30 DAYS ACTIVITY</p>

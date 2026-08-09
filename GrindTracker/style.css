@@ -443,6 +443,36 @@ input:focus {
   color: #181a20;
 }
 
+.stats-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  padding: 24px 12px;
+}
+.stat-card {
+  background: linear-gradient(180deg, #22262f, #181a20);
+  color: #e2e4e9;
+  min-width: 130px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 1px solid #9acfe0;
+  text-align: center;
+}
+.stat-card .stat-num {
+  display: block;
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #db0a40;
+}
+.stat-card .stat-label {
+  display: block;
+  font-size: 0.75em;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+  color: #cbe6ef;
+}
+
 .history {
   background: #f8fdff;
   padding: 10px;
