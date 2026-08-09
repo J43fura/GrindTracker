@@ -461,7 +461,11 @@ $datenow=date_create($timenow);
                   $val = isset($hr[$col]) ? $hr[$col] : null;
                   $txt = ($val === null || $val === '') ? '-' : (string)$val;
                 ?>
+                <?php if ($col == 'PrDate'): ?>
+                <td class="history-date"><a href="profile.php?timecalendar=<?= urlencode($hr['PrDate']) ?>" title="Open this day in profile"><?= htmlspecialchars($txt) ?></a></td>
+                <?php else: ?>
                 <td class="<?= $col == 'Completed' ? ($val ? 'done-yes' : 'done-no') : '' ?>" data-raw="<?= $val === null || $val === '' ? '' : htmlspecialchars((string)$val) ?>"><?= htmlspecialchars($txt) ?></td>
+                <?php endif; ?>
               <?php endforeach; ?>
               </tr>
             <?php endforeach; ?>

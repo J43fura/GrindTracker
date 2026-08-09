@@ -509,6 +509,16 @@ input:focus {
 .history td.done-no {
   color: #db0a40;
 }
+.history td.history-date a {
+  color: #1a5d7a;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 1px dashed #9acfe0;
+}
+.history td.history-date a:hover {
+  color: #db0a40;
+  border-bottom-style: solid;
+}
 
 /*-------------------------todo list  --------------------------------*/
 .todo-div {
