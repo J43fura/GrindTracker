@@ -97,27 +97,27 @@ if (isset($_SESSION["id"])){
 
         <?php      
             if (isset($_GET["msg"])){
+              $regErr = "";
               if ($_GET["msg"] == "usedusername"){
-              echo "<script>document.getElementById('regMsg').innerHTML = '⛔ The username is already used.';
-              document.getElementById('popup-1').classList.toggle('active');
+                $regErr = "⛔ The username is already used.";
+              }
+              else if($_GET["msg"] == "charusername"){
+                $regErr = "⛔ The username cant have special characters.";
+              }
+              else if($_GET["msg"] == "pwc"){
+                $regErr = "⛔ Password must be at least: (8: characters long, 1: number, upper and lower case letter.)";
+              }
+              else if($_GET["msg"] == "pww"){
+                $regErr = "⛔ Password confirmation is wrong.";
+              }
+              if ($regErr !== ""){
+                $regMsgJS = json_encode($regErr);
+                echo "<script>document.getElementById('regMsg').innerHTML = $regMsgJS;
+                document.getElementById('popup-1').classList.add('active');
+                document.body.style.overflow = 'hidden';
                </script>";
+              }
             }
-            else if($_GET["msg"] == "charusername"){
-              echo "<script>document.getElementById('regMsg').innerHTML = '⛔ The username cant have special characters.';
-              document.getElementById('popup-1').classList.toggle('active');
-               </script>";
-            }
-            else if($_GET["msg"] == "pwc"){
-              echo "<script>document.getElementById('regMsg').innerHTML = '⛔ Password must be at least: (8: characters long, 1: number, upper and lower case letter.)';
-              document.getElementById('popup-1').classList.toggle('active');
-               </script>";
-            }
-            else if($_GET["msg"] == "pww"){
-              echo "<script>document.getElementById('regMsg').innerHTML = '⛔ Password confirmation is wrong.';
-              document.getElementById('popup-1').classList.toggle('active');
-               </script>";
-            }
-          }
               ?>
         
         <input
