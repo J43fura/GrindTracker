@@ -8,7 +8,6 @@ if (!isset($_SESSION["id"])){
 if (!isset($_POST['elemph'])){
   header("location:index.php");
   exit();
-  exit();
 }
 $id = (int)$_SESSION["id"];
 $axe = $_POST['elemph'];
@@ -90,9 +89,7 @@ $axeOut = htmlspecialchars($axe, ENT_QUOTES, 'UTF-8');
 
 <script>
   let darkMode = localStorage.getItem("darkMode");
-  console.log(darkMode);
   if (darkMode !== "enabled") {
-    console.log(darkMode);
       document.write("<link rel='stylesheet' href='graphdarkmode.css'/>");
     }
 </script>
@@ -153,16 +150,6 @@ try{
 
 
   // setup 
-  const backgroundcolor = [];
-  for (i=0; i < dateArrayJS.length; i++){
-      if (dateArrayJS[i][6] % 2 == 1){
-        backgroundcolor.push('rgba(255, 99, 132, 0.2)');
-      }
-      else{
-        backgroundcolor.push('rgba(99, 255, 132, 0.2)');
-      }
-    }
-
   const up = (ctx, value) => ctx.p0.parsed.y < ctx.p1.parsed.y ? value:
   undefined;
   const down = (ctx, value) => ctx.p0.parsed.y > ctx.p1.parsed.y ? value:
