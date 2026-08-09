@@ -161,7 +161,7 @@ if (isset($_SESSION["id"])){
       <h2 class="section-header dark-t-w">Email Verification</h2>
       <form
         class="section-paragraph"
-        id="myForm2"
+        id="myForm3"
         method="post"
         action="emailverif.php"
       >

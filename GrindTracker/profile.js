@@ -118,6 +118,7 @@ if (elemvar[i].parentElement.id == "ToDelete") {
               if (confirm("Are you sure you want to delete " + elemph + " ?")) {
                 //DELETE
                 changed = true;
+                var delLi = elemvar[i].parentElement;
                 $.ajax({
                   url: "varssettings.php",
                   type: "POST",
@@ -126,9 +127,9 @@ if (elemvar[i].parentElement.id == "ToDelete") {
                     if (data == 0) {
                       alert("Something wrong went. Please try again.");
                     }
+                    if (delLi) delLi.remove();
                   },
                 });
-                document.getElementById(elemph).parentElement.remove();
               }
             }
           }
